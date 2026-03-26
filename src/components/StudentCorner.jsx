@@ -90,7 +90,7 @@ function StudentCorner() {
 
         <div className="lab-box">
           <div className="lab-header">
-            <FaLaptopCode /> SERL LAB
+            <FaLaptopCode /> SERL LAB 
           </div>
           <p>Software Engineering Research Lab</p>
           <span className="room">Room: 5302, CC-III Building</span>
