@@ -81,7 +81,7 @@ function StudentCorner() {
       <div className="labs-grid">
         <div className="lab-box">
           <div className="lab-header">
-            <FaFlask /> BDA LAB
+            <FaLaptopCode /> BDA LAB
           </div>
           <p>Big Data Analytics Lab</p>
           <span className="room">Room: 5243, CC-III Building</span>
@@ -94,6 +94,15 @@ function StudentCorner() {
           </div>
           <p>Software Engineering Research Lab</p>
           <span className="room">Room: 5302, CC-III Building</span>
+          {/* <button className="lab-btn">Available Projects</button> */}
+        </div>
+
+        <div className="lab-box">
+          <div className="lab-header">
+            <FaLaptopCode /> CIR LAB 
+          </div>
+          <p>Centre for Intelligent Robotics Lab</p>
+          <span className="room">CC-III Building</span>
           {/* <button className="lab-btn">Available Projects</button> */}
         </div>
       </div>
