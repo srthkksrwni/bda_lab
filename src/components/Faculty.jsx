@@ -12,7 +12,7 @@ export const facultyData = [
       "General Chair: ISEC 2023 | ICONIP 2022 | BDA 2021"
     ],
     email: "sonali@iiita.ac.in",
-    phone: "9415647042",
+   // phone: " ",
     img: "Sonali Maam.jpg",
     scholarLink: "https://scholar.google.com/citations?user=hPvt6d8AAAAJ&hl=en" // Apni link yahan dalein
   }
@@ -41,7 +41,7 @@ function Faculty() {
 
             <div className="fac-contact-info">
               <p className="fac-email"><strong>Email:</strong> {f.email}</p>
-              <p className="fac-phone"><strong>Mobile:</strong> {f.phone}</p>
+              {/* <p className="fac-phone"><strong>Mobile:</strong> {f.phone}</p> */}
             </div>
 
             {/* Google Scholar / CV Link */}

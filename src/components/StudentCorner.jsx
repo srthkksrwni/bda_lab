@@ -102,7 +102,7 @@ function StudentCorner() {
             <FaLaptopCode /> CIR LAB 
           </div>
           <p>Centre for Intelligent Robotics Lab</p>
-          <span className="room">CC-III Building</span>
+          <span className="room">CC-I Building</span>
           {/* <button className="lab-btn">Available Projects</button> */}
         </div>
       </div>
