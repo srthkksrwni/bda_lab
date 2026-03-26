@@ -1,0 +1,175 @@
+/* ===============================
+   1. PAGE LAYOUT & CONTAINER
+================================ */
+.students-page {
+  padding: 120px 5% 60px;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.main-title {
+  text-align: center;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  color: #1a2a6c;
+  font-weight: 900;
+  margin-bottom: 50px;
+  letter-spacing: -1.5px;
+}
+
+/* ===============================
+   2. TABS & BATCH SELECTOR (Centered)
+================================ */
+.student-tabs, .batch-selector {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.student-tab-btn, .batch-btn {
+  padding: 12px 28px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  color: #64748b;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.batch-btn {
+  padding: 8px 18px;
+  border: 1px solid #1a2a6c;
+  color: #1a2a6c;
+}
+
+.student-tab-btn.active, 
+.batch-btn.active, 
+.batch-btn:hover {
+  background: #1a2a6c;
+  color: white;
+  border-color: #1a2a6c;
+  box-shadow: 0 10px 20px rgba(26, 42, 108, 0.2);
+}
+
+/* ===============================
+   3. GRID SYSTEM (Single Card Centering)
+================================ */
+.member-grid {
+  display: grid;
+  /* repeat(auto-fit) aur justify-content: center se single card beech mein aata hai */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 320px)); 
+  gap: 40px 30px;
+  justify-content: center; 
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   4. MEMBER CARD DESIGN
+================================ */
+.member-card {
+  background: white;
+  width: 100%;
+  max-width: 320px;
+  padding: 40px 25px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto; /* Card ko khud ke space mein center rakhta hai */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mtech-card {
+  min-height: 420px;
+}
+
+.member-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(26, 42, 108, 0.12);
+  border-color: #3498db;
+}
+
+/* ===============================
+   5. AVATAR & TEXT STYLING
+================================ */
+.avatar-wrapper {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(135deg, #1a2a6c 0%, #3498db 100%);
+  margin-bottom: 25px;
+}
+
+.initials-avatar {
+  width: 100%;
+  height: 100%;
+  background: white;
+  color: #1a2a6c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: 800;
+  border: 3px solid white;
+}
+
+.member-name {
+  font-size: 1.25rem;
+  color: #1e293b;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.member-role {
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+/* Project Box styling */
+.project-box {
+  margin-top: 15px;
+  padding: 12px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  text-align: left;
+  width: 100%;
+}
+
+.project-text {
+  color: #475569;
+  line-height: 1.4;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+/* ===============================
+   6. RESPONSIVE QUERIES
+================================ */
+@media (max-width: 768px) {
+  .batch-selector { gap: 8px; }
+  .batch-btn { padding: 6px 14px; font-size: 0.85rem; }
+  .main-title { font-size: 2.2rem; }
+}
+
+@media (max-width: 640px) {
+  .member-grid { 
+    grid-template-columns: 1fr; /* Mobile par poori width */
+  }
+  .member-card { 
+    max-width: 100%; 
+  }
+}

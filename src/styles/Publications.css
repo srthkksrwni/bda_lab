@@ -1,0 +1,94 @@
+.publications-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 120px 20px 60px; /* Navbar space */
+  min-height: 100vh;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.8rem;
+  color: #1a2a6c;
+  margin-bottom: 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.pub-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.pub-tab-btn {
+  padding: 12px 25px;
+  border: 2px solid #1a2a6c;
+  background: transparent;
+  color: #1a2a6c;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pub-tab-btn.active {
+  background: #1a2a6c;
+  color: white;
+  box-shadow: 0 10px 20px rgba(26, 42, 108, 0.2);
+}
+
+.pub-card {
+  display: flex;
+  gap: 20px;
+  background: white;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  border-left: 6px solid #1a2a6c;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.pub-card:hover {
+  transform: translateX(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.pub-index {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1a2a6c;
+  opacity: 0.5;
+}
+
+.pub-citation {
+  font-size: 1.05rem;
+  color: #334155;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.pub-link-btn {
+  display: inline-block;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 5px 0;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.pub-link-btn:hover {
+  border-bottom-color: #3498db;
+  letter-spacing: 0.5px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .pub-tabs { flex-direction: column; }
+  .pub-tab-btn { width: 100%; }
+  .page-title { font-size: 2rem; }
+}

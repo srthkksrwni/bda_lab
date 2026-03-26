@@ -1,0 +1,55 @@
+/* ===============================
+   FOOTER (ACADEMIC / INSTITUTIONAL)
+================================ */
+
+/* TOP FOOTER SECTION */
+.footer-banner {
+  background: #0A1F44;          /* Primary Navy */
+  color: #EAF1FF;
+  text-align: center;
+  padding: 80px 20px 60px;
+
+  border-top: 1px solid #E0E6ED;
+}
+
+/* HEADING */
+.footer-banner h2 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin-bottom: 14px;
+  color: #FFFFFF;
+}
+
+/* ADDRESS / INFO TEXT */
+.footer-banner p {
+  margin: 6px 0;
+  font-size: 14.5px;
+  color: #DCE6F5;
+  line-height: 1.6;
+}
+
+/* OPTIONAL LINKS */
+.footer-banner a {
+  color: #C9A227;   /* Muted Gold */
+  font-weight: 500;
+}
+
+.footer-banner a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   COPYRIGHT STRIP
+================================ */
+.footer-bottom {
+  text-align: center;
+  padding: 14px 10px;
+  font-size: 13px;
+
+  background: #08172F;          /* Darker Navy */
+  color: #BFD3F2;
+
+  border-top: 1px solid #1C2E55;
+  letter-spacing: 0.3px;
+}

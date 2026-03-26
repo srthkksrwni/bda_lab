@@ -1,0 +1,119 @@
+/* ===============================
+   RESOURCES PAGE WRAPPER
+================================ */
+.resources-wrapper {
+  padding: 110px 40px 80px;
+  max-width: 1250px;
+  margin: auto;
+
+  background: var(--light-bg);
+  color: var(--text-dark);
+}
+
+/* ===============================
+   MAIN TITLE
+================================ */
+.resources-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+
+  color: var(--primary);
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 14px;
+}
+
+/* ===============================
+   SECTION HEADINGS
+================================ */
+.resources-section {
+  margin-top: 60px;
+}
+
+.resources-section h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: var(--primary);
+  text-align: center;
+}
+
+/* ===============================
+   RESOURCE TABLE
+================================ */
+.resource-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  overflow: hidden;
+
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 5%;
+}
+
+/* ===============================
+   TABLE HEADER
+================================ */
+.resource-table th {
+  padding: 16px 18px;
+  text-align: left;
+  font-size: 15.5px;
+  font-weight: 600;
+
+  background: #F0F4FA;
+  color: var(--text-dark);
+}
+
+/* ===============================
+   TABLE ROWS
+================================ */
+.resource-table td {
+  padding: 15px 18px;
+  font-size: 15px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ===============================
+   ROW HOVER
+================================ */
+.resource-table tr:hover {
+  background: #F7F9FC;
+  transition: background 0.2s ease;
+}
+
+/* Remove last border */
+.resource-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===============================
+   SCROLL OFFSET FOR NAVBAR
+================================ */
+section {
+  scroll-margin-top: 110px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 900px) {
+  .resources-title {
+    font-size: 30px;
+  }
+
+  .resources-section h2 {
+    font-size: 22px;
+  }
+
+  .resource-table th,
+  .resource-table td {
+    font-size: 14px;
+    padding: 12px;
+  }
+}

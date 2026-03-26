@@ -1,0 +1,153 @@
+.student-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 0 20px;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.student-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.student-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 5px;
+    color: #1a2a6c;
+    margin-top: 15%;
+}
+
+.title-underline {
+    width: 60px;
+    height: 4px;
+    background: #3498db;
+    margin: 15px auto;
+    border-radius: 2px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Grid for Track Cards */
+.opp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.opp-card {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease;
+}
+
+.opp-card:hover {
+    transform: translateY(-10px);
+}
+
+.opp-icon {
+    font-size: 3rem;
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+.opp-badge {
+    background: #e1f5fe;
+    color: #0288d1;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Guidelines Styling */
+.guidelines-section {
+    background: #f8fbff;
+    padding: 40px;
+    border-radius: 15px;
+    margin-bottom: 60px;
+}
+
+.guide-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.check-icon {
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.email-box {
+    margin-top: 30px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Labs Section */
+.labs-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.lab-box {
+    flex: 1;
+    min-width: 300px;
+    background: #1a2a6c;
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.lab-header {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.room {
+    display: block;
+    margin: 15px 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.lab-btn {
+    background: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .student-header h1 {
+        font-size: 2rem;
+    }
+
+    .opp-grid {
+        grid-template-columns: 1fr;
+    }
+}

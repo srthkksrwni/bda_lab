@@ -1,0 +1,353 @@
+/* ===============================
+   GLOBAL THEME VARIABLES
+================================ */
+:root {
+  --primary: #0A1F44;        /* Navy Blue */
+  --secondary: #3c5fb6;      /* Royal Blue */
+  --accent: #C9A227;         /* Muted Gold */
+  --light-bg: #F5F6F9;
+  --white: #FFFFFF;
+  --text-dark: #1A1A1A;
+  --text-muted: #5F6C7B;
+  --border-light: #E0E6ED;
+  --shadow-soft: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* ===============================
+   BASE STYLES
+================================ */
+* {
+  scroll-behavior: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background: var(--light-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondary);
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===============================
+   HOME CONTAINER
+================================ */
+.home-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ===============================
+   HERO SECTION
+================================ */
+.hero {
+  height: 85vh;
+  margin-top: 70px;
+  position: relative;
+  background:
+    linear-gradient(rgba(24, 77, 168, 0.45), rgba(10,31,68,0.55)),
+    url("/public/bg.jpg") center/cover no-repeat;
+}
+
+.hero-overlay {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1.5px;
+}
+
+.hero-tagline {
+  margin-top: 14px;
+  font-size: 1.15rem;
+  color: #DCE6F5;
+  max-width: 800px;
+}
+
+/* ===============================
+   HERO BUTTONS
+================================ */
+.hero-buttons {
+  display: flex;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.hero-buttons button {
+  padding: 14px 36px;
+  border-radius: 6px;
+  background: var(--secondary);
+  border: none;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hero-buttons button:hover {
+  background: #163DCC;
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   MISSION SECTION
+================================ */
+.mission-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 80px 90px;
+  background: var(--light-bg);
+}
+
+.mission-left,
+.mission-right {
+  background: var(--white);
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+.mission-left h2,
+.mission-right h2 {
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.update-item {
+  border-bottom: 1px solid var(--border-light);
+  padding: 12px 0;
+}
+
+.update-item:last-child {
+  border-bottom: none;
+}
+
+.update-item a {
+  font-weight: 600;
+}
+
+.update-item span {
+  display: block;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ===============================
+   RESEARCH SECTION
+================================ */
+.research-section {
+  text-align: center;
+  padding: 90px 90px;
+  background: var(--white);
+}
+
+.research-section h2 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.research-subtext {
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: auto;
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.research-card {
+  background: var(--light-bg);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease;
+}
+
+.research-card:hover {
+  transform: translateY(-6px);
+}
+
+.icon-circle {
+  width: 90px;
+  height: 90px;
+  margin: auto;
+  border-radius: 50%;
+  background: var(--secondary);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================ */
+@media (max-width: 1024px) {
+  .research-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mission-section {
+    grid-template-columns: 1fr;
+    padding: 60px 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .research-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+}
+
+/* ===============================
+   RECENT UPDATES
+================================ */
+
+.mission-right {
+  background: var(--white);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+}
+
+.mission-right h2 {
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  position: relative;
+}
+
+.mission-right h2::after {
+  content: "";
+  width: 50px;
+  height: 3px;
+  background: var(--accent);
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  border-radius: 2px;
+}
+
+/* Individual update item */
+.update-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.update-item:last-child {
+  border-bottom: none;
+}
+
+/* Linked titles */
+.update-item a {
+  font-weight: 500;
+  color: var(--secondary);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.update-item a:hover {
+  color: var(--primary);
+  transform: translateX(2px);
+}
+
+/* Non-linked titles */
+.update-item span:first-child {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* Date / venue */
+.update-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Non-linked titles (same as links) */
+.update-item span:not(.update-date) {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+/* ===============================
+   SCROLLABLE RECENT UPDATES
+================================ */
+
+.mission-right {
+  background: var(--white);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+
+  max-height: 420px;      /* control size */
+  overflow-y: auto;
+}
+
+/* Webkit browsers */
+.mission-right::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mission-right::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mission-right::-webkit-scrollbar-thumb {
+  background-color: var(--border-light);
+  border-radius: 10px;
+}
+
+.mission-right::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary);
+}
+
+/* Firefox */
+.mission-right {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
+}
+
+
+
+
+

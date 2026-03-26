@@ -1,0 +1,18 @@
+.slide-1 { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+     url('/bg5.png'); }
+.slide-2 { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+    url('/bg1.png'); }
+.slide-3 { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+    url('/bg3.png'); }
+
+.hero-slide {
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}

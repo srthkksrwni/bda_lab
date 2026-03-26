@@ -1,0 +1,100 @@
+/* Objectives Section Base */
+.objectives-section {
+  padding: 60px 10% 80px;
+  background-color: #fdfdfd;
+}
+
+/* Header Styling (Aesthetic Gap fix ke saath) */
+.section-header {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-top:0;
+}
+
+/* Objectives Grid Layout */
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Objective Card - Same Aesthetic as Research */
+.objective-card {
+  position: relative;
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0; /* Initial state for animation */
+}
+
+/* Hover Effect: Research cards se match karne ke liye */
+.objective-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(10, 31, 68, 0.08);
+  border-bottom: 4px solid #285b93;
+}
+
+/* Icon Box Animation */
+.icon-box {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.objective-card:hover .icon-box {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Content Styling */
+.objective-card h3 {
+  color: #061d43;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.objective-card p, 
+.objective-card li {
+  color: #555;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.objective-card ul {
+  padding-left: 18px;
+  margin-top: 10px;
+}
+
+/* Entrance Animation (Fade In Up) */
+.objective-card {
+  animation: fadeInUpObj 0.6s ease forwards;
+}
+
+/* Staggered Delay (Cards ek ke baad ek aayenge) */
+.objective-card:nth-child(1) { animation-delay: 0.1s; }
+.objective-card:nth-child(2) { animation-delay: 0.2s; }
+.objective-card:nth-child(3) { animation-delay: 0.3s; }
+.objective-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUpObj {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scroll check */
+#objectives {
+  scroll-margin-top: 100px;
+}

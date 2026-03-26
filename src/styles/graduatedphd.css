@@ -1,0 +1,127 @@
+/* Unique Wrapper */
+.grad-section-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.grad-display-heading {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #1a2a6c;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+/* Responsive Grid System */
+.grad-members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 40px 30px;
+  justify-items: center; /* Horizontally Centered */
+  align-items: stretch;
+}
+
+/* Card: Aesthetic & Symmetrical */
+.grad-individual-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 320px;
+  padding: 40px 20px;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Image & Text Center Alignment */
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.grad-individual-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(26, 42, 108, 0.12);
+  border-color: #3498db;
+}
+
+/* Image Wrapper with Blue-Gold Ring */
+.grad-img-container {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  padding: 6px;
+  background: linear-gradient(135deg, #1a2a6c 0%, #3498db 100%);
+  margin-bottom: 25px;
+}
+
+.grad-profile-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+}
+
+/* Typography */
+.grad-student-name {
+  font-size: 1.35rem;
+  color: #1e293b;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.grad-student-role {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* Email Pill Style */
+.grad-email-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #f1f5f9;
+  padding: 8px 18px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+  max-width: 95%;
+}
+
+.grad-email-link {
+  color: #3498db;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Google Scholar Button */
+.grad-scholar-btn {
+  display: inline-block;
+  color: #3498db;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 2px solid #3498db;
+  padding: 8px 20px;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.grad-scholar-btn:hover {
+  background: #3498db;
+  color: white;
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Mobile Fixes */
+@media (max-width: 640px) {
+  .grad-members-grid { grid-template-columns: 1fr; }
+  .grad-individual-card { max-width: 100%; }
+}
