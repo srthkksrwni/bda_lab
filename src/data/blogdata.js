@@ -5,4 +5,5 @@ export const blogdata = [
   { id: 4, type: "video", src: "https://www.youtube.com/embed/3zMi0TuKHeA?si=JK6MvWd2felYtQpf", isYouTube: true },
    // mp4 download ke liye isyoutube : false krna h
   { id: 5, type: "image", src: "logo.png" },
+  { id: 6, type: "image", src: "bg3.png" },
   ];
