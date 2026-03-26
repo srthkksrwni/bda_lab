@@ -83,16 +83,11 @@ export const eventsData = {
   awards : [
   {
     id: 1,
-    citation: 'Best Paper Award for our paper published in the IEEE International Conference on IATMSI, 2024.',
-    link: ""
-  },
-  {
-    id: 2,
     citation: 'Best Paper Award for our paper published in the 5th International Conference on Data Management, Analytics and Innovation (ICDMAI), 2021.',
     link: ""
   },
   {
-    id: 3,
+    id: 2,
     citation: 'First Position in Poster Presentation (M.Tech Category) at 2nd Researcher’s Day, IIIT Allahabad, 2019.',
     link: ""
   }
