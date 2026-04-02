@@ -395,5 +395,240 @@ export const conferences = [
     citation:
       'Sonali Agarwal. "Knowledge Discovery in E Governance based on Data Mining." Proceedings of RAIT-09, ISM Dhanbad, February 6–7, 2009.',
     link: ""
+  },
+  {
+    id: 67,
+    citation: 'R. Chandra, S. Agarwal, N. Singh. "Ontology-Based Integration and Analysis of NoSQL and RDF Data for IoT-Driven Healthcare Systems." 2025 OITS International Conference on IT (OCIT), 1051-1056. 2025.',
+    link: ""
+  },
+  {
+    id: 68,
+    citation: 'N. Kumari, S. Agarwal. "Hybrid Self-Supervised Lung Lesion Segmentation for Covid-19 Ct Scans." 2025 OITS International Conference on IT (OCIT), 53-57. 2025.',
+    link: ""
+  },
+  {
+    id: 69,
+    citation: 'J. Moryani, et al. "XAI-Enabled Framework to Estimate Mental Disorder Using Fusion Approaches." 2025 IEEE 22nd India Council International Conference (INDICON), 1-6. 2025.',
+    link: ""
+  },
+  {
+    id: 70,
+    citation: 'A. Manna, S. Tiwari, H. Singh, S. Agarwal. "Deep Semantics for Structured Data: Hybrid LLM-Based Models for Temporal Forecasting." Intl. Conference on Neural Information Processing, 360-371. 2025.',
+    link: ""
+  },
+  {
+    id: 71,
+    citation: 'T. Rao, N. Singh, S. Agarwal. "Causal LIME: Enhancing Local Explanations with Causal Perturbations for Military Sensor Data." TENCON 2025-2025 IEEE Region 10 Conference, 1013-1017. 2025.',
+    link: ""
+  },
+  {
+    id: 72,
+    citation: 'R. Chandra, S. Agarwal, S. Tiwari. "Ontology-Based Forest Fire Management Using Complex Event Processing and LLMs." Intl. Conference on Database and Expert Systems Applications, 98-112. 2025.',
+    link: ""
+  },
+  {
+    id: 73,
+    citation: 'H. Ethari, et al. "Co-Change Graph Entropy: A New Process Metric for Defect Prediction." Proceedings of the 29th Intl. Conference on Evaluation and Assessment in SE. 2025.',
+    link: ""
+  },
+  {
+    id: 74,
+    citation: 'R. Chandra, S. Tiwari, S. Agarwal, N. Singh. "Ontology-Driven Semantic Interoperability Approach for IoT Healthcare." Intl. Conference on Cloud Computing, Data Science and Engineering. 2025.',
+    link: ""
+  },
+  {
+    id: 75,
+    citation: 'A. Lal, S. Tiwari, R. Patra, S. Agrawal. "Melanoma Classification using GAN based augmentation and Self-Supervised feature extraction." 2024 IEEE Intl. Conference on Big Data, 1360-1366. 2024.',
+    link: ""
+  },
+  {
+    id: 76,
+    citation: 'M. Mishra, et al. "Geolocated Event Detection using Graph Mining Approach on Real-Time Multimodal Data." 2024 15th Intl. Conference on Computing Communication and Networking. 2024.',
+    link: ""
+  },
+  {
+    id: 77,
+    citation: 'R. Chandra, S. Tiwari, SS Kumar, S. Agarwal. "Diabetic retinopathy prediction based on cnn and alexnet model." 2024 14th Intl. Conference on Cloud Computing, Data Science. 2024.',
+    link: ""
+  },
+  {
+    id: 78,
+    citation: 'SS Kumar, S. Agarwal, R. Chandra, A. Kumar. "Predictive stream analytics for threshold based approach: Case study of temperature anomaly." 2023 IEEE 7th Conference on ICT (CICT), 1-6. 2023.',
+    link: ""
+  },
+  {
+    id: 79,
+    citation: 'S. Tiwari, et al. "AI-Enabled Learning for Imbalanced Class Data using Spark Streaming Concepts." 2023 OITS International Conference on IT (OCIT), 982-987. 2023.',
+    link: ""
+  },
+  {
+    id: 80,
+    citation: 'A. Geed, et al. "A Personalized Cancer Diagnosis using Text based Clinical Data with Machine Learning Models." 2023 OITS International Conference on IT (OCIT), 988-993. 2023.',
+    link: ""
+  },
+  {
+    id: 81,
+    citation: 'T. Rao, S. Agarwal, N. Singh. "An empirical evaluation of Shapley additive explanations: A military implication." 2023 10th IEEE Uttar Pradesh Section Intl. Conference. 2023.',
+    link: ""
+  },
+  {
+    id: 82,
+    citation: 'R. Patra, et al. "Detection of Major Depressive Disorders in Children, Teens, and Young Adults." International Health Informatics Conference, 25-37. 2023.',
+    link: ""
+  },
+   {
+    id: 83,
+    citation: 'SS Kumar, A Kumar, R Chandra, S Agarwal, M Syafrullah, and K Adiyarta. "Rule extraction using machine learning classifiers for complex event processing." 2023 10th international conference on electrical engineering, computer (EECSI), 2023.',
+    link: ""
+  },
+  {
+    id: 84,
+    citation: 'R. Chandra, S. Tiwari, SS Kumar, S Agarwal, M Syafrullah, and K Adiyarta. "Deep neural networks for brain tumor image segmentation and detection." 2023 10th International Conference on Electrical Engineering, Computer (EECSI), 2023.',
+    link: ""
+  },
+  {
+    id: 85,
+    citation: 'Y. Patel, S. Tiwari, SK Sonbhadra, and S. Agarwal. "Predicting habitable exoplanets in different star-systems using deep learning based anomaly detection approach." 2023 International joint conference on neural networks (IJCNN), 1-7, 2023.',
+    link: ""
+  },
+  {
+    id: 86,
+    citation: 'M. Tanveer, S. Agarwal, S. Ozawa, A. Ekbal, and A. Jatowt. "Neural Information Processing: 29th International Conference, ICONIP 2022 Proceedings." Springer Nature, 2023.',
+    link: ""
+  },
+  {
+    id: 87,
+    citation: 'S. Agarwal, A. Roychoudhury, R. Purandare, S. Tiwari, and L. Kumar. "Proceedings of the 16th Innovations in Software Engineering Conference." ACM, 2023.',
+    link: ""
+  },
+  {
+    id: 88,
+    citation: 'A. Kumari, NS Punn, SK Sonbhadra, and S. Agarwal. "Impact of the composition of feature extraction and class sampling in medicare fraud detection." International conference on neural information processing (ICONIP), 639-658, 2022.',
+    link: ""
+  },
+  {
+    id: 89,
+    citation: 'K. Deshpande, NS Punn, SK Sonbhadra, and S. Agarwal. "Anomaly detection in surveillance videos using transformer based attention model." International Conference on Neural Information Processing (ICONIP), 199-211, 2022.',
+    link: ""
+  },
+  {
+    id: 90,
+    citation: 'S. Tiwari, R. Chandra, and S. Agarwal. "An optimized hybrid solution for IoT based lifestyle disease classification using stress data." International Conference on Neural Information Processing (ICONIP), 433-445, 2022.',
+    link: ""
+  },
+  {
+    id: 91,
+    citation: 'SS Kumar, A Kumar, S Agarwal, M Syafrullah, and K Adiyarta. "Forecasting indoor temperature for smart buildings with ARIMA, SARIMAX, and LSTM: A fusion approach." 2022 9th International Conference on Electrical Engineering, Computer (EECSI), 2022.',
+    link: ""
+  },
+  {
+    id: 92,
+    citation: 'R. Chandra, A. Shukla, S. Tiwari, S. Agarwal, M. Syafrullah, and K Adiyarta. "Natural language processing and ontology based decision support system for diabetic patients." 2022 9th International Conference on Electrical Engineering, Computer (EECSI), 2022.',
+    link: ""
+  },
+  {
+    id: 93,
+    citation: 'O. Vishwakarma, S. Agarwal, KKS Pandian, M. Syafrullah, and K Adiyarta. "Anomaly detection on MNIST stroke simulation dataset." 2022 9th International Conference on Electrical Engineering, Computer (EECSI), 2022.',
+    link: ""
+  },
+  {
+    id: 94,
+    citation: 'H. Rajora, NS Punn, SK Sonbhadra, and S. Agarwal. "Machine learning equipped web-based disease prediction and recommender system." Advanced machine intelligence and signal processing, 313-324, 2022.',
+    link: ""
+  },
+  {
+    id: 95,
+    citation: 'K. Sambyo, M. Prasad, and S. Agarwal. "Advanced Machine Intelligence and Signal Processing." Springer, 2022.',
+    link: ""
+  },
+  {
+    id: 96,
+    citation: 'S. Agarwal, SK Sonbhadra, and N. Singh Punn. "Software Testing and Quality Assurance for Data Intensive Applications." Proceedings of the 26th International Conference on Evaluation, 2022.',
+    link: ""
+  },
+  {
+    id: 97,
+    citation: 'SN Srirama, JCW Lin, R Bhatnagar, S Agarwal, and PK Reddy. "Big Data Analytics: 9th International Conference, BDA 2021 Proceedings." Springer Nature, 2022.',
+    link: ""
+  },
+  {
+    id: 98,
+    citation: 'S. Gupta, NS Punn, SK Sonbhadra, and S. Agarwal. "Check for MAG-Net: Multi-task Attention Guided Network for Brain Tumor Segmentation and Classification." Big Data Analytics: 9th International Conference, BDA 2021, 2022.',
+    link: ""
+  },
+  {
+    id: 99,
+    citation: 'P. Nagabhushan, SK Sonbhadra, NS Punn, and S. Agarwal. "Towards machine learning to machine wisdom: a potential quest." International Conference on Big Data Analytics, 261-275, 2021.',
+    link: ""
+  },
+  {
+    id: 100,
+    citation: 'P. Agrawal, NS Punn, SK Sonbhadra, and S. Agarwal. "Impact of attention on adversarial robustness of image classification models." 2021 IEEE International Conference on Big Data, 3013-3019, 2021.',
+    link: ""
+  },
+  {
+    id: 101,
+    citation: 'S. Gupta, NS Punn, SK Sonbhadra, and S. Agarwal. "MAG-Net: Multi-task attention guided network for brain tumor segmentation and classification." International Conference on Big Data Analytics, 3-15, 2021.',
+    link: ""
+  },
+  {
+    id: 102,
+    citation: 'G. Rajput, NS Punn, SK Sonbhadra, and S. Agarwal. "Hate speech detection using static bert embeddings." International conference on big data analytics, 67-77, 2021.',
+    link: ""
+  },
+  {
+    id: 103,
+    citation: 'S. Kote, S. Agarwal, A. Kodipalli, and RJ Martis. "Comparative study of classification of histopathological images." 2021 5th International Conference on Electrical, Electronics, Communication, 2021.',
+    link: ""
+  },
+  {
+    id: 104,
+    citation: 'H. Bhagwani, S. Agarwal, A. Kodipalli, and RJ Martis. "Targeting class imbalance problem using GAN." 2021 5th International Conference on Electrical, Electronics, Communication, 2021.',
+    link: ""
+  },
+  {
+    id: 105,
+    citation: 'Sudhanshu, NS Punn, SK Sonbhadra, and S. Agarwal. "Recommending best course of treatment based on similarities of prognostic markers." International Conference on Neural Information Processing (ICONIP), 393-404, 2021.',
+    link: ""
+  },
+  {
+    id: 106,
+    citation: 'N. Praveen, NS Punn, SK Sonbhadra, S. Agarwal, M. Syafrullah, and K Adiyarta. "White blood cell subtype detection and classification." 2021 8th international conference on electrical engineering, computer (EECSI), 2021.',
+    link: ""
+  },
+   {
+    id: 107,
+    citation: 'U. Sumanth, NS Punn, SK Sonbhadra, and S. Agarwal. "Enhanced behavioral cloning-based self-driving car using transfer learning." Data Management, Analytics and Innovation: Proceedings of ICDMAI 2021, 2021.',
+    link: ""
+  },
+  {
+    id: 108,
+    citation: 'H. Batra, NS Punn, SK Sonbhadra, and S. Agarwal. "Bert-based sentiment analysis: A software engineering perspective." International Conference on Database and Expert Systems Applications, 138-148, 2021.',
+    link: ""
+  },
+  {
+    id: 109,
+    citation: 'SK Sonbhadra, S. Agarwal, and P. Nagabhushan. "Target class supervised sample length and training sample reduction of univariate time series." International conference on industrial, engineering and other applications, 2021.',
+    link: ""
+  },
+  {
+    id: 110,
+    citation: 'M. Dandekar, NS Punn, SK Sonbhadra, S. Agarwal, and RU Kiran. "Fruit classification using deep feature maps in the presence of deceptive similar classes." 2021 International Joint Conference on Neural Networks (IJCNN), 1-6, 2021.',
+    link: ""
+  },
+  {
+    id: 111,
+    citation: 'P. Veena, BS Chithra, RU Kiran, S. Agarwal, and K. Zettsu. "Discovering fuzzy frequent spatial patterns in large quantitative spatiotemporal databases." 2021 IEEE International Conference on Fuzzy Systems (FUZZ-IEEE), 1-8, 2021.',
+    link: ""
+  },
+  {
+    id: 112,
+    citation: 'N. Nasalwai, NS Punn, SK Sonbhadra, and S. Agarwal. "Addressing the class imbalance problem in medical image segmentation via accelerated tversky loss function." Pacific-Asia conference on knowledge discovery and data mining, 390-402, 2021.',
+    link: ""
+  },
+  {
+    id: 113,
+    citation: 'S. Agarwal. "Face Mask Detection Using Transfer Learning of InceptionV3." Big Data Analytics: 8th International Conference, BDA 2020, Sonepat, India, 2021.',
+    link: ""
   }
 ];
