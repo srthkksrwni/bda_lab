@@ -6,7 +6,7 @@ export const Completedprojects = [
       scheme: "Erasmus Capacity Building Program",
       brief:"Technology Enabled Learning Environment (TEAL 2.O) is a funded project under European Union (EU), Erasmus (European Region Action Scheme for the Mobility of University students), Capacity building program.",
       role: "Project Manager (IIIT Allahabad)",
-      duration: "2016 – 2019",
+      duration: "2019 - 2023",
       collaborators: [
         "University of Peradeniya, Sri Lanka",
         "University of Moratuwa, Sri Lanka",
@@ -105,32 +105,6 @@ export const Completedprojects = [
 
       ],
       brief : "",
-      website:""
-    },
-    {
-      id:8 ,
-      title:
-        "Data Mining using OALP Techniques",
-      agency: "Liverpool John Moores University, Liverpool U.K. under Indo-UK REC Project, a joint collaboration in between School of Computing & Mathematical Science, LJMU Liverpool UK and Motilal Nehru National Institute of Technology, Allahabad",
-      scheme: "",
-      role: "Visiting researcher",
-      duration: "November 1999 to February 2000",
-      collaborators: [
-
-      ],
-      brief : "",
-      website:""
-    },
-    {
-      id:9 ,
-      title:
-        "Parallel and Distributed Data stream mining ",
-      agency: "MHRD Scheme on Global Initiative on Academic Network(GIAN)",
-      scheme: "",
-      role: "Project Investigator",
-      duration: "December 18, 2018 to December 22,2018",
-      collaborators: [],
-      brief : " ",
       website:""
     },
     {

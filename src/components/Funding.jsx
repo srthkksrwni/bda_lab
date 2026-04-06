@@ -10,11 +10,11 @@ const partners = [
   { id: 6, name: "ISRO", logo: "fund6.png" },
   { id: 7, name: "ASEAN India", logo: "fund7.jpg" },
   { id: 8, name: "ERASMUS", logo: "fund8.png" },
-  { id: 9, name: "ICONIP", logo: "fund9.png" },
+  { id: 9, name: "UBL Jakarta", logo: "fund9.png" },
   { id: 10, name: "ICMR", logo: "fund10.png" },
   { id: 11, name: "CST-UP", logo: "fund11.jpg" },
   { id: 12, name: "UP GOVERNMENT", logo: "fund12.png" },
-  { id: 13, name: "ISEC", logo: "fund13.png" },
+  { id: 13, name: "UTM Malaysia", logo: "fund13.png" },
    { id: 14, name: "IEEE CIS", logo: "fund14.jpg" },
   { id: 15, name: "University of Peradeniya", logo: "fund15.png" },
 ];
