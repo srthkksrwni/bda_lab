@@ -4,7 +4,7 @@
 
 /* TOP FOOTER SECTION */
 .footer-banner {
-  background: #0A1F44;          /* Primary Navy */
+  background: #0A1F44;          
   color: #EAF1FF;
   text-align: center;
   padding: 80px 20px 60px;
@@ -31,7 +31,7 @@
 
 /* OPTIONAL LINKS */
 .footer-banner a {
-  color: #C9A227;   /* Muted Gold */
+  color: #C9A227;  
   font-weight: 500;
 }
 
@@ -47,7 +47,7 @@
   padding: 14px 10px;
   font-size: 13px;
 
-  background: #08172F;          /* Darker Navy */
+  background: #08172F;          
   color: #BFD3F2;
 
   border-top: 1px solid #1C2E55;

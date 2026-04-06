@@ -7,7 +7,7 @@
   padding: 120px 20px 80px;
   text-align: center;
   min-height: 100vh;
-  background-color: #f8fafc; /* Light aesthetic background */
+  background-color: #f8fafc; 
 }
 
 .fac-main-title {
@@ -111,7 +111,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Homepage Button (Solid Blue) */
+
 .btn-primary-blue {
   background: #1e40af;
   color: white !important;

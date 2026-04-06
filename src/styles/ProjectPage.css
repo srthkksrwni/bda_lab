@@ -172,7 +172,7 @@
 
 .checkmark {
   font-size: 20px;
-  color: #C9A227; /* accent color */
+  color: #C9A227; 
 }
 
 
@@ -195,10 +195,10 @@
   text-align: center;
   align-items: center;
   background: var(--white);
-  padding: 14px 16px; /* reduced padding */
+  padding: 14px 16px; 
   border-radius: 10px;
   box-shadow: var(--shadow-soft);
-  border-left: 3px solid var(--secondary); /* slightly thinner */
+  border-left: 3px solid var(--secondary); 
 }
 .contributor-name {
   font-size: 1.05rem;

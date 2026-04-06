@@ -19,7 +19,7 @@ export default function Publications() {
     { year: "2025", count: 825 }, { year: "2026", count: 150 },
   ];
 
-  // Sidebar ke liye sirf latest 8 saal dikhayenge
+
   const sidebarData = fullCitationData.slice(-8);
 
   // --- 2. AUTHOR HIGHLIGHTING LOGIC ---

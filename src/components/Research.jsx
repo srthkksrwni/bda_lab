@@ -7,7 +7,7 @@ function Research() {
       id: "bda",
       title: "Big Data Analytics",
       desc: "Scalable analysis of large datasets using distributed computing for knowledge discovery.",
-      img: "../../lg.png", // Apni image ka naam yahan likho
+      img: "../../lg.png", 
       watermark: "📊"
     },
     {
@@ -47,7 +47,7 @@ function Research() {
         {domains.map((domain) => (
           <div className="research-card" key={domain.id}>
             <div className={`icon-container ${domain.id}-bg`}>
-              {/* SVG ki jagah Image tag */}
+           
               <img 
                 src={`/images/${domain.img}`} 
                 alt={domain.title} 

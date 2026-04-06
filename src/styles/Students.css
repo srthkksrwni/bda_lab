@@ -88,7 +88,7 @@
 }
 
 .mtech-card, .postdoc-card {
-  min-height: 420px; /* Same height for consistency */
+  min-height: 420px; 
 }
 
 .member-card:hover {

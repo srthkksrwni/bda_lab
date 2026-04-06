@@ -77,7 +77,7 @@
   margin-top: 10px;
 }
 
-/* 15 Cards Staggered Animation (Ek ke baad ek aayenge) */
+
 .animate-slide {
   animation: slideUpFade 0.6s ease forwards;
 }

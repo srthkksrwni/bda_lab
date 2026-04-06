@@ -76,10 +76,8 @@
 }
 
 .link-badge:hover { text-decoration: underline; }
-
-/* International Badge specifically for Tutorials */
 .status-badge.International {
-  background: #34495e; /* Elegant dark blue/grey for international stature */
+  background: #34495e; 
 }
 
 /* Normal Cards */
@@ -95,7 +93,7 @@
   transition: 0.3s ease;
 }
 
-/* Awards Special Look */
+
 .event-card.award-highlight {
   border-left: 6px solid #1a2a6c; /* Gold Color */
   background: linear-gradient(90deg, #e8f2fa 0%, #ffffff 100%);
@@ -120,7 +118,7 @@
   color: #334155;
 }
 
-/* Awards ka text thoda dark aur bold rahega */
+
 .award-highlight .citation-text strong {
   color: #1a2a6c;
   font-weight: 700;

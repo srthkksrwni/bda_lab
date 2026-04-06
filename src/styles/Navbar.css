@@ -39,7 +39,7 @@
 .nav-center {
   display: flex;
   align-items: center;
-  height: 100%; /* Navbar ki poori height */
+  height: 100%;
 }
 
 .nav-links {
@@ -65,20 +65,20 @@
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  padding: 25px 10px; /* Padding badhayi taaki hover area bada rahe */
+  padding: 25px 10px;
   transition: 0.3s ease;
   white-space: nowrap;
 }
 
 .nav-links a:hover, 
 .nav-links span:hover {
-  color: #C9A227; /* Gold Hover */
+  color: #C9A227;
 }
 
 /* DESKTOP DROPDOWN (Fixed Hover Gap) */
 .dropdown-menu {
   position: absolute;
-  top: 72px; /* Navbar ke theek niche */
+  top: 72px; 
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -87,10 +87,10 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   padding: 10px 0;
   z-index: 3100;
-  border-top: 3px solid #C9A227; /* Gold top border */
+  border-top: 3px solid #C9A227;
 }
 
-/* INVISIBLE BRIDGE: Mouse niche le jate waqt dropdown ko close hone se rokta hai */
+/* INVISIBLE BRIDGE */
 .dropdown-menu::before {
   content: "";
   position: absolute;
@@ -103,7 +103,7 @@
 
 .dropdown-menu a {
   display: block;
-  padding: 12px 20px !important; /* Padding normal rakhi hai list ke liye */
+  padding: 12px 20px !important; 
   color: #1a1a1a !important;
   font-size: 14px;
   text-decoration: none;
@@ -118,7 +118,7 @@
 .dropdown-menu a:hover {
   background: #f8f9fa;
   color: #1a2a6c !important;
-  padding-left: 25px !important; /* Slight slide effect */
+  padding-left: 25px !important; 
 }
 
 /* ===============================
@@ -183,14 +183,14 @@
 /* TABLET & MOBILE */
 @media (max-width: 1024px) {
   .nav-center {
-    display: none; /* Desktop menu hide */
+    display: none; 
   }
 
   .hamburger {
-    display: flex; /* Hamburger show */
+    display: flex; 
   }
 
-  /* Jab React isMobileOpen state on karega */
+  
   .mobile-menu {
     display: flex; 
   }

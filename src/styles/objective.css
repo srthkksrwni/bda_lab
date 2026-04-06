@@ -4,7 +4,7 @@
   background-color: #fdfdfd;
 }
 
-/* Header Styling (Aesthetic Gap fix ke saath) */
+/* Header Styling */
 .section-header {
   text-align: center;
   margin-top: 0;
@@ -19,7 +19,6 @@
   gap: 30px;
 }
 
-/* Objective Card - Same Aesthetic as Research */
 .objective-card {
   position: relative;
   background: #ffffff;
@@ -30,10 +29,10 @@
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
   z-index: 1;
-  opacity: 0; /* Initial state for animation */
+  opacity: 0;
 }
 
-/* Hover Effect: Research cards se match karne ke liye */
+
 .objective-card:hover {
   transform: translateY(-15px);
   box-shadow: 0 20px 40px rgba(10, 31, 68, 0.08);

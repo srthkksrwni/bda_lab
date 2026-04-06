@@ -41,7 +41,7 @@ function Events() {
             key={item.id}
           >
             <div className="event-index">
-              {/* Awards ke liye Trophy, baaki ke liye Number */}
+            
               {activeTab === "awards" ? "🏆" : index + 1}
             </div>
             

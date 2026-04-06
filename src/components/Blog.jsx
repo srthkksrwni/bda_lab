@@ -5,7 +5,7 @@ import '../styles/Blog.css';
 function Gallery() {
   return (
     <div className="gallery-page">
-      {/* --- AESTHETIC HEADER SECTION --- */}
+    
       <header className="gallery-header">
         <h1 className="gallery-title">Insights</h1> 
         <div className="title-underline"></div>

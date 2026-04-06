@@ -1,6 +1,6 @@
 import React from "react";
 import { graduatedphd } from "../data/graduatedphd";
-import "../styles/graduatedphd.css"; // Ensure ye file import ho
+import "../styles/graduatedphd.css"; 
 
 const GraduatedPhd = () => {
   return (

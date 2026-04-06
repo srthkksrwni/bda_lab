@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/GestureCarepage.css";
-// import diagram from "../assets/diagram.png";
+
 
 export default function GestureCarePage() {
   return (
@@ -132,11 +132,7 @@ export default function GestureCarePage() {
         <p className="gc3-guide">Under the supervision of Prof. Sonali Agarwal</p>
       </section>
 
-      {/* FOOTER */}
-      {/* <footer className="gc3-footer">
-        <p>Bi-Modal Gesture Recognition Assisted Care System</p>
-        <span>AI · Healthcare · Smart Hospitals · Assistive Technology</span>
-      </footer> */}
+   
 
     </div>
   );

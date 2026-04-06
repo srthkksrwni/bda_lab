@@ -1,10 +1,7 @@
 import React from 'react';
 import '../styles/Carousel.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
-// 1. Navigation aur Pagination modules add karo
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-
-// 2. Swiper ke extra CSS import karo
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';

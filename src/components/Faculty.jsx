@@ -3,7 +3,7 @@ import { ExternalLink, Award, BrainCircuit, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import "../styles/Faculty.css";
 
-// Updated Data with all 3 links
+
 export const facultyData = [
   {
     name: "Prof. Sonali Agarwal",
@@ -14,7 +14,7 @@ export const facultyData = [
       "General Chair: ISEC 2023 | ICONIP 2022 | BDA 2021"
     ],
     email: "sonali@iiita.ac.in",
-    img: "/Sonali Maam.jpg", // Ensure path is correct in your public folder
+    img: "/Sonali Maam.jpg", 
     scholarLink: "https://scholar.google.com/citations?user=hPvt6d8AAAAJ&hl=en",
     profile: "https://profsonaliagarwal.netlify.app/",
     cirLab: "https://cir.iiita.ac.in/"

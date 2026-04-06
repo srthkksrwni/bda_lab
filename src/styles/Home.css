@@ -2,15 +2,18 @@
    GLOBAL THEME VARIABLES
 ================================ */
 :root {
-  --primary: #0A1F44;        /* Navy Blue */
-  --secondary: #3c5fb6;      /* Royal Blue */
-  --accent: #C9A227;         /* Muted Gold */
+  --primary: #0A1F44;
+  /* Navy Blue */
+  --secondary: #3c5fb6;
+  /* Royal Blue */
+  --accent: #C9A227;
+  /* Muted Gold */
   --light-bg: #F5F6F9;
   --white: #FFFFFF;
   --text-dark: #1A1A1A;
   --text-muted: #5F6C7B;
   --border-light: #E0E6ED;
-  --shadow-soft: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* ===============================
@@ -35,7 +38,9 @@ a {
   color: var(--secondary);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -55,7 +60,7 @@ h1, h2, h3 {
   margin-top: 70px;
   position: relative;
   background:
-    linear-gradient(rgba(24, 77, 168, 0.45), rgba(10,31,68,0.55)),
+    linear-gradient(rgba(24, 77, 168, 0.45), rgba(10, 31, 68, 0.55)),
     url("/public/bg.jpg") center/cover no-repeat;
 }
 
@@ -319,7 +324,7 @@ h1, h2, h3 {
   border-radius: 14px;
   box-shadow: var(--shadow-soft);
 
-  max-height: 420px;      /* control size */
+  max-height: 420px;
   overflow-y: auto;
 }
 
@@ -346,8 +351,3 @@ h1, h2, h3 {
   scrollbar-width: thin;
   scrollbar-color: var(--border-light) transparent;
 }
-
-
-
-
-
