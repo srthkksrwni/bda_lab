@@ -59,9 +59,7 @@ h3 {
   height: 85vh;
   margin-top: 70px;
   position: relative;
-  background:
-    linear-gradient(rgba(24, 77, 168, 0.45), rgba(10, 31, 68, 0.55)),
-    url("/public/bg.jpg") center/cover no-repeat;
+  background:linear-gradient(rgba(24, 77, 168, 0.45), rgba(10, 31, 68, 0.55)),
 }
 
 .hero-overlay {
