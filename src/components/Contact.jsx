@@ -12,10 +12,10 @@ const Contact = () => {
     setStatus("Sending...");
 
     emailjs.sendForm(
-      'service_pz85cnh',
-      'template_xlawh35',
+      'service_j83e6ru',
+      'template_8ag5bt9',  
       form.current,
-      'UGflh61S7ZF_SVGX4'
+      'ciIVc0lrAo5ideKp0'
     )
     .then(() => {
         setStatus("Message Sent Successfully! ✅");
