@@ -16,7 +16,7 @@ const ProjectPage = () => {
 name: "Prof. Sonali Agarwal",
 role: "Project Investigator",
 cv: "https://profile.iiita.ac.in/sonali/CV.pdf",
-photo: "https://profile.iiita.ac.in/sonali/static/images/sa.jpg"
+photo: "\Sonali Maam.jpg"
 },
 {
 name: "Prof. Navjot Singh",

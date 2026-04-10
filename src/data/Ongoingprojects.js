@@ -21,7 +21,7 @@ export const Ongoingprojects = [
       duration: "February 2025 to February 2026",
       collaborators: [],
       brief : "Developed a complete pipeline for integrating video based gestures and flex generated gestures to provide assistance to the disabled persons",
-      website:"/projectpage"
+      website:"/#/projectpage"
     },
     {
       id:3 ,
