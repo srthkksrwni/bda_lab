@@ -16,7 +16,7 @@ export const facultyData = [
     email: "sonali@iiita.ac.in",
     img: "/Sonali Maam.jpg", 
     scholarLink: "https://scholar.google.com/citations?user=hPvt6d8AAAAJ&hl=en",
-    profile: "https://profsonaliagarwal.netlify.app/",
+    profile: "https://profile.iiita.ac.in/sonali/",
     cirLab: "https://cir.iiita.ac.in/"
   }
 ];
