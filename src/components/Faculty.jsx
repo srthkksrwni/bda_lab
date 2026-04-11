@@ -10,7 +10,6 @@ export const facultyData = [
     roles: [
       "Head, Centre for Intelligent Robotics (CIR)",
       "Professor-In-Charge, Students’ Holistic Growth, Inclusive Care and Mental Wellness",
-      "Action Editor, Neural Networks",
       "General Chair: ISEC 2023 | ICONIP 2022 | BDA 2021"
     ],
     email: "sonali@iiita.ac.in",
