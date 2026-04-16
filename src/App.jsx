@@ -1,5 +1,4 @@
 import React from "react";
-// BrowserRouter ki jagah HashRouter import kiya
 import { HashRouter as Router, Routes, Route } from "react-router-dom"; 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -10,7 +9,6 @@ import Publications from "./components/Publications";
 import Projects from "./components/Projects";
 import DatasetsPage from "./components/DatasetsPage";
 import ResourcesPage from "./components/ResourcesPage";
-import { HashLink as Link } from "react-router-hash-link";
 import ProjectPage from "./components/ProjectPage";
 import BimodalGestureCareWebsite from "./components/GestureCarepage";
 import HealthMonitoringProject from "./components/HealthMonitoring";
@@ -23,6 +21,7 @@ import Blog from "./components/Blog";
 import Events from "./components/Events";
 import Contact from "./components/Contact";
 import StudentCorner from "./components/StudentCorner";
+import ModestIframe from "./components/ModestIframe";
 
 function App() {
   return (
@@ -50,6 +49,7 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/studentCorner" element={<StudentCorner />} />
+          <Route path="/modest" element={<ModestIframe />} />
         </Routes>
         <Footer />
       </div>
