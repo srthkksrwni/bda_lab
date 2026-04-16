@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { journals } from "../data/journals";
 import { conferences } from "../data/conferences";
+import { books } from "../data/books";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import "../styles/Publications.css";
 
@@ -16,9 +17,8 @@ export default function Publications() {
     { year: "2019", count: 280 }, { year: "2020", count: 450 },
     { year: "2021", count: 825 }, { year: "2022", count: 1050 },
     { year: "2023", count: 950 }, { year: "2024", count: 980 },
-    { year: "2025", count: 825 }, { year: "2026", count: 150 },
+    { year: "2025", count: 825 },
   ];
-
 
   const sidebarData = fullCitationData.slice(-8);
 
@@ -36,6 +36,7 @@ export default function Publications() {
   const tabs = [
     { id: "journals", label: "Transactions & Journals", data: journals },
     { id: "conferences", label: "Conference Publications", data: conferences },
+    { id: "books", label: "Books", data: books },
   ];
 
   return (
@@ -44,11 +45,15 @@ export default function Publications() {
         
         {/* LEFT COLUMN */}
         <div className="pub-left">
-          <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="page-title">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            className="page-title"
+          >
             Research Publications
           </motion.h1>
 
-          {/* ANIMATED TABS (PREMIUM LOOK) */}
+          {/* ANIMATED TABS */}
           <div className="pub-tabs">
             {tabs.map((tab) => (
               <button
@@ -68,21 +73,39 @@ export default function Publications() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
                 className="pub-list"
               >
                 {tabs.find(t => t.id === activeTab).data.map((pub, index) => (
-                  <div className="pub-card" key={pub.id}>
+                  <div className="pub-card" key={pub.id || index}>
                     <div className="pub-index">{index + 1}</div>
                     <div className="pub-details">
-                      <p className="pub-citation">{highlightAuthor(pub.citation)}</p>
+                      <p className="pub-citation">
+                        {pub.citation ? highlightAuthor(pub.citation) : pub.title}
+                      </p>
+                      
+                      {/* --- Dynamic Button Logic for Books/Journals/Conferences --- */}
                       {pub.link && (
-                        <a href={pub.link} target="_blank" rel="noreferrer" className="pub-link-btn">
-                          View Publication ↗
+                        <a 
+                          href={pub.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="pub-link-btn"
+                        >
+                          {activeTab === "books" ? (
+                            <>View Book 📖</>
+                          ) : (
+                            <>View Publication ↗</>
+                          )}
                         </a>
                       )}
                     </div>
                   </div>
                 ))}
+                {/* Fallback if no data */}
+                {tabs.find(t => t.id === activeTab).data.length === 0 && (
+                  <p className="no-data">No records found for this category.</p>
+                )}
               </motion.div>
             </AnimatePresence>
           </div>

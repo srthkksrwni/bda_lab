@@ -210,3 +210,10 @@
     max-width: 100%; 
   }
 }
+
+.member-email {
+  white-space: pre-line; 
+  display: block;        
+  line-height: 1.5;      
+  margin-top: 5px;
+}

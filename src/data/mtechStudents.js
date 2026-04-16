@@ -1,4 +1,5 @@
 export const mtechStudents = [
+  
   // 2025 Batch
   { name: "Sarang Mohrir", batch: "2025", project: "Exploring Statistical Distance-Based Techniques for Real-Time Concept Drift Detection" },
   { name: "Amol Paliwal", batch: "2025", project: "Anomaly detection in real time data" },

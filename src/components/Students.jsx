@@ -17,12 +17,14 @@ function Students() {
     { id: "mtech", label: "M.Tech Scholars" },
   ];
 
-  const years = [...new Set(mtechStudents.map((s) => s.batch))].sort().reverse();
+  const years = [...new Set(mtechStudents.map((s) => s.batch))]
+    .sort()
+    .reverse();
 
   return (
     <div className="students-page">
       <div className="container">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="main-title"
@@ -52,6 +54,7 @@ function Students() {
               transition={{ duration: 0.4 }}
             >
               {/* --- POST-DOCTORATE SECTION --- */}
+              {/* --- POST-DOCTORATE SECTION --- */}
               {activeTab === "postdoc" && (
                 <section className="postdoc-section">
                   <div className="member-grid">
@@ -59,11 +62,13 @@ function Students() {
                       <div key={index} className="member-card postdoc-card">
                         <div className="avatar-wrapper">
                           {scholar.img ? (
-                            <img 
-                              src={`/images/students/${scholar.img}`} 
-                              alt={scholar.name} 
+                            <img
+                              src={`/images/students/${scholar.img}`}
+                              alt={scholar.name}
                               className="member-img"
-                              onError={(e) => { e.target.style.display = 'none'; }} // Fallback if image fails
+                              onError={(e) => {
+                                e.target.style.display = "none";
+                              }}
                             />
                           ) : (
                             <div className="initials-avatar">
@@ -74,12 +79,29 @@ function Students() {
                         <div className="member-info">
                           <h3 className="member-name">{scholar.name}</h3>
                           <p className="member-role">Post-Doctoral Fellow</p>
-                          <p className="member-email">{scholar.email}</p>
+
+                          {/* Email display with split logic to make them clickable separately */}
+                          <div className="member-email">
+                            {scholar.email.split("\n").map((mail, i) => (
+                              <a
+                                key={i}
+                                href={`mailto:${mail.trim()}`}
+                                style={{
+                                  display: "block",
+                                  color: "inherit",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                {mail.trim()}
+                              </a>
+                            ))}
+                          </div>
+
                           {scholar.scholarLink && (
-                            <a 
-                              href={scholar.scholarLink} 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
+                            <a
+                              href={scholar.scholarLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="scholar-link-btn"
                             >
                               Google Scholar
@@ -101,9 +123,9 @@ function Students() {
                 <section className="mtech-section">
                   <div className="batch-selector">
                     {years.map((year) => (
-                      <button 
-                        key={year} 
-                        className={`batch-btn ${selectedBatch === year ? 'active' : ''}`}
+                      <button
+                        key={year}
+                        className={`batch-btn ${selectedBatch === year ? "active" : ""}`}
                         onClick={() => setSelectedBatch(year)}
                       >
                         {year}
@@ -123,7 +145,9 @@ function Students() {
                           </div>
                           <div className="member-info">
                             <h3 className="member-name">{student.name}</h3>
-                            <p className="member-role">M.Tech Scholar (Batch {student.batch})</p>
+                            <p className="member-role">
+                              M.Tech Scholar (Batch {student.batch})
+                            </p>
                             <div className="project-box">
                               <strong>Project:</strong>
                               <p className="project-text">{student.project}</p>

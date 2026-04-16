@@ -15,19 +15,19 @@ const ProjectPage = () => {
 {
 name: "Prof. Sonali Agarwal",
 role: "Project Investigator",
-cv: "https://profile.iiita.ac.in/sonali/CV.pdf",
+//cv: "https://profile.iiita.ac.in/sonali/CV.pdf",
 photo: "\Sonali Maam.jpg"
 },
 {
 name: "Prof. Navjot Singh",
 role: "Co-Project Investigator",
-cv: "https://sites.google.com/iiita.ac.in/navjotsingh/home",
+//cv: "https://sites.google.com/iiita.ac.in/navjotsingh/home",
 photo: "https://it.iiita.ac.in/photo/navjot.jpg"
 },
 {
 name: "Dr. Sadhana Tiwari",
 role: "Post Doctoral Fellow",
-cv: "https://drive.google.com/file/d/1y1gk0E-qTV0TN-Xsoq2rb_wTcSiNSlyU/view?usp=drive_link",
+//cv: "https://drive.google.com/file/d/1y1gk0E-qTV0TN-Xsoq2rb_wTcSiNSlyU/view?usp=drive_link",
 photo: "/Sadhana Tiwari.jpg"
 }
 ];
@@ -93,6 +93,21 @@ photo: "/Sadhana Tiwari.jpg"
       <h1 className="page-title">
   Cyber-Physical Health Assistance Device for Wheelchair Users
 </h1>
+{/* --- Funding & Grant Details --- */}
+<div className="grant-details-container">
+  <div className="agency-header">
+    <span className="agency-label">Funding Agency</span>
+    <h2 className="agency-name">iHUB Divyasampark IIT Roorkee for Devices Materials and Technology Foundation</h2>
+    <p className="agency-sub">A Section-8 Company established by Government of India (DST) and IIT Roorkee</p>
+  </div>
+
+  <div className="grant-meta-grid">
+    <div className="meta-item">
+      <strong>Ref. No.:</strong> <span>2024-25/TIH-IITR/274</span>
+    </div>
+  </div>
+</div>
+
 
 {/* Contributors */}
 <section className="contributors-section">
@@ -110,14 +125,14 @@ photo: "/Sadhana Tiwari.jpg"
       <h3 className="contributor-name">{person.name}</h3>
       <p className="contributor-role">{person.role}</p>
 
-      <a
+      {/* <a
         href={person.cv}
         target="_blank"
         rel="noopener noreferrer"
         className="cv-link"
       >
         View CV
-      </a>
+      </a> */}
     </div>
   ))}
 </div>

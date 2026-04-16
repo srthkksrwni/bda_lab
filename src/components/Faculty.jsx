@@ -72,7 +72,7 @@ function Faculty() {
               </a>
 
               <a href={f.cirLab} target="_blank" rel="noreferrer" className="fac-btn btn-outline-lab">
-                <BrainCircuit size={18} /> Visit CIR Lab
+                <BrainCircuit size={18} /> Visit Centre for Intelligent Robotics
               </a>
             </div>
           </motion.div>

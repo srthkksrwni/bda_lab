@@ -238,3 +238,75 @@
   margin-bottom: 12px;
   border: 2px solid var(--secondary);
 }
+
+.grant-details-container {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #0056b3; /* Primary Blue color */
+  padding: 25px;
+  margin: 30px 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.agency-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.agency-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #0056b3;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.agency-name {
+  font-size: 1.5rem;
+  color: #222;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.agency-sub {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.grant-meta-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  font-size: 1rem;
+}
+
+.meta-item strong {
+  color: #444;
+  margin-right: 8px;
+}
+
+.meta-item span {
+  color: #000;
+  font-family: 'Courier New', Courier, monospace; /* Reference number ke liye official look */
+  font-weight: 600;
+}
+
+.meta-item.highlight span {
+  color: #d32f2f; /* Amount ko highlight karne ke liye */
+  font-family: inherit;
+  font-size: 1.1rem;
+}
+
+/* Mobile responsive ke liye */
+@media (max-width: 768px) {
+  .grant-meta-grid {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

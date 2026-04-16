@@ -31,7 +31,7 @@ const CEPProject = () => {
       {/* Buttons */}
       <div className="hm-actions">
         <a
-          href="https://drive.google.com/drive/folders/14tm_QYLET3aurbaOwde0xT5UP3q4gVQB?usp=sharing"
+          href="https://drive.google.com/file/d/19nX8E1cA4sddH2e_woAjiVZ9IW8l74wm/view?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer"
           className="hm-btn hm-demo-btn"
