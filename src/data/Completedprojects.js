@@ -39,20 +39,7 @@ export const Completedprojects = [
       brief : "",
       website:""
     },
-    {
-      id:3 ,
-      title:
-        "Real Time Complex Event Processing and Analytics for Smart Buildings",
-      agency: "Call for proposal under the Interdisciplinary Cyber Physical Systems (ICPS) program. Government of India Ministry of Science & Technology Department of Science & Technology Interdisciplinary Cyber Physical Systems (ICPS) Division.",
-      scheme: "",
-      role: "Project Investigator",
-      duration: "Feb 2019 – Jan 2022",
-      collaborators: [
-        
-      ],
-      brief:"",
-      website:""
-    },
+  
     {
       id:4 ,
       title:
@@ -67,19 +54,7 @@ export const Completedprojects = [
       brief:"",
       website:"https://peppy-moonbeam-6f0d0b.netlify.app/"
     },
-    {
-      id:5,
-      title:
-        "Big Data Analytics: Recent Trends and Applications",
-      agency: "",
-      scheme: "",
-      role: "Coordinator",
-      duration: "December 13-14, 2017",
-      collaborators: [
-       ],
-      brief : "Bilateral Workshop jointly organized by IIIT Allahabad and University of Peradeniya, Sri Lanka ",
-      website:""
-    },
+    
     {
       id:6 ,
       title:

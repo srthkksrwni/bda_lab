@@ -18,8 +18,8 @@ function Research() {
       watermark: "📈"
     },
     {
-      id: "ai",
-      title: "AI & Machine Learning",
+      id: "ml",
+      title: "Machine Learning",
       desc: "Deep learning models for prediction, classification, and intelligent decision support.",
       img: "../../ai and ml.png",
       watermark: "🧠"
@@ -28,6 +28,34 @@ function Research() {
       id: "ss",
       title: "Software Systems",
       desc: "Development of reliable, scalable, and secure systems for data-intensive apps.",
+      img: "../../softwarwe.png",
+      watermark: "💻"
+    },
+    {
+      id: "ai",
+      title: "Artificial Intelligence",
+      desc: "AI accelerates discovery by automating data analysis and modeling complex systems.",
+      img: "../../lg.png", 
+      watermark: "📊"
+    },
+    {
+      id: "sus",
+      title: "Sustainability",
+      desc: "AI drives long-term viability by optimizing resource efficiency and protecting ecosystems.",
+      img: "../../data visualization.png", 
+      watermark: "📈"
+    },
+    {
+      id: "dt",
+      title: "Digital Twins",
+      desc: "Digital twins enable precise simulation by mirroring physical assets for real-time analysis.",
+      img: "../../ai and ml.png",
+      watermark: "🧠"
+    },
+    {
+      id: "sa",
+      title: "Stream Analytics",
+      desc: "Stream analytics extracts immediate insights by processing continuous data flows in real-time.",
       img: "../../softwarwe.png",
       watermark: "💻"
     }
