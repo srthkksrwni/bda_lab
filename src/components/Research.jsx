@@ -35,28 +35,28 @@ function Research() {
       id: "ai",
       title: "Artificial Intelligence",
       desc: "AI accelerates discovery by automating data analysis and modeling complex systems.",
-      img: "../../lg.png", 
+      img: "../../ai.png", 
       watermark: "📊"
     },
     {
       id: "sus",
       title: "Sustainability",
       desc: "AI drives long-term viability by optimizing resource efficiency and protecting ecosystems.",
-      img: "../../data visualization.png", 
+      img: "../../sustainability.png", 
       watermark: "📈"
     },
     {
       id: "dt",
       title: "Digital Twins",
       desc: "Digital twins enable precise simulation by mirroring physical assets for real-time analysis.",
-      img: "../../ai and ml.png",
+      img: "../../digital twin.png",
       watermark: "🧠"
     },
     {
       id: "sa",
       title: "Stream Analytics",
       desc: "Stream analytics extracts immediate insights by processing continuous data flows in real-time.",
-      img: "../../softwarwe.png",
+      img: "../../streaming.png",
       watermark: "💻"
     }
   ];

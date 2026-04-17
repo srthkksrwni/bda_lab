@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const Technology = () => {
 
-  /* ✅ Add scroll + navbar effects */
+ 
   useEffect(() => {
     const cards = document.querySelectorAll(".tech-card");
 

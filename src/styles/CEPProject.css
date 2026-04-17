@@ -1,0 +1,226 @@
+/* --- PAGE WRAPPER --- */
+.cep-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* Card ke beech ka gap */
+  padding: 40px 20px;
+  background-color: #fcfdfe; /* Halka sa off-white background page ke liye */
+}
+
+/* --- MAIN PROJECT CARD --- */
+.cep-glass-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  max-width: 1000px;
+  width: 100%;
+  padding: 40px;
+  position: relative;
+}
+
+.cep-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f8fafc;
+  padding-bottom: 20px;
+}
+
+.cep-title-premium {
+  font-size: 1.8rem;
+  color: #041f55;
+  font-weight: 800;
+  margin: 0;
+}
+
+.cep-badge {
+  background: #e6fffa;
+  color: #2c7a7b;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* --- CONTENT SECTION --- */
+.cep-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #a0aec0;
+  margin-bottom: 15px;
+  font-weight: 700;
+  display: block;
+}
+
+.cep-text {
+  color: #4a5568;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+}
+
+.cep-list {
+  padding-left: 20px;
+  color: #4a5568;
+  margin-bottom: 30px;
+}
+
+.cep-list li {
+  margin-bottom: 8px;
+}
+
+/* --- LARGE DIAGRAMS SECTION --- */
+.cep-large-diagrams {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 40px;
+}
+
+.cep-img-wrapper {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cep-large-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  transition: transform 0.4s ease;
+}
+
+.cep-large-img:hover {
+  transform: scale(1.01);
+}
+
+/* --- FOOTER & BUTTONS --- */
+.cep-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.cep-btn-group {
+  display: flex;
+  gap: 15px;
+}
+
+.cep-btn-primary {
+  background: #041f55;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+  border: 1px solid #1a202c;
+}
+
+.cep-btn-secondary {
+  background: #fff;
+  color: #1a202c;
+  border: 1px solid #e2e8f0;
+  padding: 12px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.cep-btn-primary:hover {
+  background: #4579d4;
+  transform: translateY(-2px);
+}
+
+.cep-btn-secondary:hover {
+  background: #f8fafc;
+}
+
+/* --- NEW TEAM SEPARATE CARD (AS PER IMAGE) --- */
+.team-separate-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 1000px;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  border: 1px solid #f0f0f0;
+}
+
+.team-card-title {
+  color: #002d62; /* Navy Blue look as per image */
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.team-names-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.team-member-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap; /* Naam ek hi line mein rahe */
+}
+
+.team-separator {
+  color: #a0aec0;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0 5px;
+}
+
+.team-supervision {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #718096;
+  font-style: italic;
+  letter-spacing: 0.3px;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+  .cep-glass-card {
+    padding: 25px;
+  }
+  
+  .cep-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .team-names-container {
+    gap: 8px;
+  }
+
+  .team-member-name {
+    font-size: 0.9rem;
+  }
+
+  .cep-btn-group {
+    flex-direction: column;
+  }
+}

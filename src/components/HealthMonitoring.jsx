@@ -1,43 +1,96 @@
 import React from "react";
-import "../styles/HealthMonitoringProject.css";
+import { motion } from "framer-motion";
+import "../styles/CEPProject.css"; // Same premium CSS for consistency
 
 const HealthMonitoringProject = () => {
   const googleFormUrl = "https://google.com";
 
+  // Team names as per your provided code
+  const team = ["Dr. Sadhana Tiwari", "Ritesh Chandra"];
+
   return (
-    <div className="hm-card">
-      <h2 className="hm-title">Health Monitoring System</h2>
+    <div className="cep-page-wrapper">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="cep-container"
+      >
+        <div className="cep-glass-card">
+          {/* Header */}
+          <div className="cep-header">
+            <h2 className="cep-title-premium">Health Monitoring System</h2>
+            <div className="cep-badge">IoT & Semantic Web</div>
+          </div>
 
-      {/* Brief Section */}
-      <p className="hm-brief">
-        The Health Monitoring System is an IoT-enabled solution designed to
-        continuously monitor the physical and emotional well-being of
-        individuals with lower-limb disabilities...
-      </p>
+          {/* 1. Project Brief (Restored) */}
+          <div className="cep-info-section">
+            <h4 className="cep-label">Project Brief</h4>
+            <p className="cep-text">
+              An IoT-enabled solution designed to continuously monitor the physical and 
+              emotional well-being of individuals with lower-limb disabilities using 
+              semantic reasoning and BFO-aligned standards.
+            </p>
+          </div>
 
-      {/* Objectives Section */}
-      <div className="hm-objectives">
-        <h4>Objectives</h4>
-        <ul>
-          <li>Provide a unified semantic framework for health monitoring</li>
-          <li>Ensure interoperability using BFO-aligned standards</li>
-          <li>Enable semantic annotation and multimodal data fusion</li>
-        </ul>
-      </div>
+          {/* 2. Key Objectives (Restored) */}
+          <div className="cep-info-section">
+            <h4 className="cep-label">Key Objectives</h4>
+            <ul className="cep-list">
+              <li>Unified semantic framework for health monitoring</li>
+              <li>Interoperability via BFO-aligned standards</li>
+              <li>Multimodal data fusion & semantic annotation</li>
+            </ul>
+          </div>
 
-      {/* Actions Section */}
-      <div className="hm-actions">
-        {/* 2. Direct Link Jo New Tab Mein Khulega */}
-        <a
-          href={googleFormUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hm-btn hm-github-btn"
-          style={{ textDecoration: "none", textAlign: "center" }}
+          {/* 3. Diagram Section (Placeholder if you want to add later) */}
+          {/* <div className="cep-large-diagrams">
+            <div className="cep-diagram-block">
+              <h4 className="cep-label">System Architecture</h4>
+              <div className="cep-img-wrapper">
+                <img 
+                  src="/images/projects/health-monitor-diag.png" 
+                  alt="Health Monitoring Diagram" 
+                  className="cep-large-img" 
+                />
+              </div>
+            </div>
+          </div> */}
+
+          {/* 4. Footer Buttons */}
+          <div className="cep-footer">
+            <div className="cep-btn-group">
+              <a
+                href={googleFormUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cep-btn-primary"
+              >
+                Request GitHub Access ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* --- 5. SEPARATE TEAM CARD (Niche alag card mein) --- */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="team-separate-card"
         >
-          Github Repo
-        </a>
-      </div>
+          <h3 className="team-card-title">Project Team</h3>
+          <div className="team-names-container">
+            {team.map((name, index) => (
+              <React.Fragment key={index}>
+                <span className="team-member-name">{name}</span>
+                {index !== team.length - 1 && <span className="team-separator">•</span>}
+              </React.Fragment>
+            ))}
+          </div>
+          <p className="team-supervision">Under the supervision of Prof. Sonali Agarwal</p>
+        </motion.div>
+
+      </motion.div>
     </div>
   );
 };

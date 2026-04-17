@@ -307,3 +307,53 @@
     margin-bottom:8px;
   }
 }
+/* --- GitHub Repo Button Styling --- */
+.hm-github-btn {
+  /* Layout & Spacing */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  min-width: 160px;
+  
+  /* Colors & Background */
+  background-color: #1a2a6c; /* Deep Dark Gray/Black */
+  color: #ffffff !important; /* Text Color White */
+  
+  /* Borders & Typography */
+  border: 1px solid #1a202c;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  
+  /* Transition & Effects */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  text-decoration: none !important; /* Underline hatane ke liye */
+}
+
+/* Hover Effect */
+.hm-github-btn:hover {
+  background-color: #4579d4; /* Thoda light shade on hover */
+  transform: translateY(-2px); /* Upar uthne wala effect */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  color: #ffffff !important;
+}
+
+/* Active/Click Effect */
+.hm-github-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive (Mobile ke liye) */
+@media (max-width: 480px) {
+  .hm-github-btn {
+    width: 100%; /* Mobile par full width */
+    padding: 14px 20px;
+  }
+}

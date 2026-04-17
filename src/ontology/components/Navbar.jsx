@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "../style.css"
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,47 +32,28 @@ function Navbar() {
     setMenuOpen(false);
   }
 
-  // 🔥 Active link checker logic modified for nested routing
-  // location.pathname ab "/ontology/objectives" jaisa hoga
+  // 🔥 Active link checker
   const isActive = (path) => location.pathname === path;
 
   return (
     <nav className="navbar">
-      {/* Home link updated to /ontology */}
-      <Link to="/ontology" className="nav-brand" onClick={closeMenu}>
+      <Link to="/" className="nav-brand">
         🌐 Geospatial KG Inference
       </Link>
 
       <ul className={`nav-links ${menuOpen ? "show" : ""}`}>
-        {/* Sabhi paths ke aage /ontology lagaya gaya hai */}
-        <li>
-          <Link to="/ontology" className={isActive("/ontology") ? "active" : ""} onClick={closeMenu}>Home</Link>
-        </li>
-        <li>
-          <Link to="/ontology/objectives" className={isActive("/ontology/objectives") ? "active" : ""} onClick={closeMenu}>Objectives</Link>
-        </li>
-        <li>
-          <Link to="/ontology/methodology" className={isActive("/ontology/methodology") ? "active" : ""} onClick={closeMenu}>Methodology</Link>
-        </li>
-        <li>
-          <Link to="/ontology/technology" className={isActive("/ontology/technology") ? "active" : ""} onClick={closeMenu}>Technology</Link>
-        </li>
-        <li>
-          <Link to="/ontology/applications" className={isActive("/ontology/applications") ? "active" : ""} onClick={closeMenu}>Applications</Link>
-        </li>
-        <li>
-          <Link to="/ontology/future" className={isActive("/ontology/future") ? "active" : ""} onClick={closeMenu}>Future Work</Link>
-        </li>
-        <li>
-          <Link to="/ontology/publications" className={isActive("/ontology/publications") ? "active" : ""} onClick={closeMenu}>Publications</Link>
-        </li>
-        <li>
-          <Link to="/ontology/contact" className={isActive("/ontology/contact") ? "active" : ""} onClick={closeMenu}>Contact</Link>
-        </li>
+        <li><Link to="/" className={isActive("/") ? "active" : ""} onClick={closeMenu}>Home</Link></li>
+        <li><Link to="/objectives" className={isActive("/objectives") ? "active" : ""} onClick={closeMenu}>Objectives</Link></li>
+        <li><Link to="/methodology" className={isActive("/methodology") ? "active" : ""} onClick={closeMenu}>Methodology</Link></li>
+        <li><Link to="/technology" className={isActive("/technology") ? "active" : ""} onClick={closeMenu}>Technology</Link></li>
+        <li><Link to="/applications" className={isActive("/applications") ? "active" : ""} onClick={closeMenu}>Applications</Link></li>
+        <li><Link to="/future" className={isActive("/future") ? "active" : ""} onClick={closeMenu}>Future Work</Link></li>
+        <li><Link to="/publications" className={isActive("/publications") ? "active" : ""} onClick={closeMenu}>Publications</Link></li>
+        <li><Link to="/contact" className={isActive("/contact") ? "active" : ""} onClick={closeMenu}>Contact</Link></li>
       </ul>
 
       <button onClick={toggleDark} className="dark-toggle">
-        {dark ? "☀️" : "🌙"}
+        🌙
       </button>
 
       <div className={`hamburger ${menuOpen ? "active" : ""}`} onClick={toggleMenu}>
