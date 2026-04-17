@@ -94,69 +94,65 @@ export const eventsData = {
       citation: 'Best Paper Award for our paper published in the 5th International Conference on Data Management, Analytics and Innovation (ICDMAI), 2021.',
       link: ""
     },
-    {
-      id: 3,
-      citation: 'First Position in Poster Presentation (M.Tech Category) at 2nd Researcher’s Day, IIIT Allahabad, 2019.',
-      link: ""
-    },
+    
   ],
 
-  workshop: [
-    {
-      id: 1,
-      title: 'Residential Training Program on Big Data Analytics, AI, Blockchain, and IoT',
-      citation: 'Sonali Agarwal (Coordinator), Sponsored by ONGC (Grant: Rs. 14.74 Lakh), 2020.',
-      status: 'Completed'
-    },
-    {
-      id: 2,
-      title: 'IEEE CIS Summer School on Big Data Analytics and Stream Processing: Tools, Techniques and Application',
-      citation: 'Sonali Agarwal (Coordinator), Sponsored by IEEE CIS (Grant: USD 7000), 2019.',
-      status: 'Completed'
-    },
-    {
-      id: 3,
-      title: 'India-Sri Lanka Workshop on Big Data Analytics: Recent Trends and Machine Learning Applications',
-      citation: 'Sonali Agarwal (Coordinator), Sponsored by DST (Grant: Rs. 2.71 Lakh), 2017.',
-      status: 'Completed'
-    },
-    {
-      id: 4,
-      title: 'International Conference on Machine Intelligence and Signal Processing (MISP 2019)',
-      citation: 'Sonali Agarwal (Coordinator), Sponsored by SERB, CSIR, INSA, and UP-CST (Total Grant: Rs. 3.50 Lakh), 2019.',
-      status: 'Completed'
-    },
-    {
-      id: 5,
-      title: 'First International Workshop on Core Data Science',
-      citation: 'Sonali Agarwal (Coordinator), Self-Sponsored, August 29 – September 2, 2022.',
-      status: 'Completed'
-    },
-    {
-      id: 6,
-      title: 'Second International Workshop on Core Data Science',
-      citation: 'Sonali Agarwal (Coordinator), Self-Sponsored, May 23-27, 2023.',
-      status: 'Completed'
-    },
-    {
-      id: 7,
-      title: '9th International Conference on Big Data Analytics',
-      citation: 'Sonali Agarwal (Coordinator), Self-Sponsored, December 15-18, 2021.',
-      status: 'Completed'
-    },
-    {
-      id: 8,
-      title: 'Training on Artificial Intelligence (AI) and Machine Learning (ML)',
-      citation: 'Sonali Agarwal (Coordinator), Sponsored by ISRO (Grant: Rs. 20.00 Lakh), 2023.',
-      status: 'To be held'
-    },
-    {
-      id: 9,
-      title: 'Advanced Big Data Analytics (ITS Group Training)',
-      citation: 'Invited Expert, Organized by CEC IIT Roorkee, April 15-19, 2024.',
-      status: 'Upcoming/Completed'
-    }
-  ],
+ workshop: [
+  {
+    id: 9,
+    title: 'Advanced Big Data Analytics (ITS Group Training)',
+    citation: 'Invited Expert, Organized by CEC IIT Roorkee, April 15-19, 2024.',
+    status: 'Upcoming/Completed'
+  },
+  {
+    id: 8,
+    title: 'Training on Artificial Intelligence (AI) and Machine Learning (ML)',
+    citation: 'Sonali Agarwal (Coordinator), Sponsored by ISRO (Grant: Rs. 20.00 Lakh), 2023.',
+    status: 'To be held'
+  },
+  {
+    id: 6,
+    title: 'Second International Workshop on Core Data Science',
+    citation: 'Sonali Agarwal (Coordinator), Self-Sponsored, May 23-27, 2023.',
+    status: 'Completed'
+  },
+  {
+    id: 5,
+    title: 'First International Workshop on Core Data Science',
+    citation: 'Sonali Agarwal (Coordinator), Self-Sponsored, August 29 – September 2, 2022.',
+    status: 'Completed'
+  },
+  {
+    id: 7,
+    title: '9th International Conference on Big Data Analytics',
+    citation: 'Sonali Agarwal (Coordinator), Self-Sponsored, December 15-18, 2021.',
+    status: 'Completed'
+  },
+  {
+    id: 1,
+    title: 'Residential Training Program on Big Data Analytics, AI, Blockchain, and IoT',
+    citation: 'Sonali Agarwal (Coordinator), Sponsored by ONGC (Grant: Rs. 14.74 Lakh), 2020.',
+    status: 'Completed'
+  },
+  {
+    id: 2,
+    title: 'IEEE CIS Summer School on Big Data Analytics and Stream Processing: Tools, Techniques and Application',
+    citation: 'Sonali Agarwal (Coordinator), Sponsored by IEEE CIS (Grant: USD 7000), 2019.',
+    status: 'Completed'
+  },
+  {
+    id: 4,
+    title: 'International Conference on Machine Intelligence and Signal Processing (MISP 2019)',
+    citation: 'Sonali Agarwal (Coordinator), Sponsored by SERB, CSIR, INSA, and UP-CST (Total Grant: Rs. 3.50 Lakh), 2019.',
+    status: 'Completed'
+  },
+  {
+    id: 3,
+    title: 'India-Sri Lanka Workshop on Big Data Analytics: Recent Trends and Machine Learning Applications',
+    citation: 'Sonali Agarwal (Coordinator), Sponsored by DST (Grant: Rs. 2.71 Lakh), 2017.',
+    status: 'Completed'
+  }
+]
 
 
 

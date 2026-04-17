@@ -25,11 +25,7 @@ function Home() {
             ecosystem where students, faculty, and researchers engage in
             knowledge exchange, innovation, and interdisciplinary
             problem-solving, supported by interactions with domain experts and
-            industry stakeholders. It will act as a channel to attract funded
-            research projects from government, industry, and international
-            agencies, enabling the development of real-time, intelligent, and
-            sustainable solutions for challenges such as mental health analysis,
-            smart environments, and data-driven healthcare systems.
+            industry stakeholders.
           </p>
           <h4> Vision </h4>
           <p>
