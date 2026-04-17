@@ -50,6 +50,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/studentCorner" element={<StudentCorner />} />
           <Route path="/modest" element={<ModestIframe />} />
+          
         </Routes>
         <Footer />
       </div>
