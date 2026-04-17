@@ -75,7 +75,33 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <div className="App">
+        <ScrollToTop />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/faculty" element={<Faculty />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/publications" element={<Publications />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/datasets" element={<DatasetsPage />} />
+          <Route path="/projectpage" element={<ProjectPage />} />
+          <Route path="/gesturecare" element={<BimodalGestureCareWebsite />} />
+          <Route path="/healthmonitor" element={<HealthMonitoringProject />} />
+          <Route path="/cepproject" element={<CEPProject />} />
+          <Route path="/ontologyproject" element={<OntologyProject />} />
+          <Route path="/cloudplatform" element={<CloudPlatformProject />} />
+          <Route path="/mobile-app" element={<MobileApplicationProject />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/studentCorner" element={<StudentCorner />} />
+          <Route path="/modest" element={<ModestIframe />} />
+          
+        </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 }
