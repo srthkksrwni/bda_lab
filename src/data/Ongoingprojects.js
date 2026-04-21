@@ -32,6 +32,6 @@ export const Ongoingprojects = [
       duration: "Sanctioned on August 22,2025",
       collaborators: [],
       brief : "The objective of this project is to develop the understanding with how ontology frameworks and Big data approaches helps for Geospatial data mining",
-      website:"https://geospatial-kg-inference.netlify.app/"
+      website:"/#/ontology"
     }
   ];

@@ -81,7 +81,7 @@ const Home = () => {
             </header>
 
       {/* HERO */}
-      <section className="banner">
+      <section className="csir-banner">
         <img
           src="/images/index.jpg"
           alt="Banner"
