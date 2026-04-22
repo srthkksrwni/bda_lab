@@ -20,7 +20,8 @@ export const phdStudents = [
     role: "PhD Research Scholar",
     email: "rsi2024507@iiita.ac.in",
     img: "Anvita Srivastava.jpg",
-    thesisTopic: "Stream Analytics Framework for data-driven applications"
+    thesisTopic: "Stream Analytics Framework for data-driven applications",
+    cvLink : "https://scholar.google.com/citations?hl=en&user=DE-NpLMAAAAJ"
   },
   {
     name: "Mr. Ritesh Chandra",
@@ -28,7 +29,7 @@ export const phdStudents = [
     email: "rsi202201@iiita.ac.in",
     img: "Ritesh Chandra.jpg",
     cvLink:"https://scholar.google.com/citations?user=44lff0IAAAAJ&hl=en&oi=ao",
-   // thesisTopic: "Enter Thesis Topic Here"
+   thesisTopic: "Ontology-Enabled Big Data Analytics for Clinical Decision Support in Healthcare Systems"
   },
   {
     name: "Ms. Nitu Kumari",
