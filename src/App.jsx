@@ -1,6 +1,10 @@
 import React from "react";
-// 1. useLocation ko import kiya
-import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom"; 
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
@@ -24,20 +28,24 @@ import Contact from "./components/Contact";
 import StudentCorner from "./components/StudentCorner";
 import ModestIframe from "./components/ModestIframe";
 import Redirect from "./ontology/Redirect";
+import CsirIframe from "./components/CsirIframe";
 
-// 2. Ek AppContent component banaya taaki useLocation() kaam kar sake
 function AppContent() {
   const location = useLocation();
 
-  // Ye check karega ki kya hum ontology folder ke andar hain
+  // Check karega ki kya hum ontology ya csir routes par hain
   const isOntologyRoute = location.pathname.startsWith("/ontology");
+  const isCsirRoute = location.pathname.startsWith("/csir");
+
+  // Dono mein se kisi bhi route par ho toh Navbar/Footer hide hoga
+  const hideNavFooter = isOntologyRoute || isCsirRoute;
 
   return (
     <div className="App">
       <ScrollToTop />
-      
-      {/* 3. Agar ontology page nahi hai, tabhi Project A ka Navbar dikhao */}
-      {!isOntologyRoute && <Navbar />}
+
+      {/* Agar ontology ya csir page nahi hai, tabhi Navbar dikhao */}
+      {!hideNavFooter && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -59,13 +67,17 @@ function AppContent() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/studentCorner" element={<StudentCorner />} />
         <Route path="/modest" element={<ModestIframe />} />
-        
+
+        {/* CSIR Project Routes - Inhe Routes ke andar rakha hai */}
+        <Route path="/csir/:fileName" element={<CsirIframe />} />
+        <Route path="/csir" element={<CsirIframe />} />
+
         {/* Ontology Project Entry */}
         <Route path="/ontology/*" element={<Redirect />} />
       </Routes>
 
-      {/* 4. Agar ontology page nahi hai, tabhi Project A ka Footer dikhao */}
-      {!isOntologyRoute && <Footer />}
+      {/* Agar ontology ya csir page nahi hai, tabhi Footer dikhao */}
+      {!hideNavFooter && <Footer />}
     </div>
   );
 }

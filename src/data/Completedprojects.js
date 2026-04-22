@@ -52,7 +52,7 @@ export const Completedprojects = [
         "Council of Scientific & Industrial Research (CSIR), Indian Institute of Toxicology Research (IITR), Lucknow"
       ],
       brief:"",
-      website:"https://peppy-moonbeam-6f0d0b.netlify.app/"
+      website:"/#/csir"
     },
     
     {
