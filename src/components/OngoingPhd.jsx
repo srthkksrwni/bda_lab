@@ -10,7 +10,6 @@ const OngoingPhd = () => {
       <div className="phd-members-grid">
         {phdStudents.map((student, index) => (
           <div key={index} className="phd-individual-card">
-            {/* Image Wrapper for Glowing Effect */}
             <div className="phd-img-container">
               <img 
                 src={student.img || "default-avatar.png"} 
@@ -19,7 +18,6 @@ const OngoingPhd = () => {
               />
             </div>
 
-            {/* Content Details */}
             <div className="phd-details-box">
               <h3 className="phd-student-name">{student.name}</h3>
               <p className="phd-student-role">PhD Research Scholar</p>
@@ -30,6 +28,16 @@ const OngoingPhd = () => {
                   {student.email}
                 </a>
               </div>
+
+              {/* Thesis Topic Section - New Additon */}
+              {student.thesisTopic && (
+                <div className="phd-thesis-section" style={{ marginTop: '10px', fontSize: '0.9rem' }}>
+                  <strong style={{ color: '#555' }}>Thesis Topic:</strong>
+                  <p style={{ fontStyle: 'italic', margin: '5px 0', color: '#333' }}>
+                    {student.thesisTopic}
+                  </p>
+                </div>
+              )}
 
               {student.cvLink && (
                 <div className="phd-action">

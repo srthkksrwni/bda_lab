@@ -15,6 +15,14 @@
   letter-spacing: 1px;
 }
 
+.phd-thesis-section {
+    background: rgba(0, 0, 0, 0.03);
+    padding: 8px;
+    border-radius: 5px;
+    border-left: 3px solid #007bff; /* Ek choti blue line design ke liye */
+}
+
+
 .tab-group {
   display: flex;
   justify-content: center;
