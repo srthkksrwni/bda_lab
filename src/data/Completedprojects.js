@@ -83,18 +83,6 @@ export const Completedprojects = [
       website:""
     },
     {
-      id:10 ,
-      title:
-        "Real time stream analytics and machine learning for cypher -physical streams",
-      agency: "MHRD Scheme on Global Initiative on Academic Network(GIAN)",
-      scheme: "",
-      role: "Project Investigator",
-      duration: "January 4-7, 2018",
-      collaborators: [],
-      brief : "This proposed workshop was hosted in conjuction with International Conference on Distributed Computing and Networking at IIT BHU",
-      website:""
-    },
-    {
       id:11 ,
       title:
         "Stream Analytics for Processing Big Data in motion for Real Time Responses",

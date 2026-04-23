@@ -24,13 +24,7 @@ const GraduatedPhd = () => {
               <h3 className="grad-student-name">{student.name}</h3>
               <p className="grad-student-role">Graduated PhD Scholar</p>
               
-              <div className="grad-email-pill">
-                <span className="grad-icon">📧</span>
-                <a href={`mailto:${student.email}`} className="grad-email-link">
-                  {student.email}
-                </a>
-              </div>
-
+            
               {student.scholarLink && (
                 <div className="grad-action">
                   <a 

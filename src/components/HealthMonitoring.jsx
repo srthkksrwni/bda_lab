@@ -67,6 +67,14 @@ const HealthMonitoringProject = () => {
               >
                 Request GitHub Access ↗
               </a>
+              <a
+                href="https://drive.google.com/file/d/1yDeTdiFdN4NswLX2IoV7UpA_lIhAMltC/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cep-btn-primary"
+              >
+                Demo Video ↗
+              </a>
             </div>
           </div>
         </div>

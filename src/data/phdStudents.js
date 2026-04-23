@@ -47,11 +47,5 @@ export const phdStudents = [
     cvLink: "",
    // thesisTopic: "Enter Thesis Topic Here"
   },
-  {
-    name: "Amit Kumar",
-    role: "PhD Research Scholar",
-    email: "rsi2019004@iiita.ac.in",
-    img: "Amit Tyagi.png",
-    thesisTopic: "Leveraging Advanced Network Analytics for Mining Software"
-  }
+  
 ];
