@@ -5,10 +5,10 @@ export const phdStudents = [
     email: "rsi2026003@iiita.ac.in",
     img: "Himanshi Singh.jpeg",
     cvLink: "https://scholar.google.com/citations?user=b5mtNfcAAAAJ&hl=en",
-    //thesisTopic: "Enter Thesis Topic Here" // Naya Field
+    thesisTopic: "Multimodal Analysis for Mental Disorder Recognition "
   },
   {
-    name: "Ms. Sonam Yadav",
+    name: "Mrs. Sonam Yadav",
     role: "PhD Research Scholar",
     email: "rsi2024503@iiita.ac.in",
     img: "Sonam.jpg",
@@ -16,7 +16,7 @@ export const phdStudents = [
     cvLink : "https://scholar.google.com/citations?hl=en&user=1PXAetgAAAAJ"
   },
   {
-    name: "Ms. Anvita Srivastava",
+    name: "Mrs. Anvita Srivastava",
     role: "PhD Research Scholar",
     email: "rsi2024507@iiita.ac.in",
     img: "Anvita Srivastava.jpg",
@@ -32,7 +32,7 @@ export const phdStudents = [
    thesisTopic: "Ontology-Enabled Big Data Analytics for Clinical Decision Support in Healthcare Systems"
   },
   {
-    name: "Ms. Nitu Kumari",
+    name: "Mrs. Nitu Kumari",
     role: "PhD Research Scholar",
     email: "rsi2022506@iiita.ac.in",
     img: "neetu.jpeg",
@@ -45,7 +45,7 @@ export const phdStudents = [
     email: "mse2022010@iiita.ac.in",
     img: "AmitKr..jpg",
     cvLink: "",
-   // thesisTopic: "Enter Thesis Topic Here"
+   thesisTopic: "AI - Added rapid mission design in complex dynamical enviroments"
   },
   
 ];
