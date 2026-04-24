@@ -44,6 +44,6 @@ export const graduatedphd = [
   {
     name: "Amit Kumar",
     img: "Amit Tyagi.png",
-    //scholarLink: " "
+    scholarLink: "https://scholar.google.com/citations?hl=en&user=c6sPHMcAAAAJ&view_op=list_works&sortby=pubdate"
   }
 ];
