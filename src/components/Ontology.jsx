@@ -65,14 +65,14 @@ const OntologyProject = () => {
           {/* 4. Footer Buttons */}
           <div className="cep-footer">
             <div className="cep-btn-group">
-              {/* <a
-                href="#" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cep-btn-secondary"
-              >
-                Watch Demo Video
-              </a> */}
+             <a
+              href="https://drive.google.com/file/d/1XsuXqQJQWuNYg0N75Dag6jNHToeww-cG/view?ts=69e9fea8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="gc3-btn-primary"
+            >
+              Demo Video and Setup
+            </a>
               
               <a
                 href={googleFormUrl}
