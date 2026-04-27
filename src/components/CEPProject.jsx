@@ -70,7 +70,7 @@ const CEPProject = () => {
           <div className="cep-footer">
             <div className="cep-btn-group">
               <a
-                href="https://drive.google.com/file/d/1c-IArgBPIJhXWfLYOdcuIJKoEwO-O5_q/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1Iv4_3dEoohWLhmqlH8X1shD0Mm9_OMRe/view?ts=69ef0a46"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cep-btn-secondary"
