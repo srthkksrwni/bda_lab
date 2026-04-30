@@ -1,19 +1,28 @@
 export const recentUpdates = [
-    {
-      title: "Received a new Project grant from ISRO under RESPOND 2024 call",
-      date: "2024–2026",
-    },
+  {
+    title: "Patent Details: A WEARABLE ASSISTIVE SYSTEM WITH INTEGRATED REAL-TIME HEALTH AND EMOTION MONITORING OF LOWER-LIMB DISABLED PERSONS, SSCPL Ref. No: IHUBRCRN032, Application No: 202611052999",
+    date: "2025–2026",
+  },
+  {
+    title: "Project Grant: Ontology-Driven Knowledge Modeling for IoT-Based Health Monitoring of Wheelchair Users, Project Grant No: 2024-25/TiH-IITR/274",
+    date: "2024–2025",
+  },
+
+  {
+    title: "Received a new Project grant from ISRO under RESPOND 2024 call",
+    date: "2024–2026",
+  },
   {
     title: "Lagrange point orbit prediction using high-fidelity orbit propagator and orbit representation in rotating reference frame: AK Singh, VK Srivastava, and S. Agarwal",
     date: "2026",
-    link : "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hPvt6d8AAAAJ&sortby=pubdate&citation_for_view=hPvt6d8AAAAJ:ndLnGcHYRF0C"
+    link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hPvt6d8AAAAJ&sortby=pubdate&citation_for_view=hPvt6d8AAAAJ:ndLnGcHYRF0C"
   },
   {
     title: "Ontology-based knowledge modeling approach for big data analysis of interdependent health conditions in the diagnosis of non-communicable diseases",
     date: "2026",
-    link : "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hPvt6d8AAAAJ&sortby=pubdate&citation_for_view=hPvt6d8AAAAJ:xm0LlTxljI0C"
+    link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hPvt6d8AAAAJ&sortby=pubdate&citation_for_view=hPvt6d8AAAAJ:xm0LlTxljI0C"
   },
-  
+
   {
     title:
       "Published a research paper in DEXA 2025 entitled “Innovative Framework for Early Estimation of Mental Disorder Scores to Enable Timely Interventions”",
