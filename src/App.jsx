@@ -19,6 +19,7 @@ import BimodalGestureCareWebsite from "./components/GestureCarepage";
 import HealthMonitoringProject from "./components/HealthMonitoring";
 import CEPProject from "./components/CEPProject";
 import OntologyProject from "./components/Ontology";
+import RedirectApp from "./portfolio/RedirectApp";
 import CloudPlatformProject from "./components/CloudPlatform";
 import MobileApplicationProject from "./components/Mobileapp";
 import ScrollToTop from "./components/ScrollToTop";
@@ -36,9 +37,10 @@ function AppContent() {
   // Check karega ki kya hum ontology ya csir routes par hain
   const isOntologyRoute = location.pathname.startsWith("/ontology");
   const isCsirRoute = location.pathname.startsWith("/csir");
+  const isPortfolioRoute = location.pathname.startsWith("/portfolio");
 
   // Dono mein se kisi bhi route par ho toh Navbar/Footer hide hoga
-  const hideNavFooter = isOntologyRoute || isCsirRoute;
+  const hideNavFooter = isOntologyRoute || isCsirRoute || isPortfolioRoute;
 
   return (
     <div className="App">
@@ -74,6 +76,8 @@ function AppContent() {
 
         {/* Ontology Project Entry */}
         <Route path="/ontology/*" element={<Redirect />} />
+        {/* portfolio Project Entry */}
+        <Route path="/portfolio/*" element={<RedirectApp />} />
       </Routes>
 
       {/* Agar ontology ya csir page nahi hai, tabhi Footer dikhao */}

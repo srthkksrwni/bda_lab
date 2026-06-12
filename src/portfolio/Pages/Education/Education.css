@@ -1,0 +1,81 @@
+.portfolio-education-page {
+  padding: 80px 40px;
+  background: #ffffff;
+}
+
+.portfolio-education-page h1 {
+  text-align: center;
+  font-size: 48px;
+  color: #0f172a;
+  margin-bottom: 60px;
+}
+
+.portfolio-education-timeline {
+  max-width: 900px;
+  margin: auto;
+  border-left: 4px solid #2563eb;
+  padding-left: 30px;
+}
+
+.portfolio-education-card {
+  background: #f8fafc;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.portfolio-education-card::before {
+  content: "";
+  position: absolute;
+  left: -42px;
+  top: 28px;
+  width: 16px;
+  height: 16px;
+  background: #2563eb;
+  border-radius: 50%;
+}
+
+.portfolio-education-card span {
+  color: #2563eb;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.portfolio-education-card h3 {
+  font-size: 24px;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.portfolio-education-card h4 {
+  font-size: 18px;
+  color: #334155;
+  margin-bottom: 12px;
+}
+
+.portfolio-education-card p {
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  .portfolio-education-page {
+    padding: 50px 20px;
+  }
+
+  .portfolio-education-page h1 {
+    font-size: 34px;
+  }
+
+  .portfolio-education-timeline {
+    padding-left: 20px;
+  }
+
+  .portfolio-education-card::before {
+    left: -32px;
+  }
+}

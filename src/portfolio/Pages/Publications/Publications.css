@@ -1,0 +1,187 @@
+.portfolio-publications-page {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* Header */
+
+.portfolio-publications-header {
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.portfolio-publications-header h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.portfolio-publications-header p {
+  max-width: 700px;
+  margin: auto;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+/* Statistics */
+
+.portfolio-stats-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 50px 8%;
+}
+
+.portfolio-stat-card {
+  background: white;
+  text-align: center;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: 0.3s ease;
+}
+
+.portfolio-stat-card:hover {
+  transform: translateY(-5px);
+  border-color: #38bdf8;
+}
+
+.portfolio-stat-card h2 {
+  color: #38bdf8;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.portfolio-stat-card p {
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* Publication Sections */
+
+.portfolio-publication-section {
+  padding: 30px 8%;
+}
+
+.portfolio-publication-section h2 {
+  color: #0f172a;
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+/* One Card Per Line */
+
+.portfolio-publication-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Publication Cards */
+
+.portfolio-publication-card {
+  width: 100%;
+
+  background: white;
+
+  border: 1px solid #e2e8f0;
+  border-left: 5px solid #38bdf8;
+
+  border-radius: 12px;
+
+  padding: 25px;
+
+  transition: all 0.3s ease;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.portfolio-publication-card:hover {
+  transform: translateX(6px);
+
+  border-color: #38bdf8;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.portfolio-publication-card span {
+  display: inline-block;
+
+  color: #38bdf8;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  margin-bottom: 10px;
+}
+
+.portfolio-publication-card h3 {
+  color: #0f172a;
+
+  font-size: 1.25rem;
+  line-height: 1.5;
+
+  margin-bottom: 12px;
+}
+
+.portfolio-publication-card p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Publication Metadata */
+
+.portfolio-publication-meta {
+  margin-top: 10px;
+
+  color: #38bdf8 !important;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Patent Cards */
+
+.portfolio-patent-card {
+  width: 100%;
+
+  background: white;
+
+  border: 1px solid #e2e8f0;
+  border-left: 5px solid #0f172a;
+
+  border-radius: 12px;
+
+  padding: 25px;
+
+  margin-bottom: 20px;
+
+  transition: all 0.3s ease;
+}
+
+.portfolio-patent-card:hover {
+  transform: translateX(6px);
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .portfolio-publications-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .portfolio-publication-card {
+    padding: 20px;
+  }
+
+  .portfolio-publication-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .portfolio-stats-section {
+    grid-template-columns: 1fr;
+  }
+}

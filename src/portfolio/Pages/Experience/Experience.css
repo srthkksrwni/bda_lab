@@ -1,0 +1,84 @@
+.portfolio-experience-page {
+  padding: 80px 40px;
+  background: #f8fafc;
+}
+
+.portfolio-experience-page h1 {
+  text-align: center;
+  font-size: 48px;
+  color: #0f172a;
+  margin-bottom: 60px;
+}
+
+.portfolio-timeline {
+  max-width: 900px;
+  margin: auto;
+  border-left: 4px solid #2563eb;
+  padding-left: 30px;
+}
+
+.portfolio-timeline-section {
+  margin-bottom: 50px;
+}
+
+.portfolio-timeline-section h2 {
+  font-size: 28px;
+  color: #2563eb;
+  margin-bottom: 25px;
+}
+
+.portfolio-timeline-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.portfolio-timeline-card::before {
+  content: "";
+  position: absolute;
+  left: -42px;
+  top: 28px;
+  width: 16px;
+  height: 16px;
+  background: #2563eb;
+  border-radius: 50%;
+}
+
+.portfolio-timeline-card span {
+  color: #2563eb;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.portfolio-timeline-card h3 {
+  font-size: 22px;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.portfolio-timeline-card p {
+  color: #475569;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .portfolio-experience-page {
+    padding: 50px 20px;
+  }
+
+  .portfolio-experience-page h1 {
+    font-size: 34px;
+  }
+
+  .portfolio-timeline {
+    padding-left: 20px;
+  }
+
+  .portfolio-timeline-card::before {
+    left: -32px;
+  }
+}

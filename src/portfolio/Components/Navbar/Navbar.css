@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.portfolio-navbar {
+    background: #0f172a;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 60px;
+    height: 70px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    z-index: 9999;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-logo {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.portfolio-nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.portfolio-nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.portfolio-nav-links a:hover {
+    color: #38bdf8;
+}
+
+.portfolio-mobile-menu {
+    display: none;
+}
+
+.portfolio-menu-icon {
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .portfolio-navbar {
+        height: 70px;
+        padding: 0 15px;
+    }
+
+    .portfolio-logo {
+        font-size: 18px;
+    }
+
+    .portfolio-nav-links {
+        display: none;
+    }
+
+    .portfolio-mobile-menu {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .portfolio-menu-icon {
+        font-size: 30px;
+        color: white;
+    }
+
+    .portfolio-dropdown {
+        position: absolute;
+        top: 45px;
+        right: 0;
+        width: 260px;
+
+        background: #0f172a;
+        border-radius: 8px;
+
+        display: flex;
+        flex-direction: column;
+
+        padding: 10px 0;
+        z-index: 1000;
+
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .portfolio-dropdown a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+        padding: 14px 20px;
+
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition: 0.3s;
+    }
+
+    .portfolio-dropdown a:last-child {
+        border-bottom: none;
+    }
+
+    .portfolio-dropdown a:visited {
+        color: white;
+    }
+
+    .portfolio-dropdown a:hover {
+        background: #1e293b;
+        color: #38bdf8;
+    }
+}

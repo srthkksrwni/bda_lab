@@ -1,0 +1,162 @@
+.portfolio-contact-page {
+  padding: 90px 40px;
+  background: #f8fafc;
+}
+
+.portfolio-contact-page h1 {
+  text-align: center;
+  font-size: 52px;
+  margin-bottom: 60px;
+  color: #0f172a;
+}
+
+.portfolio-contact-card,
+.portfolio-map-section,
+.portfolio-contact-form {
+  max-width: 1000px;
+  margin: 0 auto 45px;
+  background: #ffffff;
+  padding: 42px;
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  border-top: 5px solid #2563eb;
+}
+
+.portfolio-contact-card h2,
+.portfolio-map-section h2,
+.portfolio-contact-form h2 {
+  font-size: 32px;
+  margin-bottom: 28px;
+  color: #2563eb;
+}
+
+.portfolio-contact-card p {
+  font-size: 18px;
+  margin-bottom: 18px;
+  color: #334155;
+}
+
+.portfolio-contact-card strong {
+  color: #0f172a;
+  min-width: 80px;
+  display: inline-block;
+}
+
+.portfolio-contact-card p a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.portfolio-contact-links {
+  margin-top: 30px;
+}
+
+.portfolio-link-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.portfolio-link-row:last-child {
+  border-bottom: none;
+}
+
+.portfolio-link-row span {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.portfolio-link-row a {
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  padding: 11px 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.portfolio-link-row a:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.portfolio-map-section iframe {
+  width: 100%;
+  height: 420px;
+  border: none;
+  border-radius: 14px;
+}
+
+.portfolio-contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.portfolio-contact-form input,
+.portfolio-contact-form textarea {
+  padding: 15px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.portfolio-contact-form input:focus,
+.portfolio-contact-form textarea:focus {
+  border-color: #2563eb;
+}
+
+.portfolio-contact-form button {
+  padding: 15px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.portfolio-contact-form button:hover {
+  background: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  .portfolio-contact-page {
+    padding: 55px 18px;
+  }
+
+  .portfolio-contact-page h1 {
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+
+  .portfolio-contact-card,
+  .portfolio-map-section,
+  .portfolio-contact-form {
+    padding: 24px;
+  }
+
+  .portfolio-contact-card h2,
+  .portfolio-map-section h2,
+  .portfolio-contact-form h2 {
+    font-size: 26px;
+  }
+
+  .portfolio-link-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .portfolio-map-section iframe {
+    height: 300px;
+  }
+}
