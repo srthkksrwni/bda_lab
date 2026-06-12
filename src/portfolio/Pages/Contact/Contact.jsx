@@ -41,17 +41,26 @@ function Contact() {
 
                     <div className="portfolio-link-row">
                         <span>ResearchGate</span>
-                        <a href="https://www.researchgate.net/scientific-contributions/Sadhana-Tiwari-2208709971">Visit Profile</a>
+                        <a href="https://www.researchgate.net/scientific-contributions/Sadhana-Tiwari-2208709971"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Visit Profile
+                        </a>
                     </div>
 
                     <div className="portfolio-link-row">
                         <span>ORCID</span>
-                        <a href="https://orcid.org/0000-0003-1919-3490">Visit Profile</a>
+                        <a href="https://orcid.org/0000-0003-1919-3490" target="_blank" rel="noreferrer">
+                            Visit Profile
+                        </a>
                     </div>
 
                     <div className="portfolio-link-row">
                         <span>LinkedIn</span>
-                        <a href="https://www.linkedin.com/in/dr-sadhana-tiwari-a06218264/?originalSubdomain=in">Visit Profile</a>
+                        <a href="https://www.linkedin.com/in/dr-sadhana-tiwari-a06218264/?originalSubdomain=in" target="_blank" rel="noreferrer">
+                            Visit Profile
+                        </a>
                     </div>
 
                 </div>
