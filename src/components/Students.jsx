@@ -96,17 +96,29 @@ function Students() {
                               </a>
                             ))}
                           </div>
-
+                        <div className="postdoc-btn-group">
                           {scholar.scholarLink && (
-                            <a
-                              href={scholar.scholarLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="scholar-link-btn"
-                            >
-                              Google Scholar
-                            </a>
-                          )}
+                              <a
+                                href={scholar.scholarLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="scholar-link-btn"
+                              >
+                                Google Scholar
+                              </a>
+                            )}
+
+                            {scholar.fileLink && (
+                              <a
+                                href={scholar.fileLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="scholar-link-btn"
+                              >
+                                View Profile
+                              </a>
+                            )}
+                          </div>
                         </div>
                       </div>
                     ))}

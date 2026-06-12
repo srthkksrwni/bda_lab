@@ -175,6 +175,26 @@
   color: white;
 }
 
+/* Postdoc Buttons Container */
+.postdoc-btn-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Project Box styling */
+.project-box {
+  margin-top: 15px;
+  padding: 12px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  text-align: left;
+  width: 100%;
+}
+
 /* Project Box styling */
 .project-box {
   margin-top: 15px;
