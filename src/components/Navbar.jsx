@@ -6,44 +6,40 @@ function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
   const navRef = useRef(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-
-  const toggleMenu = (menu) => {
-    setActiveMenu(activeMenu === menu ? null : menu);
-  };
+  const [mobileDropdown, setMobileDropdown] = useState(null);
 
   const toggleMobileMenu = () => {
     setIsMobileOpen(!isMobileOpen);
     setActiveMenu(null);
   };
 
-  const [mobileDropdown, setMobileDropdown] = useState(null);
-
   const toggleMobileDropdown = (menu) => {
     setMobileDropdown(mobileDropdown === menu ? null : menu);
   };
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
         setActiveMenu(null);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLinkClick = () => setActiveMenu(null);
+  const handleLinkClick = () => {
+    setActiveMenu(null);
+    setIsMobileOpen(false);
+  };
 
   return (
     <nav className="navbar" ref={navRef}>
-      {/* LEFT LOGO */}
       <div className="nav-left">
         <img src="logo.png" alt="BDA LAB Logo" className="nav-logo" />
         <span className="logo">BDA LAB</span>
       </div>
 
-      {/* CENTER NAV */}
       <div className="nav-center">
         <ul className="nav-links">
           <li>
@@ -52,17 +48,16 @@ function Navbar() {
             </Link>
           </li>
 
-          {/* ABOUT */}
           <li
             className="dropdown"
             style={{ position: "relative", listStyle: "none" }}
-            onMouseEnter={() => setActiveMenu("about")} // Mouse aate hi open
-            onMouseLeave={() => setActiveMenu(null)} // Mouse jaate hi close
+            onMouseEnter={() => setActiveMenu("about")}
+            onMouseLeave={() => setActiveMenu(null)}
           >
             <span style={{ cursor: "pointer", paddingBottom: "25px" }}>
-              {" "}
-              About{" "}
+              About
             </span>
+
             {activeMenu === "about" && (
               <div className="dropdown-menu">
                 <Link to="/#mission" onClick={handleLinkClick}>
@@ -78,7 +73,6 @@ function Navbar() {
             )}
           </li>
 
-          {/* PEOPLE */}
           <li
             className="dropdown"
             style={{ position: "relative", listStyle: "none" }}
@@ -101,16 +95,16 @@ function Navbar() {
             )}
           </li>
 
-          {/* RESEARCH */}
           <li
             className="dropdown"
             style={{ position: "relative", listStyle: "none" }}
-            onMouseEnter={() => setActiveMenu("research")} // Mouse aate hi open
-            onMouseLeave={() => setActiveMenu(null)} // Mouse jaate hi close
+            onMouseEnter={() => setActiveMenu("research")}
+            onMouseLeave={() => setActiveMenu(null)}
           >
             <span style={{ cursor: "pointer", paddingBottom: "25px" }}>
-              Research{" "}
+              Research
             </span>
+
             {activeMenu === "research" && (
               <div className="dropdown-menu">
                 <Link to="/publications" onClick={handleLinkClick}>
@@ -126,16 +120,16 @@ function Navbar() {
             )}
           </li>
 
-          {/* COURSES */}
           <li
             className="dropdown"
             style={{ position: "relative", listStyle: "none" }}
-            onMouseEnter={() => setActiveMenu("courses")} // Mouse aate hi open
-            onMouseLeave={() => setActiveMenu(null)} // Mouse jaate hi close
+            onMouseEnter={() => setActiveMenu("courses")}
+            onMouseLeave={() => setActiveMenu(null)}
           >
             <span style={{ cursor: "pointer", paddingBottom: "25px" }}>
-              Courses{" "}
+              Courses
             </span>
+
             {activeMenu === "courses" && (
               <div className="dropdown-menu">
                 <Link
@@ -165,20 +159,21 @@ function Navbar() {
               </div>
             )}
           </li>
+
           <li>
-            <Link to="/projects" onClick={toggleMobileMenu}>
+            <Link to="/projects" onClick={handleLinkClick}>
               Projects
             </Link>
           </li>
 
           <li>
-            <Link to="/events" onClick={toggleMobileMenu}>
+            <Link to="/events" onClick={handleLinkClick}>
               Events
             </Link>
           </li>
 
           <li>
-            <Link to="studentCorner" onClick={toggleMobileMenu}>
+            <Link to="/studentCorner" onClick={handleLinkClick}>
               Students Corner
             </Link>
           </li>
@@ -197,23 +192,23 @@ function Navbar() {
         </ul>
       </div>
 
-      {/* RIGHT EMPTY */}
       <div className="nav-right"></div>
+
       <div className="hamburger" onClick={toggleMobileMenu}>
         <span></span>
         <span></span>
         <span></span>
       </div>
+
       {isMobileOpen && (
         <div className="mobile-menu">
-          {/* 1. HOME */}
           <Link to="/" onClick={toggleMobileMenu}>
             Home
           </Link>
 
-          {/* 2. ABOUT DROPDOWN */}
           <div className="mobile-dropdown">
             <span onClick={() => toggleMobileDropdown("about")}>About</span>
+
             {mobileDropdown === "about" && (
               <div className="mobile-submenu">
                 <Link to="/#mission" onClick={toggleMobileMenu}>
@@ -229,9 +224,9 @@ function Navbar() {
             )}
           </div>
 
-          {/* 3. PEOPLE DROPDOWN */}
           <div className="mobile-dropdown">
             <span onClick={() => toggleMobileDropdown("people")}>People</span>
+
             {mobileDropdown === "people" && (
               <div className="mobile-submenu">
                 <Link to="/faculty" onClick={toggleMobileMenu}>
@@ -244,11 +239,11 @@ function Navbar() {
             )}
           </div>
 
-          {/* 4. RESEARCH DROPDOWN */}
           <div className="mobile-dropdown">
             <span onClick={() => toggleMobileDropdown("research")}>
               Research
             </span>
+
             {mobileDropdown === "research" && (
               <div className="mobile-submenu">
                 <Link to="/publications" onClick={toggleMobileMenu}>
@@ -264,19 +259,26 @@ function Navbar() {
             )}
           </div>
 
-          {/* 5. NEW BUTTONS */}
           <Link to="/projects" onClick={toggleMobileMenu}>
             Projects
           </Link>
+
+          <Link to="/modest" onClick={toggleMobileMenu}>
+            MODEST
+          </Link>
+
           <Link to="/events" onClick={toggleMobileMenu}>
             Events
           </Link>
-          <Link to="studentCorner" onClick={toggleMobileMenu}>
+
+          <Link to="/studentCorner" onClick={toggleMobileMenu}>
             Students Corner
           </Link>
+
           <Link to="/contact" onClick={toggleMobileMenu}>
             Contact
           </Link>
+
           <Link to="/blog" onClick={toggleMobileMenu}>
             Blog
           </Link>

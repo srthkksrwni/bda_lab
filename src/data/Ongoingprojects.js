@@ -9,7 +9,7 @@ export const Ongoingprojects = [
       duration: "December 2024 to December 2027",
       collaborators: [],
       brief : "The objective of this project is to develop a multimodal AI system using EEG, audio, text, and video for early mental-health detection, along with preprocessing tools, baseline models, fusion methods, and XAI-based explanations.",
-      website:"/modest/index.html"
+      website:"/modest/"
     },
     {
       id:2 ,

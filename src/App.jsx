@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useLocation, } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
@@ -27,9 +22,10 @@ import Blog from "./components/Blog";
 import Events from "./components/Events";
 import Contact from "./components/Contact";
 import StudentCorner from "./components/StudentCorner";
-import ModestIframe from "./components/ModestIframe";
 import Redirect from "./ontology/Redirect";
 import CsirIframe from "./components/CsirIframe";
+
+
 
 function AppContent() {
   const location = useLocation();
@@ -38,9 +34,13 @@ function AppContent() {
   const isOntologyRoute = location.pathname.startsWith("/ontology");
   const isCsirRoute = location.pathname.startsWith("/csir");
   const isPortfolioRoute = location.pathname.startsWith("/portfolio");
+  
 
   // Dono mein se kisi bhi route par ho toh Navbar/Footer hide hoga
-  const hideNavFooter = isOntologyRoute || isCsirRoute || isPortfolioRoute;
+  const isModestRoute = location.pathname.startsWith("/modest");
+
+const hideNavFooter =
+  isOntologyRoute || isCsirRoute || isPortfolioRoute || isModestRoute;
 
   return (
     <div className="App">
@@ -68,7 +68,7 @@ function AppContent() {
         <Route path="/events" element={<Events />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/studentCorner" element={<StudentCorner />} />
-        <Route path="/modest" element={<ModestIframe />} />
+
 
         {/* CSIR Project Routes - Inhe Routes ke andar rakha hai */}
         <Route path="/csir/:fileName" element={<CsirIframe />} />
@@ -78,6 +78,7 @@ function AppContent() {
         <Route path="/ontology/*" element={<Redirect />} />
         {/* portfolio Project Entry */}
         <Route path="/portfolio/*" element={<RedirectApp />} />
+        
       </Routes>
 
       {/* Agar ontology ya csir page nahi hai, tabhi Footer dikhao */}
