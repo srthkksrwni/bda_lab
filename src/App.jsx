@@ -35,7 +35,9 @@ import AdminDashboard from "./admin/AdminDashboard";
 import ContactMessages from "./admin/ContactMessages";
 import FundingCollaboration from "./admin/FundingCollaboration";
 import AdminEvents from "./admin/AdminEvents/AdminEvents";
-
+import AdminPeople from "./admin/People/AdminPeople";
+import AdminFaculty from "./admin/People/AdminFaculty/AdminFaculty";
+import AdminStudents from "./admin/People/AdminStudents/AdminStudents";
 
 function AppContent() {
   const location = useLocation();
@@ -89,7 +91,12 @@ function AppContent() {
         <Route path="contact-messages" element={<ContactMessages />} />
         <Route path="funding-collaboration" element={<FundingCollaboration />} />
         <Route path="events" element={<AdminEvents />} />
-        </Route>
+
+        {/* People Management */}
+        <Route path="people" element={<AdminPeople />} />
+        <Route path="faculty" element={<AdminFaculty />} />
+        <Route path="students" element={<AdminStudents />} />
+      </Route>
       </Routes>
 
       {!hideNavFooter && <Footer />}
