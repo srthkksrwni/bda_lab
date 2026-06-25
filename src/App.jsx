@@ -32,8 +32,8 @@ import Redirect from "./ontology/Redirect";
 import CsirIframe from "./components/CsirIframe";
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/AdminDashboard";
-import ContactMessages from "./admin/ContactMessages";
-import FundingCollaboration from "./admin/FundingCollaboration";
+import ContactMessages from "./admin/ContactMessages/ContactMessages";
+import FundingCollaboration from "./admin/FundingCollaboration/FundingCollaboration";
 import AdminEvents from "./admin/AdminEvents/AdminEvents";
 
 
