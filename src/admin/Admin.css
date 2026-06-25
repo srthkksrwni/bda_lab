@@ -1,0 +1,67 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6fb;
+}
+
+.admin-sidebar {
+  width: 260px;
+  background: #071d49;
+  color: white;
+  padding: 30px 22px;
+}
+
+.admin-sidebar h2 {
+  margin-bottom: 35px;
+  font-size: 24px;
+}
+
+.admin-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 13px 16px;
+  border-radius: 10px;
+}
+
+.admin-sidebar a:hover {
+  background: #24317c;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 35px;
+}
+
+.admin-main h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.dashboard-cards {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.dash-card {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.dash-card span {
+  display: block;
+  margin-top: 15px;
+  font-size: 34px;
+  color: #071d49;
+}

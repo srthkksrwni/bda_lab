@@ -1,0 +1,77 @@
+.messages-page{
+    padding:35px;
+    background:#f5f7fb;
+    min-height:100vh;
+}
+
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+}
+
+.top-bar h1{
+    font-size:34px;
+    color:#071d49;
+}
+
+.top-bar input{
+    width:320px;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.message-card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    max-width:850px;
+}
+
+.message-card h2{
+    margin-bottom:18px;
+    color:#071d49;
+}
+
+.message-card p{
+    margin:12px 0;
+    line-height:1.6;
+}
+
+.message-card h4{
+    margin-top:22px;
+    color:#24317c;
+}
+
+.message-card small{
+    display:block;
+    margin-top:18px;
+    color:#777;
+}
+
+.actions{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+}
+
+.reply-btn{
+    background:#24317c;
+    color:white;
+    border:none;
+    padding:12px 28px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.delete-btn{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:12px 28px;
+    border-radius:10px;
+    cursor:pointer;
+}

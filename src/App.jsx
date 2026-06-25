@@ -1,5 +1,11 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route, useLocation, } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
@@ -24,29 +30,32 @@ import Contact from "./components/Contact";
 import StudentCorner from "./components/StudentCorner";
 import Redirect from "./ontology/Redirect";
 import CsirIframe from "./components/CsirIframe";
-
+import AdminLayout from "./admin/AdminLayout";
+import AdminDashboard from "./admin/AdminDashboard";
+import ContactMessages from "./admin/ContactMessages";
+import AdminProjects from "./admin/Admin-Projects";
 
 
 function AppContent() {
   const location = useLocation();
 
-  // Check karega ki kya hum ontology ya csir routes par hain
   const isOntologyRoute = location.pathname.startsWith("/ontology");
   const isCsirRoute = location.pathname.startsWith("/csir");
   const isPortfolioRoute = location.pathname.startsWith("/portfolio");
-  
-
-  // Dono mein se kisi bhi route par ho toh Navbar/Footer hide hoga
   const isModestRoute = location.pathname.startsWith("/modest");
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
-const hideNavFooter =
-  isOntologyRoute || isCsirRoute || isPortfolioRoute || isModestRoute;
+  const hideNavFooter =
+    isOntologyRoute ||
+    isCsirRoute ||
+    isPortfolioRoute ||
+    isModestRoute ||
+    isAdminRoute;
 
   return (
     <div className="App">
-      <ScrollToTop />
+      {!isAdminRoute && <ScrollToTop />}
 
-      {/* Agar ontology ya csir page nahi hai, tabhi Navbar dikhao */}
       {!hideNavFooter && <Navbar />}
 
       <Routes>
@@ -69,25 +78,23 @@ const hideNavFooter =
         <Route path="/contact" element={<Contact />} />
         <Route path="/studentCorner" element={<StudentCorner />} />
 
-
-        {/* CSIR Project Routes - Inhe Routes ke andar rakha hai */}
         <Route path="/csir/:fileName" element={<CsirIframe />} />
         <Route path="/csir" element={<CsirIframe />} />
 
-        {/* Ontology Project Entry */}
         <Route path="/ontology/*" element={<Redirect />} />
-        {/* portfolio Project Entry */}
         <Route path="/portfolio/*" element={<RedirectApp />} />
-        
+        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="contact-messages" element={<ContactMessages />} />
+        <Route path="/admin/admin-project" element={<AdminProjects />} />
+        </Route>
       </Routes>
 
-      {/* Agar ontology ya csir page nahi hai, tabhi Footer dikhao */}
       {!hideNavFooter && <Footer />}
     </div>
   );
 }
 
-// Main App Component
 function App() {
   return (
     <Router>

@@ -1,0 +1,42 @@
+.project-form-box {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.project-form-box h2 {
+  color: #071d49;
+  margin-bottom: 20px;
+}
+
+.project-form-box form {
+  display: grid;
+  gap: 15px;
+}
+
+.project-form-box input,
+.project-form-box select {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.form-actions button {
+  background: #24317c;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+.cancel-btn {
+  background: #6b7280 !important;
+}
