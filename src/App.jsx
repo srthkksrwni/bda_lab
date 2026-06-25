@@ -30,11 +30,12 @@ import Contact from "./components/Contact";
 import StudentCorner from "./components/StudentCorner";
 import Redirect from "./ontology/Redirect";
 import CsirIframe from "./components/CsirIframe";
+
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/AdminDashboard";
 import ContactMessages from "./admin/ContactMessages";
 import AdminProjects from "./admin/Admin-Projects";
-
+import AdminResearchUpdates from "./admin/AdminResearchUpdates";
 
 function AppContent() {
   const location = useLocation();
@@ -55,7 +56,6 @@ function AppContent() {
   return (
     <div className="App">
       {!isAdminRoute && <ScrollToTop />}
-
       {!hideNavFooter && <Navbar />}
 
       <Routes>
@@ -83,10 +83,12 @@ function AppContent() {
 
         <Route path="/ontology/*" element={<Redirect />} />
         <Route path="/portfolio/*" element={<RedirectApp />} />
+
         <Route path="/admin" element={<AdminLayout />}>
-        <Route path="dashboard" element={<AdminDashboard />} />
-        <Route path="contact-messages" element={<ContactMessages />} />
-        <Route path="/admin/admin-project" element={<AdminProjects />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="admin-project" element={<AdminProjects />} />
+          <Route path="research-updates" element={<AdminResearchUpdates />} />
+          <Route path="contact-messages" element={<ContactMessages />} />
         </Route>
       </Routes>
 

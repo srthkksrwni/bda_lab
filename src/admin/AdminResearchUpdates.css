@@ -1,0 +1,68 @@
+.research-container {
+  padding: 40px;
+}
+
+.research-container h1 {
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: #0a1f54;
+}
+
+.research-form {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.research-form input {
+  flex: 1;
+  min-width: 220px;
+  padding: 12px 15px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.research-form input:focus {
+  outline: none;
+  border-color: #0a1f54;
+}
+
+.research-form button {
+  background: #0a1f54;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.research-form button:hover {
+  background: #16398a;
+}
+
+.research-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.research-table th {
+  background: #0a1f54;
+  color: white;
+  padding: 15px;
+  text-align: left;
+}
+
+.research-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.research-table tr:hover {
+  background: #f7f9fc;
+}

@@ -12,6 +12,7 @@ function AdminLayout() {
           <Link to="/admin/admin-project">Projects</Link>
           <Link to="/admin/faculty">Faculty</Link>
           <Link to="/admin/publications">Publications</Link>
+          <Link to="/admin/research-updates">Research Updates</Link>
           <Link to="/admin/events">Events</Link>
           <Link to="/admin/blogs">Blogs</Link>
           <Link to="/admin/contact-messages">Contact Messages</Link>
