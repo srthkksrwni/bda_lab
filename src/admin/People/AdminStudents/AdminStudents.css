@@ -1,0 +1,116 @@
+.student-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.student-categories button {
+  border: 1px solid #24317c;
+  background: white;
+  color: #24317c;
+  padding: 10px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.student-categories button:hover {
+  background: #24317c;
+  color: white;
+}
+
+.active-category {
+  background: #24317c !important;
+  color: white !important;
+}
+
+.student-form {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+  display: grid;
+  gap: 15px;
+}
+
+.student-form input,
+.student-form textarea {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.student-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.student-form button {
+  width: fit-content;
+  background: #24317c;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.student-table {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.student-table-header,
+.student-row {
+  display: grid;
+  grid-template-columns: 80px 1.5fr 1fr 1fr 150px;
+  gap: 15px;
+  padding: 18px 24px;
+  align-items: center;
+}
+
+.student-table-header {
+  background: #071d49;
+  color: white;
+  font-weight: 700;
+}
+
+.student-row {
+  border-bottom: 1px solid #eee;
+}
+
+.student-row:hover {
+  background: #f8f9fc;
+}
+
+.edit-btn {
+  background: #24317c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.empty-text {
+  padding: 25px;
+  text-align: center;
+  color: #777;
+}

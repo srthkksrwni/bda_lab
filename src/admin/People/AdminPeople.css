@@ -1,0 +1,30 @@
+.people-page {
+  padding: 35px;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+.people-header h1 {
+  color: #071d49;
+  margin-bottom: 25px;
+}
+
+.people-tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.people-tabs button {
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.people-tabs .active {
+  background: #24317c;
+  color: white;
+}
