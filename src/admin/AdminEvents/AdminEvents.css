@@ -1,0 +1,137 @@
+.events-page {
+  padding: 35px;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+.events-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.events-top h1 {
+  color: #071d49;
+  font-size: 36px;
+}
+
+.events-top button,
+.form-actions button {
+  background: #24317c;
+  color: white;
+  border: none;
+  padding: 13px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.category-box {
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.category-box label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #071d49;
+}
+
+.category-box select {
+  width: 360px;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.event-form-box {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.event-form-box h2 {
+  color: #071d49;
+  margin-bottom: 20px;
+}
+
+.event-form-box form {
+  display: grid;
+  gap: 15px;
+}
+
+.event-form-box textarea,
+.event-form-box input {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.event-form-box textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cancel-btn {
+  background: #6b7280 !important;
+}
+
+.events-table {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.table-head,
+.table-row {
+  display: grid;
+  grid-template-columns: 0.5fr 3fr 1fr 1fr;
+  padding: 18px 24px;
+  align-items: center;
+  gap: 15px;
+}
+
+.table-head {
+  background: #071d49;
+  color: white;
+  font-weight: 700;
+}
+
+.table-row {
+  border-bottom: 1px solid #eee;
+}
+
+.edit-btn {
+  background: #24317c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin-right: 8px;
+}
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.empty-text {
+  padding: 25px;
+  color: #777;
+}

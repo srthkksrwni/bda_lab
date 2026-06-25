@@ -1,43 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ContactMessages.css";
 
 function ContactMessages() {
   const [search, setSearch] = useState("");
+  const [messages, setMessages] = useState([]);
 
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      full_name: "Mohit Kumar",
-      email: "mohit@gmail.com",
-      phone: "9876543210",
-      query: "I want information about the BDA Lab internship program and research opportunities.",
-      date: "24 June 2026",
-    },
-    {
-      id: 2,
-      full_name: "Rahul Sharma",
-      email: "rahul@gmail.com",
-      phone: "9876543211",
-      query: "How can I apply for the Summer Internship at IIIT Allahabad? Please guide me regarding the application process.",
-      date: "25 June 2026",
-    },
-    {
-      id: 3,
-      full_name: "Neha Gupta",
-      email: "neha@gmail.com",
-      phone: "9876501234",
-      query: "Please share details about ongoing AI and Machine Learning projects.",
-      date: "28 June 2026",
-    },
-    {
-      id: 4,
-      full_name: "Rohit Gupta",
-      email: "rohit@gmail.com",
-      phone: "9475501234",
-      query: "Please share details about ongoing AI and Machine Learning projects.",
-      date: "26 June 2026",
-    },
-  ]);
+  useEffect(() => {
+    fetch("http://localhost/bda_lab/backend/contact/list.php")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setMessages(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error fetching contact messages:", error);
+      });
+  }, []);
 
   const filteredMessages = messages.filter((msg) => {
     return (
@@ -50,11 +29,26 @@ function ContactMessages() {
     window.location.href = `mailto:${email}`;
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Delete this message?");
 
-    if (confirmDelete) {
-      setMessages(messages.filter((msg) => msg.id !== id));
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost/bda_lab/backend/contact/delete.php?id=${id}`
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessages(messages.filter((msg) => msg.id !== id));
+        alert("Message deleted successfully.");
+      } else {
+        alert("Delete failed.");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -75,13 +69,18 @@ function ContactMessages() {
         <div className="message-card" key={msg.id}>
           <h2>{msg.full_name}</h2>
 
-          <p><strong>Email:</strong> {msg.email}</p>
-          <p><strong>Phone:</strong> {msg.phone}</p>
+          <p>
+            <strong>Email:</strong> {msg.email}
+          </p>
+
+          <p>
+            <strong>Phone:</strong> {msg.phone}
+          </p>
 
           <h4>Query</h4>
-          <p>{msg.query}</p>
+          <p>{msg.query_message}</p>
 
-          <small>{msg.date}</small>
+          <small>{msg.created_at}</small>
 
           <div className="actions">
             <button

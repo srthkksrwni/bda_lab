@@ -35,7 +35,7 @@ import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/AdminDashboard";
 import ContactMessages from "./admin/ContactMessages";
 import AdminProjects from "./admin/Admin-Projects";
-import AdminResearchUpdates from "./admin/AdminResearchUpdates";
+
 
 function AppContent() {
   const location = useLocation();
@@ -85,10 +85,9 @@ function AppContent() {
         <Route path="/portfolio/*" element={<RedirectApp />} />
 
         <Route path="/admin" element={<AdminLayout />}>
-          <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="admin-project" element={<AdminProjects />} />
-          <Route path="research-updates" element={<AdminResearchUpdates />} />
-          <Route path="contact-messages" element={<ContactMessages />} />
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="contact-messages" element={<ContactMessages />} />
+        <Route path="/admin/admin-project" element={<AdminProjects />} />
         </Route>
       </Routes>
 
