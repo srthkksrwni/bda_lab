@@ -33,7 +33,8 @@ import CsirIframe from "./components/CsirIframe";
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/AdminDashboard";
 import ContactMessages from "./admin/ContactMessages";
-
+import FundingCollaboration from "./admin/FundingCollaboration";
+import AdminEvents from "./admin/AdminEvents/AdminEvents";
 
 
 function AppContent() {
@@ -86,6 +87,8 @@ function AppContent() {
         <Route path="/admin" element={<AdminLayout />}>
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="contact-messages" element={<ContactMessages />} />
+        <Route path="funding-collaboration" element={<FundingCollaboration />} />
+        <Route path="events" element={<AdminEvents />} />
         </Route>
       </Routes>
 
