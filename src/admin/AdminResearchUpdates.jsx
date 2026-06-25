@@ -7,14 +7,18 @@ function AdminResearchUpdates() {
   const [year, setYear] = useState("");
   const [type, setType] = useState("");
 
-  const API_URL = "http://localhost/php-api";
+  const API_URL = "http://localhost/bda_lab/backend/research_updates";
 
   const fetchUpdates = async () => {
-    const response = await fetch(`${API_URL}/getResearchUpdates.php`);
-    const data = await response.json();
+    try {
+      const response = await fetch(`${API_URL}/list.php`);
+      const data = await response.json();
 
-    if (data.success) {
-      setUpdates(data.updates);
+      if (data.success) {
+        setUpdates(data.updates);
+      }
+    } catch (error) {
+      console.error("Error fetching updates:", error);
     }
   };
 
@@ -28,24 +32,29 @@ function AdminResearchUpdates() {
       return;
     }
 
-    const response = await fetch(`${API_URL}/createResearchUpdate.php`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title, year, type }),
-    });
+    try {
+      const response = await fetch(`${API_URL}/add.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, year, type }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (data.success) {
-      alert("Research update added successfully");
-      setTitle("");
-      setYear("");
-      setType("");
-      fetchUpdates();
-    } else {
-      alert("Failed to add research update");
+      if (data.success) {
+        alert("Research update added successfully");
+        setTitle("");
+        setYear("");
+        setType("");
+        fetchUpdates();
+      } else {
+        alert("Failed to add research update");
+      }
+    } catch (error) {
+      console.error("Error adding update:", error);
+      alert("Something went wrong");
     }
   };
 
