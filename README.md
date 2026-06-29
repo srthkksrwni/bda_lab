@@ -1,16 +1,52 @@
-# React + Vite
+# BDA Lab Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite web application for the **BDA Lab, IIIT Allahabad**. The project includes an Admin Panel for managing research updates using **PHP** and **MySQL**.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* React + Vite
+* PHP
+* MySQL
+* XAMPP
 
-## React Compiler
+## Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Start **Apache** and **MySQL** from XAMPP.
+2. Place the project inside:
 
-## Expanding the ESLint configuration
+C:\xampp\htdocs\bda_lab
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. Create a MySQL database named:
+
+bda_lab
+
+## Run the Frontend
+
+Install dependencies (first time only):
+
+npm install
+
+Start the React application:
+
+npm run dev
+
+The frontend runs at:
+
+http://localhost:5173
+
+## Backend
+
+The backend is built using PHP and runs automatically through **Apache** in XAMPP.
+
+API example:
+
+http://localhost/bda_lab/backend/research_updates/list.php
+
+## Features
+
+* Admin login panel
+* Add research updates
+* Store updates in MySQL
+* Display research updates in the Admin Panel
+* Show recent research updates on the Home page
+* Responsive React frontend
