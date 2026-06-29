@@ -1,38 +1,65 @@
-import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
-import { motion } from 'framer-motion'; 
-import '../styles/contact.css';
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import "../styles/contact.css";
 
 const Contact = () => {
   const form = useRef();
   const [status, setStatus] = useState("");
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     setStatus("Sending...");
 
-    emailjs.sendForm(
-      'service_i6ewnjs',
-      'template_8ag5bt9',  
-      form.current,
-      'ciIVc0lrAo5ideKp0'
-    )
-    .then(() => {
+    const formData = new FormData(form.current);
+
+    const contactData = {
+      full_name: formData.get("from_name"),
+      email: formData.get("reply_to"),
+      phone: formData.get("phone"),
+      query_message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch(
+       "http://localhost/bda_api/contact/add.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(contactData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        emailjs.sendForm(
+          "service_i6ewnjs",
+          "template_8ag5bt9",
+          form.current,
+          "ciIVc0lrAo5ideKp0"
+        );
+
         setStatus("Message Sent Successfully! ✅");
         form.current.reset();
         setTimeout(() => setStatus(""), 5000);
-    }, () => {
-        setStatus("Failed to send. ❌ Please try again.");
-    });
+      } else {
+        setStatus("Failed to save message. ❌");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("Server error. ❌ Please try again.");
+    }
   };
 
   return (
     <section className="contact-section" id="contact">
-      {/* Background Decor Elements */}
       <div className="bg-circle-1"></div>
       <div className="bg-circle-2"></div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
@@ -43,13 +70,12 @@ const Contact = () => {
           <p>Have a query? Drop a message below.</p>
         </div>
 
-        {/* Form ab pure container ki width lega aur center mein rahega */}
         <form ref={form} onSubmit={sendEmail} className="contact-form">
           <div className="input-group">
             <input type="text" name="from_name" placeholder=" " required />
             <label>Full Name</label>
           </div>
-          
+
           <div className="input-group">
             <input type="email" name="reply_to" placeholder=" " required />
             <label>Email Address</label>
@@ -64,20 +90,20 @@ const Contact = () => {
             <textarea name="message" rows="4" placeholder=" " required></textarea>
             <label>Your Query</label>
           </div>
-          
-          <motion.button 
+
+          <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            type="submit" 
+            type="submit"
             className="submit-btn"
           >
             Send Message
           </motion.button>
-          
+
           {status && (
-            <motion.p 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               className="status-msg"
             >
               {status}
