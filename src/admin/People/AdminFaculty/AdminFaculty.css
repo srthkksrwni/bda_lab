@@ -1,17 +1,23 @@
 .top-bar {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 25px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.add-btn {
+  background: #2b378d;
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
 }
 
-.top-bar button {
-  background: #24317c;
-  color: white;
-  border: none;
-  padding: 13px 22px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
+.add-btn:hover {
+  background: #1f2c74;
 }
 
 .faculty-form {
