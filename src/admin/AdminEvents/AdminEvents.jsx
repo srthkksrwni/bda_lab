@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AdminEvents.css";
 
 function AdminEvents() {
+  const API_URL = "http://localhost:8000/events";
+
   const categories = [
     { id: "conferences", label: "International Conferences" },
     { id: "corporate", label: "Corporate Training" },
@@ -16,32 +18,7 @@ function AdminEvents() {
   const [editId, setEditId] = useState(null);
 
   const [events, setEvents] = useState({
-    conferences: [
-      {
-        id: 1,
-        title:
-          'Sonali Agarwal (General Chair), "16th Innovations in Software Engineering Conference (ISEC 2023)." Organized under ACM India.',
-        year: "2023",
-      },
-      {
-        id: 2,
-        title:
-          'Sonali Agarwal (General Chair), "29th International Conference on Neural Information Processing (ICONIP 2022)." Supported by APNNS Society.',
-        year: "2022",
-      },
-      {
-        id: 3,
-        title:
-          'Sonali Agarwal (General Chair), "9th International Conference on Big Data Analytics (BDA 2021)." Self-Sponsored.',
-        year: "2021",
-      },
-      {
-        id: 4,
-        title:
-          'Sonali Agarwal (General Chair), "2nd International Conference on Machine Intelligence and Signal Processing (MISP 2019)." Multi-agency Funding.',
-        year: "2019",
-      },
-    ],
+    conferences: [],
     corporate: [],
     gian: [],
     tutorials: [],
@@ -50,66 +27,110 @@ function AdminEvents() {
   });
 
   const [form, setForm] = useState({
-    title: "",
-    year: "",
+    citation: "",
+    link: "",
   });
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch(`${API_URL}/list.php`);
+      const data = await response.json();
+
+      if (data.success) {
+        const grouped = {
+          conferences: [],
+          corporate: [],
+          gian: [],
+          tutorials: [],
+          workshop: [],
+          awards: [],
+        };
+
+        data.data.forEach((item) => {
+          if (grouped[item.category_id]) {
+            grouped[item.category_id].push(item);
+          }
+        });
+
+        setEvents(grouped);
+      }
+    } catch (error) {
+      console.log("Error fetching events:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const currentList = events[selectedCategory];
+    const selectedCat = categories.find((cat) => cat.id === selectedCategory);
 
-    if (editId) {
-      const updatedList = currentList.map((item) =>
-        item.id === editId ? { ...item, ...form } : item
-      );
+    const eventData = {
+      id: editId,
+      category_id: selectedCategory,
+      category_label: selectedCat.label,
+      citation: form.citation,
+      link: form.link,
+    };
 
-      setEvents({
-        ...events,
-        [selectedCategory]: updatedList,
+    const url = editId ? `${API_URL}/update.php` : `${API_URL}/add.php`;
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventData),
       });
 
-      setEditId(null);
-    } else {
-      const newId =
-        currentList.length > 0
-          ? Math.max(...currentList.map((item) => item.id)) + 1
-          : 1;
+      const data = await response.json();
 
-      setEvents({
-        ...events,
-        [selectedCategory]: [
-          ...currentList,
-          {
-            id: newId,
-            ...form,
-          },
-        ],
-      });
+      if (data.success) {
+        alert(editId ? "Event updated successfully." : "Event added successfully.");
+        setForm({ citation: "", link: "" });
+        setEditId(null);
+        setShowForm(false);
+        fetchEvents();
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log("Error saving event:", error);
+      alert("Server error.");
     }
-
-    setForm({ title: "", year: "" });
-    setShowForm(false);
   };
 
   const handleEdit = (item) => {
-    setForm({
-      title: item.title,
-      year: item.year,
-    });
-
     setEditId(item.id);
+    setForm({
+      citation: item.citation,
+      link: item.link || "",
+    });
     setShowForm(true);
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm("Delete this event?")) {
-      setEvents({
-        ...events,
-        [selectedCategory]: events[selectedCategory].filter(
-          (item) => item.id !== id
-        ),
-      });
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Delete this event?");
+
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`${API_URL}/delete.php?id=${id}`);
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Event deleted successfully.");
+        fetchEvents();
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log("Error deleting event:", error);
+      alert("Server error.");
     }
   };
 
@@ -117,8 +138,15 @@ function AdminEvents() {
     <div className="events-page">
       <div className="events-top">
         <h1>Events</h1>
-
-        <button onClick={() => setShowForm(true)}>+ Add Event</button>
+        <button
+          onClick={() => {
+            setEditId(null);
+            setForm({ citation: "", link: "" });
+            setShowForm(true);
+          }}
+        >
+          + Add Event
+        </button>
       </div>
 
       <div className="category-box">
@@ -130,6 +158,7 @@ function AdminEvents() {
             setSelectedCategory(e.target.value);
             setShowForm(false);
             setEditId(null);
+            setForm({ citation: "", link: "" });
           }}
         >
           {categories.map((cat) => (
@@ -146,18 +175,17 @@ function AdminEvents() {
 
           <form onSubmit={handleSubmit}>
             <textarea
-              placeholder="Event Title / Description"
-              value={form.title}
+              placeholder="Event citation / description"
+              value={form.citation}
               required
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              onChange={(e) => setForm({ ...form, citation: e.target.value })}
             />
 
             <input
               type="text"
-              placeholder="Year"
-              value={form.year}
-              required
-              onChange={(e) => setForm({ ...form, year: e.target.value })}
+              placeholder="Optional Link"
+              value={form.link}
+              onChange={(e) => setForm({ ...form, link: e.target.value })}
             />
 
             <div className="form-actions">
@@ -171,7 +199,7 @@ function AdminEvents() {
                 onClick={() => {
                   setShowForm(false);
                   setEditId(null);
-                  setForm({ title: "", year: "" });
+                  setForm({ citation: "", link: "" });
                 }}
               >
                 Cancel
@@ -184,16 +212,16 @@ function AdminEvents() {
       <div className="events-table">
         <div className="table-head">
           <span>ID</span>
-          <span>Title</span>
-          <span>Year</span>
+          <span>Citation</span>
+          <span>Link</span>
           <span>Action</span>
         </div>
 
-        {events[selectedCategory].map((item) => (
+        {events[selectedCategory].map((item, index) => (
           <div className="table-row" key={item.id}>
-            <span>{item.id}</span>
-            <span>{item.title}</span>
-            <span>{item.year}</span>
+             <span>{index + 1}</span>
+            <span>{item.citation}</span>
+            <span>{item.link ? item.link : "No link"}</span>
             <span>
               <button className="edit-btn" onClick={() => handleEdit(item)}>
                 Edit

@@ -35,6 +35,7 @@ import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/AdminDashboard";
 import ContactMessages from "./admin/ContactMessages/ContactMessages";
 import AdminResearchUpdates from "./admin/AdminResearchUpdates";
+import AdminEvents from "./admin/AdminEvents/AdminEvents";
 
 
 function AppContent() {
@@ -88,6 +89,7 @@ function AppContent() {
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="contact-messages" element={<ContactMessages />} />
         <Route path="research-updates" element={<AdminResearchUpdates />} />
+        <Route path="events" element={<AdminEvents />} />
         </Route>
       </Routes>
 
