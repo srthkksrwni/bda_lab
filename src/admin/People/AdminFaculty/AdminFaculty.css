@@ -31,11 +31,13 @@
   gap: 15px;
 }
 
-.faculty-form input {
+.faculty-form input,
+.faculty-form textarea {
   padding: 14px;
   border: 1px solid #ddd;
   border-radius: 10px;
   font-size: 15px;
+  font-family: inherit;
 }
 
 .faculty-form button {
@@ -80,4 +82,61 @@
   text-align: center;
   padding: 25px;
   color: #777;
+}
+
+.external-links-section {
+  border: 1px dashed #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fdfdfd;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.external-links-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.link-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.link-row input {
+  flex: 1;
+}
+
+.remove-link-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: opacity 0.2s;
+}
+
+.remove-link-btn:hover {
+  opacity: 0.9;
+}
+
+.add-link-btn {
+  align-self: flex-start;
+  background: #28a745 !important;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-link-btn:hover {
+  opacity: 0.9;
 }

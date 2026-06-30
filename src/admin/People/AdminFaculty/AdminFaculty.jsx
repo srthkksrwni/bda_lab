@@ -15,6 +15,8 @@ function AdminFaculty() {
     image_url: "",
     scholar_url: "",
     profile_url: "",
+    description: "",
+    external_links: [],
   });
 
   const fetchFaculty = async () => {
@@ -43,6 +45,8 @@ function AdminFaculty() {
       image_url: "",
       scholar_url: "",
       profile_url: "",
+      description: "",
+      external_links: [],
     });
     setEditId(null);
   };
@@ -58,6 +62,8 @@ function AdminFaculty() {
       image_url: form.image_url,
       scholar_url: form.scholar_url,
       profile_url: form.profile_url,
+      description: form.description,
+      external_links: form.external_links,
     };
 
     if (editId) {
@@ -89,6 +95,18 @@ function AdminFaculty() {
   };
 
   const handleEdit = (item) => {
+    let links = [];
+    if (item.external_links) {
+      if (typeof item.external_links === "string") {
+        try {
+          links = JSON.parse(item.external_links);
+        } catch (e) {
+          links = [];
+        }
+      } else if (Array.isArray(item.external_links)) {
+        links = item.external_links;
+      }
+    }
     setForm({
       name: item.name || "",
       designation: item.designation || "",
@@ -96,9 +114,35 @@ function AdminFaculty() {
       image_url: item.image_url || "",
       scholar_url: item.scholar_url || "",
       profile_url: item.profile_url || "",
+      description: item.description || "",
+      external_links: links,
     });
     setEditId(item.id);
     setShowForm(true);
+  };
+
+  const handleAddLink = () => {
+    setForm({
+      ...form,
+      external_links: [...form.external_links, { title: "", url: "" }],
+    });
+  };
+
+  const handleLinkChange = (index, field, value) => {
+    const updatedLinks = [...form.external_links];
+    updatedLinks[index] = { ...updatedLinks[index], [field]: value };
+    setForm({
+      ...form,
+      external_links: updatedLinks,
+    });
+  };
+
+  const handleRemoveLink = (index) => {
+    const updatedLinks = form.external_links.filter((_, i) => i !== index);
+    setForm({
+      ...form,
+      external_links: updatedLinks,
+    });
   };
 
   const handleDelete = async (id) => {
@@ -202,6 +246,47 @@ function AdminFaculty() {
             onChange={(e) => setForm({ ...form, profile_url: e.target.value })}
           />
 
+          <textarea
+            placeholder="Description"
+            value={form.description || ""}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            rows={4}
+          />
+
+          <div className="external-links-section">
+            <h3 className="external-links-title">External Links</h3>
+            {form.external_links && form.external_links.map((link, idx) => (
+              <div key={idx} className="link-row">
+                <input
+                  placeholder="Link Title (e.g. CIR Lab)"
+                  value={link.title || ""}
+                  onChange={(e) => handleLinkChange(idx, "title", e.target.value)}
+                  required
+                />
+                <input
+                  placeholder="Link URL"
+                  value={link.url || ""}
+                  onChange={(e) => handleLinkChange(idx, "url", e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="remove-link-btn"
+                  onClick={() => handleRemoveLink(idx)}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              className="add-link-btn"
+              onClick={handleAddLink}
+            >
+              + Add Link
+            </button>
+          </div>
+
           <div style={{ display: "flex", gap: "10px" }}>
             <button type="submit">
               {editId ? "Update Faculty" : "Save Faculty"}
@@ -229,7 +314,9 @@ function AdminFaculty() {
             <th>Image Preview</th>
             <th>Name</th>
             <th>Designation</th>
+            <th>Description</th>
             <th>Email</th>
+            <th>External Links</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -270,35 +357,86 @@ function AdminFaculty() {
               </td>
               <td>{item.name}</td>
               <td>{item.designation}</td>
+              <td>
+                <div style={{
+                  maxWidth: "200px",
+                  maxHeight: "60px",
+                  overflowY: "auto",
+                  fontSize: "13px",
+                  lineHeight: "1.4",
+                  whiteSpace: "pre-wrap"
+                }} title={item.description}>
+                  {item.description || <span style={{ color: "#aaa" }}>—</span>}
+                </div>
+              </td>
               <td>{item.email}</td>
               <td>
-                <button
-                  onClick={() => handleEdit(item)}
-                  style={{
-                    marginRight: "10px",
-                    padding: "6px 12px",
-                    background: "#24317c",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "6px",
-                    cursor: "pointer"
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  style={{
-                    padding: "6px 12px",
-                    background: "#dc3545",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "6px",
-                    cursor: "pointer"
-                  }}
-                >
-                  Delete
-                </button>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  {(() => {
+                    let links = [];
+                    if (item.external_links) {
+                      if (typeof item.external_links === "string") {
+                        try {
+                          links = JSON.parse(item.external_links);
+                        } catch (e) {
+                          links = [];
+                        }
+                      } else if (Array.isArray(item.external_links)) {
+                        links = item.external_links;
+                      }
+                    }
+                    return links.length > 0 ? (
+                      links.map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{
+                            fontSize: "12px",
+                            color: "#24317c",
+                            textDecoration: "underline",
+                            wordBreak: "break-all"
+                          }}
+                        >
+                          {link.title || link.url}
+                        </a>
+                      ))
+                    ) : (
+                      <span style={{ color: "#aaa", fontSize: "12px" }}>None</span>
+                    );
+                  })()}
+                </div>
+              </td>
+              <td>
+                <div style={{ display: "flex", gap: "6px" }}>
+                  <button
+                    onClick={() => handleEdit(item)}
+                    style={{
+                      padding: "6px 12px",
+                      background: "#24317c",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "6px",
+                      cursor: "pointer"
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    style={{
+                      padding: "6px 12px",
+                      background: "#dc3545",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "6px",
+                      cursor: "pointer"
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

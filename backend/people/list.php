@@ -52,9 +52,13 @@ if ($type=="faculty"){
 $data = [];
 
 while($row=$result->fetch_assoc()){
-
+    if (isset($row['external_links']) && $row['external_links'] !== null && $row['external_links'] !== '') {
+        $decoded = json_decode($row['external_links'], true);
+        $row['external_links'] = is_array($decoded) ? $decoded : [];
+    } else {
+        $row['external_links'] = [];
+    }
     $data[]=$row;
-
 }
 
 echo json_encode([

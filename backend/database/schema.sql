@@ -8,11 +8,13 @@ USE bda_lab;
 CREATE TABLE IF NOT EXISTS faculty (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    designation VARCHAR(255) NOT NULL,
+    designation VARCHAR(255),
+    description TEXT,
     email VARCHAR(255),
     image_url TEXT,
     scholar_url TEXT,
     profile_url TEXT,
+    external_links LONGTEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP
