@@ -1,4 +1,5 @@
 <?php
+
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 
@@ -6,6 +7,14 @@ include "../config/db.php";
 
 $sql = "SELECT * FROM contact_messages ORDER BY id DESC";
 $result = $conn->query($sql);
+
+if (!$result) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Failed to fetch messages."
+    ]);
+    exit();
+}
 
 $messages = [];
 
@@ -19,4 +28,5 @@ echo json_encode([
 ]);
 
 $conn->close();
+
 ?>

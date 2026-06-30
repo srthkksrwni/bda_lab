@@ -20,9 +20,29 @@ const Contact = () => {
       query_message: formData.get("message"),
     };
 
+    const { full_name, email, phone, query_message } = contactData;
+
+    // Full Name Validation
+    if (!/^[A-Za-z ]{3,100}$/.test(full_name)) {
+      setStatus("Full name should contain only letters and spaces (3-100 characters).");
+      return;
+    }
+
+    // Email Validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus("Please enter a valid email address.");
+      return;
+    }
+
+    // Query Validation
+    if (query_message.trim().length < 10) {
+      setStatus("Query must contain at least 10 characters.");
+      return;
+    }
+
     try {
       const response = await fetch(
-       "http://localhost/bda_api/contact/add.php",
+        "http://localhost:8000/contact/add.php",
         {
           method: "POST",
           headers: {

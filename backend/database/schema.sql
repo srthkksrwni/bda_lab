@@ -46,3 +46,15 @@ CREATE TABLE IF NOT EXISTS research_updates (
 );
 
 
+-- =====================================================
+-- Contactmessages
+-- =====================================================
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    subject VARCHAR(200) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
