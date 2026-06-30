@@ -37,6 +37,7 @@ import ContactMessages from "./admin/ContactMessages/ContactMessages";
 import AdminResearchUpdates from "./admin/AdminResearchUpdates";
 import AdminEvents from "./admin/AdminEvents/AdminEvents";
 import AdminPeople from "./admin/People/AdminPeople";
+import AdminFunding from "./admin/FundingCollaboration/FundingCollaboration";
 
 
 function AppContent() {
@@ -87,16 +88,18 @@ function AppContent() {
         <Route path="/portfolio/*" element={<RedirectApp />} />
 
         <Route path="/admin" element={<AdminLayout />}>
-        <Route path="dashboard" element={<AdminDashboard />} />
-        <Route path="contact-messages" element={<ContactMessages />} />
-        <Route path="people" element={<AdminPeople />} />
-        <Route path="research-updates" element={<AdminResearchUpdates />} />
-        <Route path="events" element={<AdminEvents />} />
+          <Route index element={<AdminDashboard />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="contact-messages" element={<ContactMessages />} />
+          <Route path="people" element={<AdminPeople />} />
+          <Route path="research-updates" element={<AdminResearchUpdates />} />
+          <Route path="events" element={<AdminEvents />} />
+          <Route path="funding" element={<AdminFunding />} />
         </Route>
-      </Routes>
+    </Routes>
 
-      {!hideNavFooter && <Footer />}
-    </div>
+      { !hideNavFooter && <Footer /> }
+    </div >
   );
 }
 

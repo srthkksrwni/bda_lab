@@ -57,3 +57,15 @@ CREATE TABLE IF NOT EXISTS contact_messages (
     query_message TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- =====================================================
+-- Funding & collaboration
+-- =====================================================
+
+
+CREATE TABLE funding_collaboration (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    partner_name VARCHAR(255) NOT NULL,
+    logo VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
