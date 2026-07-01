@@ -6,18 +6,29 @@ header("Content-Type: application/json");
 
 include "../config/db.php";
 
-$sql = "SELECT * FROM research_updates ORDER BY created_at DESC";
+$sql = "SELECT id, title, year, created_at
+        FROM research_updates
+        ORDER BY created_at DESC";
 
 $result = $conn->query($sql);
 
 $updates = [];
 
-while ($row = $result->fetch_assoc()) {
-    $updates[] = $row;
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $updates[] = $row;
+    }
+
+    echo json_encode([
+        "success" => true,
+        "updates" => $updates
+    ]);
+} else {
+    echo json_encode([
+        "success" => false,
+        "message" => "Failed to fetch research updates."
+    ]);
 }
 
-echo json_encode([
-    "success" => true,
-    "updates" => $updates
-]);
+$conn->close();
 ?>

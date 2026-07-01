@@ -10,12 +10,11 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 $title = $data["title"];
 $year = $data["year"];
-$type = $data["type"];
 
-$sql = "INSERT INTO research_updates (title, year, type) VALUES (?, ?, ?)";
+$sql = "INSERT INTO research_updates (title, year) VALUES (?, ?)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sss", $title, $year, $type);
+$stmt->bind_param("ss", $title, $year);
 
 if ($stmt->execute()) {
     echo json_encode([
