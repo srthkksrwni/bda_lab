@@ -151,3 +151,29 @@ INSERT INTO research_updates (title, year) VALUES
 ('Machine Learning for Early Disease Prediction', '2024'),
 ('Natural Language Processing for Mental Health Assessment', '2023'),
 ('Computer Vision for Medical Image Analysis', '2023');
+
+INSERT INTO faculty (
+    name,
+    designation,
+    description,
+    email,
+    image_url,
+    scholar_url,
+    profile_url,
+    external_links
+)
+VALUES (
+    'Prof. Sonali Agarwal',
+    'Professor',
+    'Head, Centre for Intelligent Robotics (CIR)\nProfessor-In-Charge, Students’ Holistic Growth, Inclusive Care and Mental Wellness\nGeneral Chair: ISEC 2023 | ICONIP 2022 | BDA 2021',
+    'sonali@iiita.ac.in',
+    '/Sonali Maam.jpg',
+    'https://scholar.google.com/citations?user=hPvt6d8AAAAJ&hl=en',
+    'https://profile.iiita.ac.in/sonali/',
+    '[
+        {
+            "title":"Visit Centre for Intelligent Robotics",
+            "url":"https://cir.iiita.ac.in/"
+        }
+    ]'
+);
