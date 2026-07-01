@@ -1,0 +1,94 @@
+.admin-publications-container {
+  padding: 40px;
+}
+
+.admin-publications-container h1 {
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: #0a1f54;
+}
+
+.admin-publications-form {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.admin-publications-form select,
+.admin-publications-form input,
+.admin-publications-form textarea {
+  padding: 12px 15px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.admin-publications-form select {
+  min-width: 260px;
+}
+
+.admin-publications-form input {
+  min-width: 260px;
+  flex: 1;
+}
+
+.admin-publications-form textarea {
+  min-width: 350px;
+  flex: 2;
+  min-height: 45px;
+  resize: vertical;
+}
+
+.admin-publications-form button {
+  background: #0a1f54;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.admin-publications-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+}
+
+.admin-publications-table th {
+  background: #0a1f54;
+  color: white;
+  padding: 15px;
+  text-align: left;
+}
+
+.admin-publications-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  background: #1f3c88;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #e5252a;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+}
