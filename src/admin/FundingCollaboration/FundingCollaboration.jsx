@@ -1,76 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./FundingCollaboration.css";
 
 function FundingCollaboration() {
+  const API_URL = "http://localhost:8000/funding";
+
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
-
-  const [fundings, setFundings] = useState([
-    {
-      id: 1,
-      name: "IIIT Allahabad",
-      logo: "https://picsum.photos/120?random=1",
-    },
-    {
-      id: 2,
-      name: "Council of Science & Technology, U.P.",
-      logo: "https://picsum.photos/120?random=2",
-    },
-    {
-      id: 3,
-      name: "AICTE",
-      logo: "https://picsum.photos/120?random=3",
-    },
-  ]);
+  const [fundings, setFundings] = useState([]);
 
   const [form, setForm] = useState({
-    name: "",
+    partner_name: "",
     logo: "",
   });
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  useEffect(() => {
+    fetchFundings();
+  }, []);
 
-    if (file) {
-      setForm({
-        ...form,
-        logo: URL.createObjectURL(file),
-      });
+  const fetchFundings = async () => {
+    const response = await fetch(`${API_URL}/list.php`);
+    const data = await response.json();
+
+    if (data.success) {
+      setFundings(data.data);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (editId) {
-      setFundings(
-        fundings.map((item) =>
-          item.id === editId ? { ...item, ...form } : item
-        )
-      );
+    const url = editId ? `${API_URL}/update.php` : `${API_URL}/add.php`;
+
+    const fundingData = {
+      id: editId,
+      partner_name: form.partner_name,
+      logo: form.logo,
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(fundingData),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert(editId ? "Updated successfully." : "Added successfully.");
+      setForm({ partner_name: "", logo: "" });
       setEditId(null);
+      setShowForm(false);
+      fetchFundings();
     } else {
-      const newId =
-        fundings.length > 0
-          ? Math.max(...fundings.map((item) => item.id)) + 1
-          : 1;
-
-      setFundings([
-        ...fundings,
-        {
-          id: newId,
-          ...form,
-        },
-      ]);
+      alert(data.message);
     }
-
-    setForm({ name: "", logo: "" });
-    setShowForm(false);
   };
 
   const handleEdit = (item) => {
     setForm({
-      name: item.name,
+      partner_name: item.partner_name,
       logo: item.logo,
     });
 
@@ -78,9 +68,17 @@ function FundingCollaboration() {
     setShowForm(true);
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm("Delete this item?")) {
-      setFundings(fundings.filter((item) => item.id !== id));
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this item?")) return;
+
+    const response = await fetch(`${API_URL}/delete.php?id=${id}`);
+    const data = await response.json();
+
+    if (data.success) {
+      alert("Deleted successfully.");
+      fetchFundings();
+    } else {
+      alert(data.message);
     }
   };
 
@@ -89,7 +87,15 @@ function FundingCollaboration() {
       <div className="funding-top">
         <h1>Funding & Collaboration</h1>
 
-        <button onClick={() => setShowForm(true)}>+ Add</button>
+        <button
+          onClick={() => {
+            setEditId(null);
+            setForm({ partner_name: "", logo: "" });
+            setShowForm(true);
+          }}
+        >
+          + Add
+        </button>
       </div>
 
       {showForm && (
@@ -99,13 +105,21 @@ function FundingCollaboration() {
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Name"
-              value={form.name}
+              placeholder="Partner Name"
+              value={form.partner_name}
               required
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, partner_name: e.target.value })
+              }
             />
 
-            <input type="file" accept="image/*" onChange={handleImageChange} />
+            <input
+              type="text"
+              placeholder="Logo filename e.g. fund1.jpg"
+              value={form.logo}
+              required
+              onChange={(e) => setForm({ ...form, logo: e.target.value })}
+            />
 
             {form.logo && (
               <img
@@ -114,7 +128,7 @@ function FundingCollaboration() {
                 style={{
                   width: "90px",
                   height: "90px",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   borderRadius: "10px",
                 }}
               />
@@ -129,7 +143,7 @@ function FundingCollaboration() {
                 onClick={() => {
                   setShowForm(false);
                   setEditId(null);
-                  setForm({ name: "", logo: "" });
+                  setForm({ partner_name: "", logo: "" });
                 }}
               >
                 Cancel
@@ -147,15 +161,15 @@ function FundingCollaboration() {
           <span>Action</span>
         </div>
 
-        {fundings.map((item) => (
+        {fundings.map((item, index) => (
           <div className="table-row" key={item.id}>
-            <span>{item.id}</span>
+            <span>{index + 1}</span>
 
             <span>
-              <img src={item.logo} alt={item.name} />
+              <img src={item.logo} alt={item.partner_name} />
             </span>
 
-            <span>{item.name}</span>
+            <span>{item.partner_name}</span>
 
             <span>
               <button className="edit-btn" onClick={() => handleEdit(item)}>
@@ -171,6 +185,10 @@ function FundingCollaboration() {
             </span>
           </div>
         ))}
+
+        {fundings.length === 0 && (
+          <p className="empty-text">No funding partners found.</p>
+        )}
       </div>
     </div>
   );

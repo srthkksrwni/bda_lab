@@ -90,7 +90,12 @@ function AdminEvents() {
       const data = await response.json();
 
       if (data.success) {
-        alert(editId ? "Event updated successfully." : "Event added successfully.");
+        alert(
+          editId
+            ? "Event updated successfully."
+            : "Event added successfully."
+        );
+
         setForm({ citation: "", link: "" });
         setEditId(null);
         setShowForm(false);
@@ -138,6 +143,7 @@ function AdminEvents() {
     <div className="events-page">
       <div className="events-top">
         <h1>Events</h1>
+
         <button
           onClick={() => {
             setEditId(null);
@@ -219,9 +225,10 @@ function AdminEvents() {
 
         {events[selectedCategory].map((item, index) => (
           <div className="table-row" key={item.id}>
-             <span>{index + 1}</span>
+            <span>{index + 1}</span>
             <span>{item.citation}</span>
             <span>{item.link ? item.link : "No link"}</span>
+
             <span>
               <button className="edit-btn" onClick={() => handleEdit(item)}>
                 Edit
