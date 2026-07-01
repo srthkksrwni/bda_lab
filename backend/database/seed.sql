@@ -140,3 +140,14 @@ NULL),
 ('awards', 'Awards',
 'Best Paper Award for our paper published in the 5th International Conference on Data Management, Analytics and Innovation (ICDMAI), 2021.',
 NULL);
+
+-- ==========================
+-- Research Updates seed data
+-- ==========================
+
+INSERT INTO research_updates (title, year) VALUES
+('AI-Based Mental Health Detection using Multimodal Learning', '2025'),
+('Deep Learning for Healthcare Analytics', '2024'),
+('Machine Learning for Early Disease Prediction', '2024'),
+('Natural Language Processing for Mental Health Assessment', '2023'),
+('Computer Vision for Medical Image Analysis', '2023');
