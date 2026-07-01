@@ -65,9 +65,20 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 -- =====================================================
 
 
-CREATE TABLE funding_collaboration (
+CREATE TABLE IF NOT EXISTS funding_collaboration (
     id INT AUTO_INCREMENT PRIMARY KEY,
     partner_name VARCHAR(255) NOT NULL,
     logo VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+-- =====================================================
+-- Events
+-- =====================================================
+CREATE TABLE IF NOT EXISTS `events` (
+  `id` int(11) NOT NULL,
+  `category_id` varchar(50) NOT NULL,
+  `category_label` varchar(100) NOT NULL,
+  `citation` text NOT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
