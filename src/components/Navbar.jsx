@@ -177,16 +177,14 @@ function Navbar() {
               Students Corner
             </Link>
           </li>
-
-          <li>
-            <Link to="/contact" onClick={handleLinkClick}>
-              Contact
-            </Link>
-          </li>
-
           <li>
             <Link to="/blog" onClick={handleLinkClick}>
               Blog
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" onClick={handleLinkClick}>
+              Contact
             </Link>
           </li>
         </ul>
@@ -275,12 +273,13 @@ function Navbar() {
             Students Corner
           </Link>
 
-          <Link to="/contact" onClick={toggleMobileMenu}>
-            Contact
-          </Link>
+          
 
           <Link to="/blog" onClick={toggleMobileMenu}>
             Blog
+          </Link>
+          <Link to="/contact" onClick={toggleMobileMenu}>
+            Contact
           </Link>
         </div>
       )}
