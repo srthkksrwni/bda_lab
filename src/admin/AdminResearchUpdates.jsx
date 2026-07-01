@@ -5,7 +5,6 @@ function AdminResearchUpdates() {
   const [updates, setUpdates] = useState([]);
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
-  const [type, setType] = useState("");
 
   const API_URL = "http://localhost/bda_lab/backend/research_updates";
 
@@ -27,7 +26,7 @@ function AdminResearchUpdates() {
   }, []);
 
   const addUpdate = async () => {
-    if (!title || !year || !type) {
+    if (!title || !year) {
       alert("Please fill all fields");
       return;
     }
@@ -38,7 +37,7 @@ function AdminResearchUpdates() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, year, type }),
+        body: JSON.stringify({ title, year }),
       });
 
       const data = await response.json();
@@ -47,7 +46,6 @@ function AdminResearchUpdates() {
         alert("Research update added successfully");
         setTitle("");
         setYear("");
-        setType("");
         fetchUpdates();
       } else {
         alert("Failed to add research update");
@@ -77,13 +75,6 @@ function AdminResearchUpdates() {
           onChange={(e) => setYear(e.target.value)}
         />
 
-        <input
-          type="text"
-          placeholder="Type e.g. Publication"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        />
-
         <button onClick={addUpdate}>+ Add Research Update</button>
       </div>
 
@@ -92,7 +83,6 @@ function AdminResearchUpdates() {
           <tr>
             <th>Title</th>
             <th>Year</th>
-            <th>Type</th>
           </tr>
         </thead>
 
@@ -101,7 +91,6 @@ function AdminResearchUpdates() {
             <tr key={update.id}>
               <td>{update.title}</td>
               <td>{update.year}</td>
-              <td>{update.type}</td>
             </tr>
           ))}
         </tbody>

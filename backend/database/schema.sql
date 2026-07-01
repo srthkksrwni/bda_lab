@@ -43,10 +43,10 @@ CREATE TABLE IF NOT EXISTS research_updates (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     year VARCHAR(10) NOT NULL,
-    type VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE INDEX idx_research_year ON research_updates(year);
 
 -- =====================================================
 -- Contactmessages
