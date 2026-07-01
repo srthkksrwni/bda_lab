@@ -79,6 +79,7 @@ if ($type == "faculty") {
     $image_url = $data["image_url"] ?? null;
     $scholar_url = $data["scholar_url"] ?? null;
     $profile_url = $data["profile_url"] ?? null;
+    $batch_year = ($category === "mtech" && isset($data["batch_year"]) && $data["batch_year"] !== "") ? intval($data["batch_year"]) : null;
 
     if ($category == "" || $name == "") {
         echo json_encode([
@@ -92,6 +93,7 @@ if ($type == "faculty") {
         UPDATE students
         SET
             category = ?,
+            batch_year = ?,
             name = ?,
             email = ?,
             research_topic = ?,
@@ -102,8 +104,9 @@ if ($type == "faculty") {
     ");
 
     $stmt->bind_param(
-        "sssssssi",
+        "sissssssi",
         $category,
+        $batch_year,
         $name,
         $email,
         $research_topic,

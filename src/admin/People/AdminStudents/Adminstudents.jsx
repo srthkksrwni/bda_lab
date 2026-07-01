@@ -11,6 +11,7 @@ function AdminStudents() {
   ];
 
   const [selectedCategory, setSelectedCategory] = useState("postdoc");
+  const [batchYear, setBatchYear] = useState("2025");
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
   const [students, setStudents] = useState([]);
@@ -26,9 +27,10 @@ function AdminStudents() {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch(
-        `${PEOPLE_API.list}?type=students&category=${selectedCategory}`
-      );
+      const url = selectedCategory === "mtech"
+        ? `${PEOPLE_API.list}?type=students&category=${selectedCategory}&batch_year=${batchYear}`
+        : `${PEOPLE_API.list}?type=students&category=${selectedCategory}`;
+      const response = await fetch(url);
       const data = await response.json();
       if (data.success) {
         const mapped = (data.data || []).map((item) => ({
@@ -39,6 +41,7 @@ function AdminStudents() {
           imageLink: item.image_url || "",
           scholarLink: item.scholar_url || "",
           profileLink: item.profile_url || "",
+          batchYear: item.batch_year || "",
         }));
         setStudents(mapped);
       } else {
@@ -51,7 +54,7 @@ function AdminStudents() {
 
   useEffect(() => {
     fetchStudents();
-  }, [selectedCategory]);
+  }, [selectedCategory, batchYear]);
 
   const resetForm = () => {
     setForm({
@@ -77,6 +80,7 @@ function AdminStudents() {
       image_url: form.imageLink,
       scholar_url: form.scholarLink,
       profile_url: form.profileLink,
+      batch_year: selectedCategory === "mtech" ? batchYear : null,
     };
 
     if (editId) {
@@ -116,6 +120,9 @@ function AdminStudents() {
       scholarLink: item.scholarLink || "",
       profileLink: item.profileLink || "",
     });
+    if (selectedCategory === "mtech" && item.batchYear) {
+      setBatchYear(item.batchYear.toString());
+    }
     setEditId(item.id);
     setShowForm(true);
   };
@@ -180,6 +187,34 @@ return (
       ))}
     </select>
   </div>
+
+  {selectedCategory === "mtech" && (
+    <div className="category-box">
+      <label>Batch Year</label>
+
+      <select
+        value={batchYear}
+        onChange={(e) => setBatchYear(e.target.value)}
+      >
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+        <option value="2014">2014</option>
+        <option value="2013">2013</option>
+        <option value="2012">2012</option>
+        <option value="2011">2011</option>
+        <option value="2010">2010</option>
+      </select>
+    </div>
+  )}
 
   {showForm && (
     <div className="student-form">

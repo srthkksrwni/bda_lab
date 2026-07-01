@@ -11,15 +11,26 @@ if ($type == "faculty") {
 } elseif ($type == "students") {
 
     $category = $_GET["category"] ?? "";
+    $batch_year = $_GET["batch_year"] ?? "";
 
     if ($category != "") {
-        $stmt = $conn->prepare(
-            "SELECT * FROM students
-             WHERE category=?
-             ORDER BY id DESC"
-        );
+        if ($category === "mtech" && $batch_year !== "") {
+            $stmt = $conn->prepare(
+                "SELECT * FROM students
+                 WHERE category=? AND batch_year=?
+                 ORDER BY id DESC"
+            );
 
-        $stmt->bind_param("s", $category);
+            $stmt->bind_param("si", $category, $batch_year);
+        } else {
+            $stmt = $conn->prepare(
+                "SELECT * FROM students
+                 WHERE category=?
+                 ORDER BY id DESC"
+            );
+
+            $stmt->bind_param("s", $category);
+        }
 
         $stmt->execute();
 
