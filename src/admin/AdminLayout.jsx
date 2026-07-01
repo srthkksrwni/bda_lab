@@ -9,7 +9,7 @@ function AdminLayout() {
 
         <nav>
           <Link to="/admin/dashboard">Dashboard</Link>
-          <Link to="/admin/funding-collaboration">Funding & Collaboration</Link>
+          <Link to="/admin/funding">Funding & Collaboration</Link>
           <Link to="/admin/people">People</Link>
           <Link to="/admin/publications">Publications</Link>
           <Link to="/admin/research-updates">Research Updates</Link>

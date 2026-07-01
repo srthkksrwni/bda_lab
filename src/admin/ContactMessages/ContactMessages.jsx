@@ -5,23 +5,29 @@ function ContactMessages() {
   const [search, setSearch] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const API_URL = "http://localhost:8000/contact";
+
   useEffect(() => {
-    fetch("http://localhost/bda_lab/backend/contact/list.php")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setMessages(data.data);
-        }
-      })
-      .catch((error) => {
-        console.log("Error fetching contact messages:", error);
-      });
+    fetchMessages();
   }, []);
+
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch(`${API_URL}/list.php`);
+      const data = await response.json();
+
+      if (data.success) {
+        setMessages(data.data);
+      }
+    } catch (error) {
+      console.log("Error fetching contact messages:", error);
+    }
+  };
 
   const filteredMessages = messages.filter((msg) => {
     return (
-      msg.full_name.toLowerCase().includes(search.toLowerCase()) ||
-      msg.email.toLowerCase().includes(search.toLowerCase())
+      msg.full_name?.toLowerCase().includes(search.toLowerCase()) ||
+      msg.email?.toLowerCase().includes(search.toLowerCase())
     );
   });
 
@@ -35,20 +41,20 @@ function ContactMessages() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(
-        `http://localhost/bda_lab/backend/contact/delete.php?id=${id}`
-      );
-
+      const response = await fetch(`${API_URL}/delete.php?id=${id}`);
       const data = await response.json();
 
       if (data.success) {
-        setMessages(messages.filter((msg) => msg.id !== id));
+        setMessages((prevMessages) =>
+          prevMessages.filter((msg) => msg.id !== id)
+        );
         alert("Message deleted successfully.");
       } else {
         alert("Delete failed.");
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error deleting message:", error);
+      alert("Something went wrong.");
     }
   };
 
@@ -65,40 +71,44 @@ function ContactMessages() {
         />
       </div>
 
-      {filteredMessages.map((msg) => (
-        <div className="message-card" key={msg.id}>
-          <h2>{msg.full_name}</h2>
+      {filteredMessages.length === 0 ? (
+        <p>No messages found.</p>
+      ) : (
+        filteredMessages.map((msg) => (
+          <div className="message-card" key={msg.id}>
+            <h2>{msg.full_name}</h2>
 
-          <p>
-            <strong>Email:</strong> {msg.email}
-          </p>
+            <p>
+              <strong>Email:</strong> {msg.email}
+            </p>
 
-          <p>
-            <strong>Phone:</strong> {msg.phone}
-          </p>
+            <p>
+              <strong>Phone:</strong> {msg.phone}
+            </p>
 
-          <h4>Query</h4>
-          <p>{msg.query_message}</p>
+            <h4>Query</h4>
+            <p>{msg.query_message}</p>
 
-          <small>{msg.created_at}</small>
+            <small>{msg.created_at}</small>
 
-          <div className="actions">
-            <button
-              className="reply-btn"
-              onClick={() => handleReply(msg.email)}
-            >
-              Reply
-            </button>
+            <div className="actions">
+              <button
+                className="reply-btn"
+                onClick={() => handleReply(msg.email)}
+              >
+                Reply
+              </button>
 
-            <button
-              className="delete-btn"
-              onClick={() => handleDelete(msg.id)}
-            >
-              Delete
-            </button>
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(msg.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 }

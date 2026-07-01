@@ -8,11 +8,13 @@ USE bda_lab;
 CREATE TABLE IF NOT EXISTS faculty (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    designation VARCHAR(255) NOT NULL,
+    designation VARCHAR(255),
+    description TEXT,
     email VARCHAR(255),
     image_url TEXT,
     scholar_url TEXT,
     profile_url TEXT,
+    external_links LONGTEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP
@@ -46,3 +48,26 @@ CREATE TABLE IF NOT EXISTS research_updates (
 
 CREATE INDEX idx_research_year ON research_updates(year);
 
+-- =====================================================
+-- Contactmessages
+-- =====================================================
+CREATE TABLE IF NOT EXISTS contact_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    query_message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =====================================================
+-- Funding & collaboration
+-- =====================================================
+
+
+CREATE TABLE funding_collaboration (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    partner_name VARCHAR(255) NOT NULL,
+    logo VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

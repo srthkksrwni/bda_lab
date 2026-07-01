@@ -24,6 +24,8 @@ if ($type == "faculty") {
     $image_url = $data["image_url"] ?? null;
     $scholar_url = $data["scholar_url"] ?? null;
     $profile_url = $data["profile_url"] ?? null;
+    $description = $data["description"] ?? "";
+    $external_links = json_encode($data["external_links"] ?? []);
 
     if ($name == "" || $designation == "") {
         echo json_encode([
@@ -35,18 +37,20 @@ if ($type == "faculty") {
 
     $stmt = $conn->prepare("
         INSERT INTO faculty
-        (name, designation, email, image_url, scholar_url, profile_url)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (name, designation, description, email, image_url, scholar_url, profile_url, external_links)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
     $stmt->bind_param(
-        "ssssss",
+        "ssssssss",
         $name,
         $designation,
+        $description,
         $email,
         $image_url,
         $scholar_url,
-        $profile_url
+        $profile_url,
+        $external_links
     );
 
 } elseif ($type == "student") {
