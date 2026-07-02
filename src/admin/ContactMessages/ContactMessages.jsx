@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import "./ContactMessages.css";
+import { CONTACT_API } from "../../api/contactApi";
 
 function ContactMessages() {
   const [search, setSearch] = useState("");
   const [messages, setMessages] = useState([]);
-
-  const API_URL = "http://localhost:8000/contact";
 
   useEffect(() => {
     fetchMessages();
@@ -13,7 +12,7 @@ function ContactMessages() {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(`${API_URL}/list.php`);
+      const response = await fetch(CONTACT_API.list);
       const data = await response.json();
 
       if (data.success) {
@@ -41,7 +40,7 @@ function ContactMessages() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`${API_URL}/delete.php?id=${id}`);
+      const response = await fetch(`${CONTACT_API.delete}?id=${id}`);
       const data = await response.json();
 
       if (data.success) {

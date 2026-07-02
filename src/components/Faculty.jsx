@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { ExternalLink, Award, BrainCircuit, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import "../styles/Faculty.css";
+import { PEOPLE_API } from "../admin/People/peopleApi";
+import { API_BASE } from "../api/apiConfig";
 
 function Faculty() {
   const [facultyData, setFacultyData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/people/list.php?type=faculty")
+    fetch(`${PEOPLE_API.list}?type=faculty`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -18,7 +20,9 @@ function Faculty() {
               ? item.description.split("\n")
               : [],
             email: item.email || "",
-            img: item.image_url || "/default-profile.png",
+            img: item.image_url
+              ? (item.image_url.startsWith("http") ? item.image_url : `${API_BASE}/${item.image_url}`)
+              : "/default-profile.png",
             scholarLink: item.scholar_url || "",
             profile: item.profile_url || "",
             externalLinks: item.external_links

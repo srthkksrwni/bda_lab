@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
+import { PUBLICATIONS_API } from "../../api/publicationsApi";
 
 import {
   Chart as ChartJS,
@@ -15,16 +16,16 @@ function PublicationStatsCard({ refresh }) {
   const [stats, setStats] = useState([]);
   const [yearlyStats, setYearlyStats] = useState([]);
 
-  const API_URL = "http://localhost/bda_lab/backend/publications";
+  // API_URL managed via PUBLICATIONS_API
 
   const fetchStats = () => {
-    fetch(`${API_URL}/get_publication_stats.php`)
+    fetch(PUBLICATIONS_API.getStats)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setStats(data.data);
       });
 
-    fetch(`${API_URL}/get_publication_yearly_stats.php`)
+    fetch(PUBLICATIONS_API.getYearlyStats)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setYearlyStats(data.data);
@@ -36,7 +37,7 @@ function PublicationStatsCard({ refresh }) {
   }, [refresh]);
 
   const updateMainStat = async (item) => {
-    await fetch(`${API_URL}/update_publication_stats.php`, {
+    await fetch(PUBLICATIONS_API.updateStats, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +49,7 @@ function PublicationStatsCard({ refresh }) {
   };
 
   const updateYearStat = async (item) => {
-    await fetch(`${API_URL}/update_publication_yearly_stats.php`, {
+    await fetch(PUBLICATIONS_API.updateYearlyStats, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,8 +99,6 @@ function PublicationStatsCard({ refresh }) {
           <tr>
             <th>Metric</th>
             <th>All</th>
-            <th>Since 2021</th>
-            <th>Action</th>
           </tr>
         </thead>
 
@@ -115,18 +114,6 @@ function PublicationStatsCard({ refresh }) {
                   onChange={(e) => {
                     const updated = [...stats];
                     updated[index].all_count = e.target.value;
-                    setStats(updated);
-                  }}
-                />
-              </td>
-
-              <td>
-                <input
-                  type="number"
-                  value={item.since_2021}
-                  onChange={(e) => {
-                    const updated = [...stats];
-                    updated[index].since_2021 = e.target.value;
                     setStats(updated);
                   }}
                 />

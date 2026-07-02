@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import "../styles/contact.css";
+import { CONTACT_API } from "../api/contactApi";
 
 const Contact = () => {
   const form = useRef();
@@ -42,7 +43,7 @@ const Contact = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/contact/add.php",
+        CONTACT_API.add,
         {
           method: "POST",
           headers: {

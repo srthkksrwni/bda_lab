@@ -3,6 +3,11 @@
 return [
 
     // Database
+    "db_host" => "localhost",
+    "db_name" => "bda_lab",
+    "db_user" => "root",
+    "db_pass" => "",
+
     "DB_HOST" => "localhost",
     "DB_NAME" => "bda_lab",
     "DB_USER" => "root",

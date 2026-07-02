@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./AdminResearchUpdates.css";
+import { RESEARCH_API } from "../api/researchApi";
 
 function AdminResearchUpdates() {
   const [updates, setUpdates] = useState([]);
@@ -7,11 +8,9 @@ function AdminResearchUpdates() {
   const [year, setYear] = useState("");
   const [editId, setEditId] = useState(null);
 
-  const API_URL = "http://localhost/bda_lab/backend/research_updates";
-
   const fetchUpdates = async () => {
     try {
-      const response = await fetch(`${API_URL}/list.php`);
+      const response = await fetch(RESEARCH_API.list);
       const data = await response.json();
 
       if (data.success) {
@@ -38,7 +37,7 @@ function AdminResearchUpdates() {
       return;
     }
 
-    const url = editId ? `${API_URL}/update.php` : `${API_URL}/add.php`;
+    const url = editId ? RESEARCH_API.update : RESEARCH_API.add;
     const body = editId ? { id: editId, title, year } : { title, year };
 
     try {
@@ -77,7 +76,7 @@ function AdminResearchUpdates() {
     }
 
     try {
-      const response = await fetch(`${API_URL}/delete.php`, {
+      const response = await fetch(RESEARCH_API.delete, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

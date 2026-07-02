@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./FundingCollaboration.css";
+import { FUNDING_API } from "../../api/fundingApi";
 
 function FundingCollaboration() {
-  const API_URL = "http://localhost:8000/funding";
 
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
@@ -18,7 +18,7 @@ function FundingCollaboration() {
   }, []);
 
   const fetchFundings = async () => {
-    const response = await fetch(`${API_URL}/list.php`);
+    const response = await fetch(FUNDING_API.list);
     const data = await response.json();
 
     if (data.success) {
@@ -29,7 +29,7 @@ function FundingCollaboration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = editId ? `${API_URL}/update.php` : `${API_URL}/add.php`;
+    const url = editId ? FUNDING_API.update : FUNDING_API.add;
 
     const fundingData = {
       id: editId,
@@ -71,7 +71,7 @@ function FundingCollaboration() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this item?")) return;
 
-    const response = await fetch(`${API_URL}/delete.php?id=${id}`);
+    const response = await fetch(`${FUNDING_API.delete}?id=${id}`);
     const data = await response.json();
 
     if (data.success) {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/events.css";
+import { EVENTS_API } from "../api/eventsApi";
 
 function Events() {
   const [activeTab, setActiveTab] = useState("conferences");
@@ -23,7 +24,7 @@ function Events() {
   ];
 
   useEffect(() => {
-    fetch("http://localhost:8000/events/list.php")
+    fetch(EVENTS_API.list)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

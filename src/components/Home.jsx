@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Home.css";
 import "../styles/research.css";
-import { recentUpdates } from "../data/recentUpdates";
+import { recentUpdates as dummyUpdates } from "../data/recentUpdates"; // rename static import if needed to prevent naming conflicts
 import Carousel from "./Carousel.jsx";
 import CoreObjective from "./CoreObjective.jsx";
 import Research from "./Research.jsx";
 import Funding from "./Funding.jsx";
+import { RESEARCH_API } from "../api/researchApi";
 
 function Home() {
   const [recentUpdates, setRecentUpdates] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/bda_lab/backend/research_updates/list.php")
+    fetch(RESEARCH_API.list)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

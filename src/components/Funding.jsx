@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../styles/funding.css";
+import { FUNDING_API } from "../api/fundingApi";
 
 function Funding() {
   const [partners, setPartners] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/funding/list.php")
+    fetch(FUNDING_API.list)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
