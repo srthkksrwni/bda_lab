@@ -1,8 +1,25 @@
-import React from "react";
-import { blogdata } from "../data/blogdata";
+import React, { useEffect, useState } from "react";
 import "../styles/Blog.css";
 
 function Gallery() {
+  const [blogs, setBlogs] = useState([]);
+
+  const API_URL = "http://localhost/bda_lab/backend/blogs/list.php";
+  const IMAGE_URL = "http://localhost/bda_lab/backend/";
+
+  useEffect(() => {
+    fetch(API_URL)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setBlogs(data.blogs);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching blogs:", error);
+      });
+  }, []);
+
   return (
     <div className="gallery-page">
       <header className="gallery-header">
@@ -14,20 +31,17 @@ function Gallery() {
         </p>
       </header>
 
-      {/* Masonry Grid */}
       <main className="masonry-container">
         <div className="masonry-grid">
-          {blogdata
-            .filter((item) => item.type === "image")
-            .map((item) => (
-              <div key={item.id} className="grid-item">
-                <img
-                  src={item.src}
-                  alt={item.title || "Lab Update"}
-                  loading="lazy"
-                />
-              </div>
-            ))}
+          {blogs.map((blog) => (
+            <div key={blog.id} className="grid-item">
+              <img
+                src={`${IMAGE_URL}${blog.image}`}
+                alt={blog.title || "Lab Update"}
+                loading="lazy"
+              />
+            </div>
+          ))}
         </div>
       </main>
     </div>

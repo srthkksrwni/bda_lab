@@ -128,3 +128,16 @@ CREATE TABLE publication_yearly_stats (
     year INT PRIMARY KEY,
     total INT NOT NULL DEFAULT 0
 );
+
+/* ===========================================================
+   BLOGS TABLE
+=========================================================== */
+
+CREATE TABLE IF NOT EXISTS blogs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    image VARCHAR(255),
+    link VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

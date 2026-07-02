@@ -39,6 +39,7 @@ import AdminEvents from "./admin/AdminEvents/AdminEvents";
 import AdminPeople from "./admin/People/AdminPeople";
 import AdminFunding from "./admin/FundingCollaboration/FundingCollaboration";
 import AdminPublications from "./admin/Publications/AdminPublications";
+import AdminBlogs from "./admin/Blogs/AdminBlogs";
 
 function AppContent() {
   const location = useLocation();
@@ -95,6 +96,7 @@ function AppContent() {
           <Route path="publications" element={<AdminPublications />} />
           <Route path="research-updates" element={<AdminResearchUpdates />} />
           <Route path="events" element={<AdminEvents />} />
+          <Route path="blogs" element={<AdminBlogs />} />
           <Route path="contact-messages" element={<ContactMessages />} />
         </Route>
       </Routes>

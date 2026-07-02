@@ -1,0 +1,106 @@
+.admin-blogs-container {
+  padding: 40px;
+}
+
+.admin-blogs-container h1 {
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: #0a1f54;
+}
+
+.admin-blogs-form {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.admin-blogs-form input,
+.admin-blogs-form select,
+.admin-blogs-form textarea {
+  padding: 12px 15px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.admin-blogs-form input,
+.admin-blogs-form select {
+  min-width: 220px;
+}
+
+.admin-blogs-form textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+}
+
+.admin-blogs-form button {
+  background: #0a1f54;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.admin-blogs-form button:hover {
+  background: #16398a;
+}
+
+.admin-blogs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+}
+
+.admin-blogs-table th {
+  background: #0a1f54;
+  color: white;
+  padding: 15px;
+  text-align: left;
+}
+
+.admin-blogs-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.blog-admin-img {
+  width: 90px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  background: #1f3c88;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #e5252a;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.no-data {
+  text-align: center;
+  color: #777;
+  padding: 25px;
+}
