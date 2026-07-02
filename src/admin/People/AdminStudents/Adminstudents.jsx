@@ -15,6 +15,8 @@ function AdminStudents() {
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
   const [students, setStudents] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -24,6 +26,26 @@ function AdminStudents() {
     scholarLink: "",
     profileLink: "",
   });
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const allowedExts = ["jpg", "jpeg", "png", "webp"];
+      const ext = file.name.split(".").pop().toLowerCase();
+      if (!allowedExts.includes(ext)) {
+        alert("Only JPG, JPEG, PNG, and WEBP image files are allowed.");
+        e.target.value = "";
+        return;
+      }
+      if (file.size > 5242880) {
+        alert("Image file size exceeds the 5MB limit.");
+        e.target.value = "";
+        return;
+      }
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
 
   const fetchStudents = async () => {
     try {
@@ -66,35 +88,40 @@ function AdminStudents() {
       profileLink: "",
     });
     setEditId(null);
+    setSelectedFile(null);
+    setPreviewUrl("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      type: "student",
-      category: selectedCategory,
-      name: form.name,
-      email: form.email,
-      research_topic: form.topic,
-      image_url: form.imageLink,
-      scholar_url: form.scholarLink,
-      profile_url: form.profileLink,
-      batch_year: selectedCategory === "mtech" ? batchYear : null,
-    };
+    const formData = new FormData();
+    formData.append("type", "student");
+    formData.append("category", selectedCategory);
+    formData.append("name", form.name);
+    formData.append("email", form.email || "");
+    formData.append("research_topic", form.topic || "");
+    formData.append("scholar_url", form.scholarLink || "");
+    formData.append("profile_url", form.profileLink || "");
+    if (selectedCategory === "mtech") {
+      formData.append("batch_year", batchYear);
+    } else {
+      formData.append("batch_year", "");
+    }
+
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
 
     if (editId) {
-      payload.id = editId;
+      formData.append("id", editId);
     }
 
     try {
       const url = editId ? PEOPLE_API.update : PEOPLE_API.add;
       const response = await fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        body: formData,
       });
 
       const data = await response.json();
@@ -265,17 +292,28 @@ return (
           }
         />
 
+        <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Upload Image</label>
         <input
-          type="text"
-          placeholder="Image URL (Optional)"
-          value={form.imageLink}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              imageLink: e.target.value,
-            })
-          }
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
         />
+
+        {(previewUrl || form.imageLink) && (
+          <div style={{ padding: "5px 0" }}>
+            <img
+              src={previewUrl || (form.imageLink.startsWith("http") ? form.imageLink : `http://localhost:8000/${form.imageLink}`)}
+              alt="Preview"
+              style={{
+                maxWidth: "100px",
+                maxHeight: "100px",
+                borderRadius: "8px",
+                objectFit: "cover",
+                border: "1px solid #ddd"
+              }}
+            />
+          </div>
+        )}
 
         <input
           type="text"
@@ -339,7 +377,7 @@ return (
       <span className="preview-cell">
         {item.imageLink ? (
           <img
-            src={item.imageLink}
+            src={item.imageLink.startsWith("http") ? item.imageLink : `http://localhost:8000/${item.imageLink}`}
             alt={item.name}
             className="student-preview"
             onError={(e) => {

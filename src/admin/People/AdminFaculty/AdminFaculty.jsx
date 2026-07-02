@@ -7,6 +7,8 @@ function AdminFaculty() {
 
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -18,6 +20,26 @@ function AdminFaculty() {
     description: "",
     external_links: [],
   });
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const allowedExts = ["jpg", "jpeg", "png", "webp"];
+      const ext = file.name.split(".").pop().toLowerCase();
+      if (!allowedExts.includes(ext)) {
+        alert("Only JPG, JPEG, PNG, and WEBP image files are allowed.");
+        e.target.value = "";
+        return;
+      }
+      if (file.size > 5242880) {
+        alert("Image file size exceeds the 5MB limit.");
+        e.target.value = "";
+        return;
+      }
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
 
   const fetchFaculty = async () => {
     try {
@@ -49,35 +71,36 @@ function AdminFaculty() {
       external_links: [],
     });
     setEditId(null);
+    setSelectedFile(null);
+    setPreviewUrl("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      type: "faculty",
-      name: form.name,
-      designation: form.designation,
-      email: form.email,
-      image_url: form.image_url,
-      scholar_url: form.scholar_url,
-      profile_url: form.profile_url,
-      description: form.description,
-      external_links: form.external_links,
-    };
+    const formData = new FormData();
+    formData.append("type", "faculty");
+    formData.append("name", form.name);
+    formData.append("designation", form.designation);
+    formData.append("email", form.email || "");
+    formData.append("scholar_url", form.scholar_url || "");
+    formData.append("profile_url", form.profile_url || "");
+    formData.append("description", form.description || "");
+    formData.append("external_links", JSON.stringify(form.external_links || []));
+
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
 
     if (editId) {
-      payload.id = editId;
+      formData.append("id", editId);
     }
 
     try {
       const url = editId ? PEOPLE_API.update : PEOPLE_API.add;
       const response = await fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        body: formData,
       });
 
       const data = await response.json();
@@ -205,16 +228,17 @@ function AdminFaculty() {
             onChange={(e) => setForm({ ...form, designation: e.target.value })}
           />
 
+          <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Upload Image</label>
           <input
-            placeholder="Image URL"
-            value={form.image_url}
-            onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
           />
 
-          {form.image_url && (
+          {(previewUrl || form.image_url) && (
             <div style={{ padding: "5px 0" }}>
               <img
-                src={form.image_url}
+                src={previewUrl || (form.image_url.startsWith("http") ? form.image_url : `http://localhost:8000/${form.image_url}`)}
                 alt="Preview"
                 style={{
                   maxWidth: "100px",
@@ -327,7 +351,7 @@ function AdminFaculty() {
               <td>
                 {item.image_url ? (
                   <img
-                    src={item.image_url}
+                    src={item.image_url.startsWith("http") ? item.image_url : `http://localhost:8000/${item.image_url}`}
                     alt={item.name}
                     style={{
                       width: "50px",

@@ -2,10 +2,10 @@
 
 require_once("../config/db.php");
 
-// Read JSON data
-$data = json_decode(file_get_contents("php://input"), true);
+// Read FormData (populated into $_POST)
+$data = $_POST;
 
-if (!$data) {
+if (!$data && empty($_FILES)) {
     echo json_encode([
         "success" => false,
         "message" => "No data received."
@@ -24,16 +24,92 @@ if ($id <= 0) {
     exit();
 }
 
+function handle_image_upload($type) {
+    if (isset($_FILES["image"]) && $_FILES["image"]["error"] === UPLOAD_ERR_OK) {
+        $file = $_FILES["image"];
+        $filename = $file["name"];
+        $filesize = $file["size"];
+        $tmp_name = $file["tmp_name"];
+
+        // Validate size (5MB = 5,242,880 bytes)
+        if ($filesize > 5242880) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Image file size exceeds the 5MB limit."
+            ]);
+            exit();
+        }
+
+        // Validate extension
+        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $allowed_exts = ["jpg", "jpeg", "png", "webp"];
+        if (!in_array($ext, $allowed_exts)) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Only JPG, JPEG, PNG, and WEBP image files are allowed."
+            ]);
+            exit();
+        }
+
+        // Generate unique filename
+        $unique_name = time() . "_" . bin2hex(random_bytes(4)) . "." . $ext;
+        $folder = ($type === "faculty" ? "faculty" : "students");
+        $target_dir = "../uploads/" . $folder . "/";
+        
+        // Ensure folder exists
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0755, true);
+        }
+
+        $target_file = $target_dir . $unique_name;
+        if (move_uploaded_file($tmp_name, $target_file)) {
+            return "uploads/" . $folder . "/" . $unique_name;
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => "Failed to save uploaded image."
+            ]);
+            exit();
+        }
+    }
+    return null;
+}
+
+// Retrieve old image_url before updating
+$old_image_url = null;
+$table_name = ($type === "faculty") ? "faculty" : "students";
+$query = "SELECT image_url FROM $table_name WHERE id = ?";
+$stmt_old = $conn->prepare($query);
+$stmt_old->bind_param("i", $id);
+$stmt_old->execute();
+$res_old = $stmt_old->get_result();
+if ($row_old = $res_old->fetch_assoc()) {
+    $old_image_url = $row_old["image_url"];
+}
+$stmt_old->close();
+
+$new_image_url = handle_image_upload($type);
+
+// If no new image was uploaded, keep the old one
+$image_url = ($new_image_url !== null) ? $new_image_url : $old_image_url;
+
 if ($type == "faculty") {
 
     $name = $data["name"] ?? "";
     $designation = $data["designation"] ?? "";
     $email = $data["email"] ?? null;
-    $image_url = $data["image_url"] ?? null;
     $scholar_url = $data["scholar_url"] ?? null;
     $profile_url = $data["profile_url"] ?? null;
     $description = $data["description"] ?? "";
-    $external_links = json_encode($data["external_links"] ?? []);
+    
+    // Parse external links safely from JSON string
+    $ext_links_raw = $data["external_links"] ?? null;
+    if (is_string($ext_links_raw)) {
+        $decoded = json_decode($ext_links_raw, true);
+        $external_links = json_encode(is_array($decoded) ? $decoded : []);
+    } else {
+        $external_links = json_encode($ext_links_raw ?? []);
+    }
 
     if ($name == "" || $designation == "") {
         echo json_encode([
@@ -76,7 +152,6 @@ if ($type == "faculty") {
     $name = $data["name"] ?? "";
     $email = $data["email"] ?? null;
     $research_topic = $data["research_topic"] ?? null;
-    $image_url = $data["image_url"] ?? null;
     $scholar_url = $data["scholar_url"] ?? null;
     $profile_url = $data["profile_url"] ?? null;
     $batch_year = ($category === "mtech" && isset($data["batch_year"]) && $data["batch_year"] !== "") ? intval($data["batch_year"]) : null;
@@ -127,18 +202,18 @@ if ($type == "faculty") {
 }
 
 if ($stmt->execute()) {
-
-    if ($stmt->affected_rows > 0) {
-        echo json_encode([
-            "success" => true,
-            "message" => "Record updated successfully."
-        ]);
-    } else {
-        echo json_encode([
-            "success" => true,
-            "message" => "No changes were made."
-        ]);
+    
+    // Delete the old image file if a new one was uploaded and is different
+    if ($new_image_url !== null && $old_image_url && $old_image_url !== $new_image_url) {
+        if (file_exists("../" . $old_image_url)) {
+            unlink("../" . $old_image_url);
+        }
     }
+
+    echo json_encode([
+        "success" => true,
+        "message" => "Record updated successfully."
+    ]);
 
 } else {
 

@@ -167,7 +167,7 @@ VALUES (
     'Professor',
     'Head, Centre for Intelligent Robotics (CIR)\nProfessor-In-Charge, Students’ Holistic Growth, Inclusive Care and Mental Wellness\nGeneral Chair: ISEC 2023 | ICONIP 2022 | BDA 2021',
     'sonali@iiita.ac.in',
-    '/Sonali Maam.jpg',
+    'uploads/faculty/1782986072_208e9c91.jpg',
     'https://scholar.google.com/citations?user=hPvt6d8AAAAJ&hl=en',
     'https://profile.iiita.ac.in/sonali/',
     '[

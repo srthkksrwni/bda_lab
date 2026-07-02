@@ -18,7 +18,9 @@ function Faculty() {
               ? item.description.split("\n")
               : [],
             email: item.email || "",
-            img: item.image_url || "/default-profile.png",
+            img: item.image_url
+              ? (item.image_url.startsWith("http") ? item.image_url : `http://localhost:8000/${item.image_url}`)
+              : "/default-profile.png",
             scholarLink: item.scholar_url || "",
             profile: item.profile_url || "",
             externalLinks: item.external_links
