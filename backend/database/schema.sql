@@ -4,7 +4,6 @@ USE bda_lab;
 -- =====================================================
 -- FACULTY TABLE
 -- =====================================================
-
 CREATE TABLE IF NOT EXISTS faculty (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -16,9 +15,9 @@ CREATE TABLE IF NOT EXISTS faculty (
     profile_url TEXT,
     external_links LONGTEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 -- =====================================================
 -- STUDENTS TABLE
 -- =====================================================
@@ -33,13 +32,12 @@ CREATE TABLE IF NOT EXISTS students (
     scholar_url TEXT,
     profile_url TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
--- ============================================
--- Research Updates Table
--- ============================================
 
+-- =====================================================
+-- RESEARCH UPDATES TABLE
+-- =====================================================
 CREATE TABLE IF NOT EXISTS research_updates (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -50,7 +48,20 @@ CREATE TABLE IF NOT EXISTS research_updates (
 CREATE INDEX idx_research_year ON research_updates(year);
 
 -- =====================================================
--- Contactmessages
+-- PUBLICATIONS TABLE
+-- =====================================================
+CREATE TABLE IF NOT EXISTS publications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(50) NOT NULL,
+    citation TEXT NOT NULL,
+    link VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_publications_category ON publications(category);
+
+-- =====================================================
+-- CONTACT MESSAGES TABLE
 -- =====================================================
 CREATE TABLE IF NOT EXISTS contact_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -62,24 +73,58 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 );
 
 -- =====================================================
--- Funding & collaboration
+-- FUNDING & COLLABORATION TABLE
 -- =====================================================
-
-
 CREATE TABLE IF NOT EXISTS funding_collaboration (
     id INT AUTO_INCREMENT PRIMARY KEY,
     partner_name VARCHAR(255) NOT NULL,
     logo VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 -- =====================================================
--- Events
+-- EVENTS TABLE
 -- =====================================================
-CREATE TABLE IF NOT EXISTS `events` (
-  `id` int(11) NOT NULL,
-  `category_id` varchar(50) NOT NULL,
-  `category_label` varchar(100) NOT NULL,
-  `citation` text NOT NULL,
-  `link` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS events (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id VARCHAR(50) NOT NULL,
+    category_label VARCHAR(100) NOT NULL,
+    citation TEXT NOT NULL,
+    link VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+/* ===========================================================
+   PUBLICATIONS TABLE
+=========================================================== */
+
+CREATE TABLE publications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category ENUM('journals','conferences','books') NOT NULL,
+    year INT NOT NULL,
+    citation TEXT NOT NULL,
+    link VARCHAR(255) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+/* ===========================================================
+   PUBLICATION STATISTICS TABLE
+=========================================================== */
+
+CREATE TABLE publication_stats (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    label VARCHAR(50) NOT NULL UNIQUE,
+    all_count INT NOT NULL DEFAULT 0,
+    since_2021 INT NOT NULL DEFAULT 0
+);
+
+
+/* ===========================================================
+   PUBLICATION YEARLY STATISTICS TABLE
+=========================================================== */
+
+CREATE TABLE publication_yearly_stats (
+    year INT PRIMARY KEY,
+    total INT NOT NULL DEFAULT 0
+);

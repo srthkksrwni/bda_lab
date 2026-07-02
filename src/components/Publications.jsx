@@ -15,7 +15,7 @@ import {
 import "../styles/Publications.css";
 
 export default function Publications() {
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState("journals");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fullCitationData = [
@@ -52,10 +52,9 @@ export default function Publications() {
     ...books.map((item) => ({ ...item, category: "books" })),
   ];
 
-  const filteredPublications =
-    activeTab === "all"
-      ? allPublications
-      : allPublications.filter((item) => item.category === activeTab);
+  const filteredPublications = allPublications.filter(
+    (item) => item.category === activeTab
+  );
 
   return (
     <div className="publications-page">
@@ -69,20 +68,29 @@ export default function Publications() {
             Research Publications
           </motion.h1>
 
-          <div className="pub-filter-box">
-            <label htmlFor="publicationFilter">Filter Publications</label>
-
-            <select
-              id="publicationFilter"
-              value={activeTab}
-              onChange={(e) => setActiveTab(e.target.value)}
-              className="pub-dropdown"
+          <div className="publication-tabs">
+            <button
+              className={`tab-btn ${activeTab === "journals" ? "active" : ""}`}
+              onClick={() => setActiveTab("journals")}
             >
-              <option value="all">All Publications</option>
-              <option value="journals">Transactions & Journals</option>
-              <option value="conferences">Conference Publications</option>
-              <option value="books">Books</option>
-            </select>
+              Transactions & Journals
+            </button>
+
+            <button
+              className={`tab-btn ${
+                activeTab === "conferences" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("conferences")}
+            >
+              Conference Publications
+            </button>
+
+            <button
+              className={`tab-btn ${activeTab === "books" ? "active" : ""}`}
+              onClick={() => setActiveTab("books")}
+            >
+              Books
+            </button>
           </div>
 
           <div className="pub-container">
@@ -100,12 +108,6 @@ export default function Publications() {
                     <div className="pub-index">{index + 1}</div>
 
                     <div className="pub-details">
-                      <span className="pub-category">
-                        {pub.category === "journals" && "Journal"}
-                        {pub.category === "conferences" && "Conference"}
-                        {pub.category === "books" && "Book"}
-                      </span>
-
                       <p className="pub-citation">
                         {pub.citation
                           ? highlightAuthor(pub.citation)
@@ -129,9 +131,7 @@ export default function Publications() {
                 ))}
 
                 {filteredPublications.length === 0 && (
-                  <p className="no-data">
-                    No records found for this category.
-                  </p>
+                  <p className="no-data">No records found for this category.</p>
                 )}
               </motion.div>
             </AnimatePresence>
@@ -176,7 +176,7 @@ export default function Publications() {
               <ResponsiveContainer width="100%" height={180}>
                 <BarChart
                   data={sidebarData}
-                  margin={{ top: 10, right: 0, left: -25, bottom: 0 }}
+                  margin={{ top: 10, right: 5, left: -25, bottom: 0 }}
                 >
                   <CartesianGrid vertical={false} stroke="#f0f0f0" />
                   <XAxis
@@ -203,10 +203,7 @@ export default function Publications() {
 
       <AnimatePresence>
         {isModalOpen && (
-          <div
-            className="modal-overlay"
-            onClick={() => setIsModalOpen(false)}
-          >
+          <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
             <motion.div
               className="modal-content"
               initial={{ scale: 0.9, opacity: 0 }}

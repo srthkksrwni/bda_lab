@@ -29,18 +29,19 @@
   border-color: #0a1f54;
 }
 
-.research-form button {
+/* Only Add/Update button */
+.research-form > button {
   background: #0a1f54;
   color: white;
   border: none;
   padding: 12px 25px;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: .3s;
   font-size: 15px;
 }
 
-.research-form button:hover {
+.research-form > button:hover {
   background: #16398a;
 }
 
@@ -58,11 +59,68 @@
   text-align: left;
 }
 
+.research-table th:last-child {
+  text-align: center;
+}
+
+.research-table td:last-child {
+  text-align: center;
+}
+
 .research-table td {
   padding: 15px;
   border-bottom: 1px solid #eee;
+  vertical-align: middle;
 }
 
 .research-table tr:hover {
   background: #f7f9fc;
+}
+
+/* Center the Action column */
+.research-table th:last-child,
+.research-table td:last-child {
+  text-align: center;
+  width: 220px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Edit button */
+.edit-btn {
+  background: #233b8b !important;
+  color: white !important;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 70px;
+}
+
+.edit-btn:hover {
+  background: #172d70 !important;
+}
+
+/* Delete button */
+.delete-btn {
+  background: #e53935 !important;
+  color: white !important;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 70px;
+}
+
+.delete-btn:hover {
+  background: #c62828 !important;
 }
