@@ -48,19 +48,6 @@ CREATE TABLE IF NOT EXISTS research_updates (
 CREATE INDEX idx_research_year ON research_updates(year);
 
 -- =====================================================
--- PUBLICATIONS TABLE
--- =====================================================
-CREATE TABLE IF NOT EXISTS publications (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    category VARCHAR(50) NOT NULL,
-    citation TEXT NOT NULL,
-    link VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE INDEX idx_publications_category ON publications(category);
-
--- =====================================================
 -- CONTACT MESSAGES TABLE
 -- =====================================================
 CREATE TABLE IF NOT EXISTS contact_messages (
