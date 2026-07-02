@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 import "./AdminPublications.css";
+import PublicationStatsCard from "./PublicationStatsCard";
 
 function AdminPublications() {
   const [publications, setPublications] = useState([]);
   const [category, setCategory] = useState("journals");
+  const [year, setYear] = useState(new Date().getFullYear());
   const [citation, setCitation] = useState("");
   const [link, setLink] = useState("");
   const [editId, setEditId] = useState(null);
+  const [statsRefresh, setStatsRefresh] = useState(0);
+  const [showForm, setShowForm] = useState(false);
 
   const API_URL = "http://localhost/bda_lab/backend/publications";
 
   const fetchPublications = async () => {
-    try {
-      const response = await fetch(`${API_URL}/list.php`);
-      const data = await response.json();
+    const response = await fetch(`${API_URL}/list.php`);
+    const data = await response.json();
 
-      if (data.success) {
-        setPublications(data.publications);
-      }
-    } catch (error) {
-      console.error("Error fetching publications:", error);
+    if (data.success) {
+      setPublications(data.publications);
     }
   };
 
@@ -29,79 +29,71 @@ function AdminPublications() {
 
   const resetForm = () => {
     setCategory("journals");
+    setYear(new Date().getFullYear());
     setCitation("");
     setLink("");
     setEditId(null);
   };
 
   const savePublication = async () => {
-    if (!category || !citation) {
-      alert("Please select category and enter citation");
+    if (!category || !year || !citation) {
+      alert("Please fill category, year and citation");
       return;
     }
 
     const url = editId ? `${API_URL}/update.php` : `${API_URL}/add.php`;
 
     const body = editId
-      ? { id: editId, category, citation, link }
-      : { category, citation, link };
+      ? { id: editId, category, year, citation, link }
+      : { category, year, citation, link };
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.success) {
-        alert(editId ? "Publication updated" : "Publication added");
-        resetForm();
-        fetchPublications();
-      } else {
-        alert("Operation failed");
-      }
-    } catch (error) {
-      console.error("Error saving publication:", error);
-      alert("Something went wrong");
+    if (data.success) {
+      alert(editId ? "Publication updated" : "Publication added");
+      resetForm();
+      setShowForm(false);
+      fetchPublications();
+      setStatsRefresh((prev) => prev + 1);
+    } else {
+      alert("Operation failed");
     }
   };
 
   const editPublication = (publication) => {
     setEditId(publication.id);
     setCategory(publication.category);
+    setYear(publication.year);
     setCitation(publication.citation);
     setLink(publication.link || "");
+    setShowForm(true);
   };
 
   const deletePublication = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this publication?")) {
-      return;
-    }
+    if (!window.confirm("Are you sure?")) return;
 
-    try {
-      const response = await fetch(`${API_URL}/delete.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      });
+    const response = await fetch(`${API_URL}/delete.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.success) {
-        alert("Publication deleted");
-        fetchPublications();
-      } else {
-        alert("Failed to delete publication");
-      }
-    } catch (error) {
-      console.error("Error deleting publication:", error);
-      alert("Something went wrong");
+    if (data.success) {
+      alert("Publication deleted");
+      fetchPublications();
+      setStatsRefresh((prev) => prev + 1);
     }
   };
 
@@ -114,43 +106,91 @@ function AdminPublications() {
 
   return (
     <div className="admin-publications-container">
-      <h1>Publications</h1>
+      <div className="publications-header">
+        <h1>Publications</h1>
 
-      <div className="admin-publications-form">
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="journals">Transactions & Journals</option>
-          <option value="conferences">Conference Publications</option>
-          <option value="books">Books</option>
-        </select>
-
-        <textarea
-          placeholder="Enter publication citation"
-          value={citation}
-          onChange={(e) => setCitation(e.target.value)}
-        />
-
-        <input
-          type="text"
-          placeholder="Publication link (optional)"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-        />
-
-        <button onClick={savePublication}>
-          {editId ? "Update Publication" : "+ Add Publication"}
-        </button>
-
-        {editId && <button onClick={resetForm}>Cancel</button>}
+        {!showForm && (
+          <button
+            className="add-publication-btn"
+            onClick={() => setShowForm(true)}
+          >
+            + Add Publication
+          </button>
+        )}
       </div>
+
+      {showForm && (
+        <div className="admin-publications-form">
+          <h2>{editId ? "Update Publication" : "Add Publication"}</h2>
+
+          <div className="form-group">
+            <label>Category</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="journals">Transactions & Journals</option>
+              <option value="conferences">Conference Publications</option>
+              <option value="books">Books</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Publication Year</label>
+            <input
+              type="number"
+              placeholder="e.g. 2026"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Publication Citation</label>
+            <textarea
+              placeholder="Enter publication citation"
+              value={citation}
+              onChange={(e) => setCitation(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Publication Link</label>
+            <input
+              type="text"
+              placeholder="Optional Link"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+            />
+          </div>
+
+          <div className="admin-publications-buttons">
+            <button onClick={savePublication}>
+              {editId ? "Update Publication" : "Save Publication"}
+            </button>
+
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={() => {
+                resetForm();
+                setShowForm(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      <PublicationStatsCard refresh={statsRefresh} />
 
       <table className="admin-publications-table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Category</th>
+            <th>Year</th>
             <th>Citation</th>
             <th>Link</th>
             <th>Action</th>
@@ -162,6 +202,7 @@ function AdminPublications() {
             <tr key={publication.id}>
               <td>{index + 1}</td>
               <td>{getCategoryLabel(publication.category)}</td>
+              <td>{publication.year}</td>
               <td>{publication.citation}</td>
               <td>
                 {publication.link ? (
@@ -198,7 +239,7 @@ function AdminPublications() {
 
           {publications.length === 0 && (
             <tr>
-              <td colSpan="5" className="no-data">
+              <td colSpan="6" className="no-data">
                 No publications found
               </td>
             </tr>

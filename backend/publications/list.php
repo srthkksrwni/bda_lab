@@ -6,7 +6,9 @@ header("Content-Type: application/json");
 
 include "../config/db.php";
 
-$sql = "SELECT id, category, citation, link, created_at FROM publications ORDER BY created_at DESC";
+$sql = "SELECT id, category, year, citation, link, created_at 
+        FROM publications 
+        ORDER BY created_at DESC";
 
 $result = $conn->query($sql);
 
