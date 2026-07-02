@@ -1,25 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Students.css";
-import { mtechStudents } from "../data/mtechStudents";
-import OngoingPhd from "./OngoingPhd";
-import GraduatedPhd from "./GraduatePhd";
-import { postdoc } from "../data/postdoc";
 
 function Students() {
   const [activeTab, setActiveTab] = useState("ongoing");
   const [selectedBatch, setSelectedBatch] = useState("2025");
+  const [students, setStudents] = useState([]);
 
   const tabs = [
-    { id: "postdoc", label: "Post-Doctorate" }, // Added to tabs
+    { id: "postdoc", label: "Post-Doctorate" },
     { id: "ongoing", label: "PhD Scholars" },
     { id: "graduated", label: "Graduated PhD" },
     { id: "mtech", label: "M.Tech Scholars" },
   ];
 
-  const years = [...new Set(mtechStudents.map((s) => s.batch))]
-    .sort()
-    .reverse();
+  const years = [
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010"
+  ];
+
+  const fetchStudents = async () => {
+    let category = activeTab;
+    if (activeTab === "ongoing") {
+      category = "phd";
+    }
+
+    let url = `http://localhost:8000/people/list.php?type=students&category=${category}`;
+    if (category === "mtech") {
+      url += `&batch_year=${selectedBatch}`;
+    }
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data.success) {
+        const mapped = (data.data || []).map((item) => ({
+          id: item.id,
+          name: item.name,
+          email: item.email || "",
+          img: item.image_url || "",
+          scholarLink: item.scholar_url || "",
+          fileLink: item.profile_url || "",
+          project: item.research_topic || "",
+          batch: item.batch_year || "",
+        }));
+        setStudents(mapped);
+      } else {
+        console.error("Failed to load students:", data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudents();
+  }, [activeTab, selectedBatch]);
 
   return (
     <div className="students-page">
@@ -54,33 +104,32 @@ function Students() {
               transition={{ duration: 0.4 }}
             >
               {/* --- POST-DOCTORATE SECTION --- */}
-              {/* --- POST-DOCTORATE SECTION --- */}
               {activeTab === "postdoc" && (
                 <section className="postdoc-section">
                   <div className="member-grid">
-                    {postdoc.map((scholar, index) => (
-                      <div key={index} className="member-card postdoc-card">
+                    {students.map((scholar, index) => (
+                      <div key={scholar.id || index} className="member-card postdoc-card">
                         <div className="avatar-wrapper">
                           {scholar.img ? (
                             <img
-                              src={`/images/students/${scholar.img}`}
+                              src={`http://localhost:8000/${scholar.img}`}
                               alt={scholar.name}
                               className="member-img"
                               onError={(e) => {
                                 e.target.style.display = "none";
+                                e.target.nextSibling.style.display = "flex";
                               }}
                             />
-                          ) : (
-                            <div className="initials-avatar">
-                              {scholar.name.charAt(0)}
-                            </div>
-                          )}
+                          ) : null}
+                          <div className="initials-avatar" style={{ display: scholar.img ? "none" : "flex" }}>
+                            {scholar.name ? scholar.name.charAt(0) : ""}
+                          </div>
                         </div>
                         <div className="member-info">
                           <h3 className="member-name">{scholar.name}</h3>
                           <p className="member-role">Post-Doctoral Fellow</p>
 
-                          {/* Email display with split logic to make them clickable separately */}
+                          {/* Email display with split logic */}
                           <div className="member-email">
                             {scholar.email.split("\n").map((mail, i) => (
                               <a
@@ -96,8 +145,8 @@ function Students() {
                               </a>
                             ))}
                           </div>
-                        <div className="postdoc-btn-group">
-                          {scholar.scholarLink && (
+                          <div className="postdoc-btn-group">
+                            {scholar.scholarLink && (
                               <a
                                 href={scholar.scholarLink}
                                 target="_blank"
@@ -126,9 +175,117 @@ function Students() {
                 </section>
               )}
 
-              {/* --- PHD SECTIONS --- */}
-              {activeTab === "ongoing" && <OngoingPhd />}
-              {activeTab === "graduated" && <GraduatedPhd />}
+              {/* --- PhD SCHOLARS SECTION --- */}
+              {activeTab === "ongoing" && (
+                <section id="OngoingPhd" className="phd-section-wrapper">
+                  <h2 className="phd-display-heading">PhD Scholars</h2>
+
+                  <div className="phd-members-grid">
+                    {students.map((student, index) => (
+                      <div key={student.id || index} className="phd-individual-card">
+                        <div className="phd-img-container">
+                          {student.img ? (
+                            <img
+                              src={`http://localhost:8000/${student.img}`}
+                              alt={student.name}
+                              className="phd-profile-photo"
+                              onError={(e) => {
+                                e.target.style.display = "none";
+                                e.target.nextSibling.style.display = "flex";
+                              }}
+                            />
+                          ) : null}
+                          <div className="initials-avatar" style={{ display: student.img ? "none" : "flex" }}>
+                            {student.name ? student.name.charAt(0) : ""}
+                          </div>
+                        </div>
+
+                        <div className="phd-details-box">
+                          <h3 className="phd-student-name">{student.name}</h3>
+                          <p className="phd-student-role">PhD Research Scholar</p>
+
+                          <div className="phd-email-pill">
+                            <span className="phd-icon">📧</span>
+                            <a href={`mailto:${student.email}`} className="phd-email-link">
+                              {student.email}
+                            </a>
+                          </div>
+
+                          {student.project && (
+                            <div className="phd-thesis-section" style={{ marginTop: "10px", fontSize: "0.9rem" }}>
+                              <strong style={{ color: "#555" }}>Thesis Topic:</strong>
+                              <p style={{ fontStyle: "italic", margin: "5px 0", color: "#333" }}>
+                                {student.project}
+                              </p>
+                            </div>
+                          )}
+
+                          {student.scholarLink && (
+                            <div className="phd-action">
+                              <a
+                                href={student.scholarLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="phd-homepage-btn"
+                              >
+                                Google Scholar Profile →
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* --- GRADUATED PhD SECTION --- */}
+              {activeTab === "graduated" && (
+                <section id="GraduatedPhd" className="grad-section-wrapper">
+                  <h2 className="grad-display-heading">Graduated PhD Students</h2>
+
+                  <div className="grad-members-grid">
+                    {students.map((student, index) => (
+                      <div key={student.id || index} className="grad-individual-card">
+                        <div className="grad-img-container">
+                          {student.img ? (
+                            <img
+                              src={`http://localhost:8000/${student.img}`}
+                              alt={student.name}
+                              className="grad-profile-photo"
+                              onError={(e) => {
+                                e.target.style.display = "none";
+                                e.target.nextSibling.style.display = "flex";
+                              }}
+                            />
+                          ) : null}
+                          <div className="initials-avatar" style={{ display: student.img ? "none" : "flex" }}>
+                            {student.name ? student.name.charAt(0) : ""}
+                          </div>
+                        </div>
+
+                        <div className="grad-details-box">
+                          <h3 className="grad-student-name">{student.name}</h3>
+                          <p className="grad-student-role">Graduated PhD Scholar</p>
+
+                          {student.scholarLink && (
+                            <div className="grad-action">
+                              <a
+                                href={student.scholarLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="grad-scholar-btn"
+                              >
+                                Google Scholar Profile →
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               {/* --- M.TECH SECTION --- */}
               {activeTab === "mtech" && (
@@ -146,27 +303,36 @@ function Students() {
                   </div>
 
                   <div className="member-grid">
-                    {mtechStudents
-                      .filter((s) => s.batch === selectedBatch)
-                      .map((student, index) => (
-                        <div key={index} className="member-card mtech-card">
-                          <div className="avatar-wrapper">
-                            <div className="initials-avatar">
-                              {student.name.charAt(0)}
-                            </div>
-                          </div>
-                          <div className="member-info">
-                            <h3 className="member-name">{student.name}</h3>
-                            <p className="member-role">
-                              M.Tech Scholar (Batch {student.batch})
-                            </p>
-                            <div className="project-box">
-                              <strong>Project:</strong>
-                              <p className="project-text">{student.project}</p>
-                            </div>
+                    {students.map((student, index) => (
+                      <div key={student.id || index} className="member-card mtech-card">
+                        <div className="avatar-wrapper">
+                          {student.img ? (
+                            <img
+                              src={`http://localhost:8000/${student.img}`}
+                              alt={student.name}
+                              className="member-img"
+                              onError={(e) => {
+                                e.target.style.display = "none";
+                                e.target.nextSibling.style.display = "flex";
+                              }}
+                            />
+                          ) : null}
+                          <div className="initials-avatar" style={{ display: student.img ? "none" : "flex" }}>
+                            {student.name ? student.name.charAt(0) : ""}
                           </div>
                         </div>
-                      ))}
+                        <div className="member-info">
+                          <h3 className="member-name">{student.name}</h3>
+                          <p className="member-role">
+                            M.Tech Scholar (Batch {student.batch})
+                          </p>
+                          <div className="project-box">
+                            <strong>Project:</strong>
+                            <p className="project-text">{student.project}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </section>
               )}
