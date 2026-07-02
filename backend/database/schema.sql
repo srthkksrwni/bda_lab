@@ -94,11 +94,11 @@ CREATE TABLE IF NOT EXISTS events (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-/* ===========================================================
-   PUBLICATIONS TABLE
-=========================================================== */
+-- =====================================================
+-- PUBLICATIONS TABLE
+-- =====================================================
 
-CREATE TABLE publications (
+CREATE TABLE IF NOT EXISTS publications (
     id INT AUTO_INCREMENT PRIMARY KEY,
     category ENUM('journals','conferences','books') NOT NULL,
     year INT NOT NULL,
@@ -107,24 +107,24 @@ CREATE TABLE publications (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE INDEX idx_publications_category ON publications(category);
 
-/* ===========================================================
-   PUBLICATION STATISTICS TABLE
-=========================================================== */
+-- =====================================================
+-- PUBLICATION STATISTICS TABLE
+-- =====================================================
 
-CREATE TABLE publication_stats (
+CREATE TABLE IF NOT EXISTS publication_stats (
     id INT AUTO_INCREMENT PRIMARY KEY,
     label VARCHAR(50) NOT NULL UNIQUE,
     all_count INT NOT NULL DEFAULT 0,
     since_2021 INT NOT NULL DEFAULT 0
 );
 
+-- =====================================================
+-- PUBLICATION YEARLY STATISTICS TABLE
+-- =====================================================
 
-/* ===========================================================
-   PUBLICATION YEARLY STATISTICS TABLE
-=========================================================== */
-
-CREATE TABLE publication_yearly_stats (
+CREATE TABLE IF NOT EXISTS publication_yearly_stats (
     year INT PRIMARY KEY,
     total INT NOT NULL DEFAULT 0
 );
