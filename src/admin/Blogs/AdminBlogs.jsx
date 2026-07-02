@@ -3,6 +3,7 @@ import "./AdminBlogs.css";
 
 function AdminBlogs() {
   const [blogs, setBlogs] = useState([]);
+  const [blogType, setBlogType] = useState("image");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Research");
   const [description, setDescription] = useState("");
@@ -32,6 +33,7 @@ function AdminBlogs() {
   }, []);
 
   const resetForm = () => {
+    setBlogType("image");
     setTitle("");
     setCategory("Research");
     setDescription("");
@@ -43,22 +45,28 @@ function AdminBlogs() {
 
   const saveBlog = async () => {
     if (!title || !category || !description) {
-      alert("Please fill all fields");
+      alert("Please fill title, category, and description");
       return;
     }
 
-    if (!editId && !image) {
+    if (blogType === "image" && !editId && !image) {
       alert("Please upload an image");
       return;
     }
 
+    if (blogType === "url" && !link) {
+      alert("Please enter a URL");
+      return;
+    }
+
     const formData = new FormData();
+    formData.append("blogType", blogType);
     formData.append("title", title);
     formData.append("category", category);
     formData.append("description", description);
-    formData.append("link", link);
+    formData.append("link", blogType === "url" ? link : "");
 
-    if (image) {
+    if (blogType === "image" && image) {
       formData.append("image", image);
     }
 
@@ -91,12 +99,15 @@ function AdminBlogs() {
   };
 
   const editBlog = (blog) => {
+    const hasUrl = blog.link && blog.link.trim() !== "";
+
     setEditId(blog.id);
+    setBlogType(hasUrl ? "url" : "image");
     setTitle(blog.title);
     setCategory(blog.category);
     setDescription(blog.description);
     setLink(blog.link || "");
-    setOldImage(blog.image);
+    setOldImage(blog.image || "");
     setImage(null);
   };
 
@@ -133,6 +144,11 @@ function AdminBlogs() {
       <h1>Blogs</h1>
 
       <div className="admin-blogs-form">
+        <select value={blogType} onChange={(e) => setBlogType(e.target.value)}>
+          <option value="image">Image Blog</option>
+          <option value="url">URL Blog</option>
+        </select>
+
         <input
           type="text"
           placeholder="Enter blog title"
@@ -154,18 +170,22 @@ function AdminBlogs() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <input
-          type="url"
-          placeholder="Enter blog URL (optional)"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-        />
+        {blogType === "url" && (
+          <input
+            type="url"
+            placeholder="Enter blog URL"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+          />
+        )}
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
+        {blogType === "image" && (
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+        )}
 
         <button onClick={saveBlog}>
           {editId ? "Update Blog" : "+ Add Blog"}
@@ -178,6 +198,7 @@ function AdminBlogs() {
         <thead>
           <tr>
             <th>ID</th>
+            <th>Type</th>
             <th>Image</th>
             <th>Title</th>
             <th>Category</th>
@@ -191,14 +212,17 @@ function AdminBlogs() {
           {blogs.map((blog, index) => (
             <tr key={blog.id}>
               <td>{index + 1}</td>
+              <td>{blog.link ? "URL" : "Image"}</td>
 
               <td>
-                {blog.image && (
+                {blog.image ? (
                   <img
                     src={`${IMAGE_URL}${blog.image}`}
                     alt={blog.title}
                     className="blog-admin-img"
                   />
+                ) : (
+                  "No Image"
                 )}
               </td>
 
@@ -235,7 +259,7 @@ function AdminBlogs() {
 
           {blogs.length === 0 && (
             <tr>
-              <td colSpan="7" className="no-data">
+              <td colSpan="8" className="no-data">
                 No blogs found
               </td>
             </tr>
