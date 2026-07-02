@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { DASHBOARD_API } from "../api/dashboardApi";
 
 function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -11,7 +12,7 @@ function AdminDashboard() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:8000/dashboard/stats.php")
+    fetch(DASHBOARD_API.stats)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

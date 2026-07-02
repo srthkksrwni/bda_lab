@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Students.css";
+import { PEOPLE_API } from "../admin/People/peopleApi";
+import { API_BASE } from "../api/apiConfig";
 
 function Students() {
   const [activeTab, setActiveTab] = useState("ongoing");
@@ -39,7 +41,7 @@ function Students() {
       category = "phd";
     }
 
-    let url = `http://localhost:8000/people/list.php?type=students&category=${category}`;
+    let url = `${PEOPLE_API.list}?type=students&category=${category}`;
     if (category === "mtech") {
       url += `&batch_year=${selectedBatch}`;
     }
@@ -112,7 +114,7 @@ function Students() {
                         <div className="avatar-wrapper">
                           {scholar.img ? (
                             <img
-                              src={`http://localhost:8000/${scholar.img}`}
+                              src={`${API_BASE}/${scholar.img}`}
                               alt={scholar.name}
                               className="member-img"
                               onError={(e) => {
@@ -186,7 +188,7 @@ function Students() {
                         <div className="phd-img-container">
                           {student.img ? (
                             <img
-                              src={`http://localhost:8000/${student.img}`}
+                              src={`${API_BASE}/${student.img}`}
                               alt={student.name}
                               className="phd-profile-photo"
                               onError={(e) => {
@@ -250,7 +252,7 @@ function Students() {
                         <div className="grad-img-container">
                           {student.img ? (
                             <img
-                              src={`http://localhost:8000/${student.img}`}
+                              src={`${API_BASE}/${student.img}`}
                               alt={student.name}
                               className="grad-profile-photo"
                               onError={(e) => {
@@ -308,7 +310,7 @@ function Students() {
                         <div className="avatar-wrapper">
                           {student.img ? (
                             <img
-                              src={`http://localhost:8000/${student.img}`}
+                              src={`${API_BASE}/${student.img}`}
                               alt={student.name}
                               className="member-img"
                               onError={(e) => {
