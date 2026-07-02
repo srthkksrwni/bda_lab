@@ -98,8 +98,6 @@ function PublicationStatsCard({ refresh }) {
           <tr>
             <th>Metric</th>
             <th>All</th>
-            <th>Since 2021</th>
-            <th>Action</th>
           </tr>
         </thead>
 
@@ -115,18 +113,6 @@ function PublicationStatsCard({ refresh }) {
                   onChange={(e) => {
                     const updated = [...stats];
                     updated[index].all_count = e.target.value;
-                    setStats(updated);
-                  }}
-                />
-              </td>
-
-              <td>
-                <input
-                  type="number"
-                  value={item.since_2021}
-                  onChange={(e) => {
-                    const updated = [...stats];
-                    updated[index].since_2021 = e.target.value;
                     setStats(updated);
                   }}
                 />

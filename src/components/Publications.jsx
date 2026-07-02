@@ -77,9 +77,8 @@ export default function Publications() {
             </button>
 
             <button
-              className={`tab-btn ${
-                activeTab === "conferences" ? "active" : ""
-              }`}
+              className={`tab-btn ${activeTab === "conferences" ? "active" : ""
+                }`}
               onClick={() => setActiveTab("conferences")}
             >
               Conference Publications
@@ -145,7 +144,6 @@ export default function Publications() {
                 <tr>
                   <th></th>
                   <th>All</th>
-                  <th>Since 2021</th>
                 </tr>
               </thead>
 
@@ -153,17 +151,16 @@ export default function Publications() {
                 <tr>
                   <td>Citations</td>
                   <td>7016</td>
-                  <td>4761</td>
                 </tr>
+
                 <tr>
                   <td>h-index</td>
                   <td>39</td>
-                  <td>31</td>
                 </tr>
+
                 <tr>
                   <td>i10-index</td>
                   <td>111</td>
-                  <td>76</td>
                 </tr>
               </tbody>
             </table>
