@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:8000/people";
+import { API_BASE } from "../../api/apiConfig";
+
+const BASE_URL = `${API_BASE}/people`;
 
 export const PEOPLE_API = {
   list: `${BASE_URL}/list.php`,

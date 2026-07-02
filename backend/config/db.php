@@ -8,10 +8,10 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 $conn = new mysqli(
-    $config["DB_HOST"],
-    $config["DB_USER"],
-    $config["DB_PASS"],
-    $config["DB_NAME"]
+    $config["db_host"],
+    $config["db_user"],
+    $config["db_pass"],
+    $config["db_name"]
 );
 
 if ($conn->connect_error) {

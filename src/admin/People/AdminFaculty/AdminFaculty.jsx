@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./AdminFaculty.css";
 import { PEOPLE_API } from "../peopleApi";
+import { API_BASE } from "../../../api/apiConfig";
 
 function AdminFaculty() {
   const [faculty, setFaculty] = useState([]);
@@ -238,7 +239,7 @@ function AdminFaculty() {
           {(previewUrl || form.image_url) && (
             <div style={{ padding: "5px 0" }}>
               <img
-                src={previewUrl || (form.image_url.startsWith("http") ? form.image_url : `http://localhost:8000/${form.image_url}`)}
+                src={previewUrl || (form.image_url.startsWith("http") ? form.image_url : `${API_BASE}/${form.image_url}`)}
                 alt="Preview"
                 style={{
                   maxWidth: "100px",
@@ -351,7 +352,7 @@ function AdminFaculty() {
               <td>
                 {item.image_url ? (
                   <img
-                    src={item.image_url.startsWith("http") ? item.image_url : `http://localhost:8000/${item.image_url}`}
+                    src={item.image_url.startsWith("http") ? item.image_url : `${API_BASE}/${item.image_url}`}
                     alt={item.name}
                     style={{
                       width: "50px",

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./AdminPublications.css";
 import PublicationStatsCard from "./PublicationStatsCard";
+import { PUBLICATIONS_API } from "../../api/publicationsApi";
 
 function AdminPublications() {
   const [publications, setPublications] = useState([]);
@@ -12,10 +13,10 @@ function AdminPublications() {
   const [statsRefresh, setStatsRefresh] = useState(0);
   const [showForm, setShowForm] = useState(false);
 
-  const API_URL = "http://localhost/bda_lab/backend/publications";
+  // API_URL managed via PUBLICATIONS_API
 
   const fetchPublications = async () => {
-    const response = await fetch(`${API_URL}/list.php`);
+    const response = await fetch(PUBLICATIONS_API.list);
     const data = await response.json();
 
     if (data.success) {
@@ -41,7 +42,7 @@ function AdminPublications() {
       return;
     }
 
-    const url = editId ? `${API_URL}/update.php` : `${API_URL}/add.php`;
+    const url = editId ? PUBLICATIONS_API.update : PUBLICATIONS_API.add;
 
     const body = editId
       ? { id: editId, category, year, citation, link }
@@ -80,7 +81,7 @@ function AdminPublications() {
   const deletePublication = async (id) => {
     if (!window.confirm("Are you sure?")) return;
 
-    const response = await fetch(`${API_URL}/delete.php`, {
+    const response = await fetch(PUBLICATIONS_API.delete, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

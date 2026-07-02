@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./AdminStudents.css";
 import { PEOPLE_API } from "../peopleApi";
+import { API_BASE } from "../../../api/apiConfig";
 
 function AdminStudents() {
   const categories = [
@@ -302,7 +303,7 @@ return (
         {(previewUrl || form.imageLink) && (
           <div style={{ padding: "5px 0" }}>
             <img
-              src={previewUrl || (form.imageLink.startsWith("http") ? form.imageLink : `http://localhost:8000/${form.imageLink}`)}
+              src={previewUrl || (form.imageLink.startsWith("http") ? form.imageLink : `${API_BASE}/${form.imageLink}`)}
               alt="Preview"
               style={{
                 maxWidth: "100px",
@@ -377,7 +378,7 @@ return (
       <span className="preview-cell">
         {item.imageLink ? (
           <img
-            src={item.imageLink.startsWith("http") ? item.imageLink : `http://localhost:8000/${item.imageLink}`}
+            src={item.imageLink.startsWith("http") ? item.imageLink : `${API_BASE}/${item.imageLink}`}
             alt={item.name}
             className="student-preview"
             onError={(e) => {

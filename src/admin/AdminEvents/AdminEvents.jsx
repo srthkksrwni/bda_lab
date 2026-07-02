@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./AdminEvents.css";
+import { EVENTS_API } from "../../api/eventsApi";
 
 function AdminEvents() {
-  const API_URL = "http://localhost:8000/events";
 
   const categories = [
     { id: "conferences", label: "International Conferences" },
@@ -37,7 +37,7 @@ function AdminEvents() {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch(`${API_URL}/list.php`);
+      const response = await fetch(EVENTS_API.list);
       const data = await response.json();
 
       if (data.success) {
@@ -76,7 +76,7 @@ function AdminEvents() {
       link: form.link,
     };
 
-    const url = editId ? `${API_URL}/update.php` : `${API_URL}/add.php`;
+    const url = editId ? EVENTS_API.update : EVENTS_API.add;
 
     try {
       const response = await fetch(url, {
@@ -124,7 +124,7 @@ function AdminEvents() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`${API_URL}/delete.php?id=${id}`);
+      const response = await fetch(`${EVENTS_API.delete}?id=${id}`);
       const data = await response.json();
 
       if (data.success) {
