@@ -6,12 +6,16 @@ header("Content-Type: application/json");
 
 include "../config/db.php";
 
+if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+    exit();
+}
+
 $id = $_POST["id"] ?? "";
 
 if (empty($id)) {
     echo json_encode([
         "success" => false,
-        "message" => "Missing blog ID."
+        "message" => "Missing image ID."
     ]);
     exit();
 }

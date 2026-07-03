@@ -6,9 +6,7 @@ header("Content-Type: application/json");
 
 include "../config/db.php";
 
-$sql = "SELECT id, image, created_at
-        FROM blogs
-        ORDER BY created_at DESC";
+$sql = "SELECT id, image, created_at FROM blogs ORDER BY created_at DESC";
 
 $result = $conn->query($sql);
 
@@ -26,7 +24,7 @@ if ($result) {
 } else {
     echo json_encode([
         "success" => false,
-        "message" => "Failed to fetch blogs"
+        "message" => $conn->error
     ]);
 }
 

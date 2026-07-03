@@ -1,5 +1,4 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -11,71 +10,41 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit();
 }
 
-if (!isset($_FILES["image"])) {
+if (!isset($_FILES["image"]) || $_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
     echo json_encode([
         "success" => false,
-        "message" => "No image received."
-    ]);
-    exit();
-}
-
-if ($_FILES["image"]["error"] != 0) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Image upload failed."
+        "message" => "Please upload an image."
     ]);
     exit();
 }
 
 $uploadDir = "../uploads/blogs/";
 
-if (!file_exists($uploadDir)) {
+if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
 
 $imageName = time() . "_" . basename($_FILES["image"]["name"]);
 $targetFile = $uploadDir . $imageName;
-$imagePath = "uploads/blogs/" . $imageName";
+$imagePath = "uploads/blogs/" . $imageName;
 
 if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
     echo json_encode([
         "success" => false,
-        "message" => "Failed to save image."
+        "message" => "Failed to upload image."
     ]);
     exit();
 }
 
-/* Default values */
-
-$title = "Image";
-$category = "Gallery";
-$description = "Gallery Image";
-
-$sql = "INSERT INTO blogs(title, category, description, image)
-        VALUES(?, ?, ?, ?)";
+$sql = "INSERT INTO blogs (image) VALUES (?)";
 
 $stmt = $conn->prepare($sql);
-
-if (!$stmt) {
-    echo json_encode([
-        "success" => false,
-        "message" => $conn->error
-    ]);
-    exit();
-}
-
-$stmt->bind_param(
-    "ssss",
-    $title,
-    $category,
-    $description,
-    $imagePath
-);
+$stmt->bind_param("s", $imagePath);
 
 if ($stmt->execute()) {
     echo json_encode([
         "success" => true,
-        "message" => "Image uploaded successfully."
+        "message" => "Image added successfully"
     ]);
 } else {
     echo json_encode([
@@ -86,5 +55,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
-
 ?>

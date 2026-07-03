@@ -61,7 +61,7 @@ function AdminBlogs() {
         alert(data.message || "Operation failed");
       }
     } catch (error) {
-      console.error("Error saving blog:", error);
+      console.error("Error saving image:", error);
       alert("Something went wrong");
     }
   };
@@ -72,9 +72,7 @@ function AdminBlogs() {
   };
 
   const deleteBlog = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this image?")) {
-      return;
-    }
+    if (!window.confirm("Are you sure you want to delete this image?")) return;
 
     try {
       const response = await fetch(BLOGS_API.delete, {
@@ -132,15 +130,11 @@ function AdminBlogs() {
               <td>{index + 1}</td>
 
               <td>
-                {blog.image ? (
-                  <img
-                    src={`${API_BASE}/${blog.image}`}
-                    alt="Blog"
-                    className="blog-admin-img"
-                  />
-                ) : (
-                  "No Image"
-                )}
+                <img
+                  src={`${API_BASE}/${blog.image}`}
+                  alt="Blog"
+                  className="blog-admin-img"
+                />
               </td>
 
               <td>
@@ -163,7 +157,7 @@ function AdminBlogs() {
           {blogs.length === 0 && (
             <tr>
               <td colSpan="3" className="no-data">
-                No blogs found
+                No images found
               </td>
             </tr>
           )}
