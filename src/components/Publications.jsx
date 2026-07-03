@@ -1,8 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { journals } from "../data/journals";
-import { conferences } from "../data/conferences";
-import { books } from "../data/books";
 import {
   BarChart,
   Bar,
@@ -14,23 +11,49 @@ import {
 } from "recharts";
 import "../styles/Publications.css";
 
+const API = import.meta.env.VITE_API_BASE;
+
 export default function Publications() {
   const [activeTab, setActiveTab] = useState("journals");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fullCitationData = [
-    { year: "2015", count: 80 },
-    { year: "2016", count: 120 },
-    { year: "2017", count: 190 },
-    { year: "2018", count: 210 },
-    { year: "2019", count: 280 },
-    { year: "2020", count: 450 },
-    { year: "2021", count: 825 },
-    { year: "2022", count: 1050 },
-    { year: "2023", count: 950 },
-    { year: "2024", count: 980 },
-    { year: "2025", count: 825 },
-  ];
+  const [publications, setPublications] = useState([]);
+  const [stats, setStats] = useState([]);
+  const [fullCitationData, setFullCitationData] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API}/publications/list.php`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setPublications(data.publications);
+        }
+      })
+      .catch((err) => console.log("Error fetching publications:", err));
+
+    fetch(`${API}/publications/get_publication_stats.php`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setStats(data.data);
+        }
+      })
+      .catch((err) => console.log("Error fetching stats:", err));
+
+    fetch(`${API}/publications/get_publication_yearly_stats.php`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          const chartData = data.data.map((item) => ({
+            year: String(item.year),
+            count: Number(item.total),
+          }));
+
+          setFullCitationData(chartData);
+        }
+      })
+      .catch((err) => console.log("Error fetching yearly stats:", err));
+  }, []);
 
   const sidebarData = fullCitationData.slice(-8);
 
@@ -46,13 +69,7 @@ export default function Publications() {
     return <span dangerouslySetInnerHTML={{ __html: text }} />;
   };
 
-  const allPublications = [
-    ...journals.map((item) => ({ ...item, category: "journals" })),
-    ...conferences.map((item) => ({ ...item, category: "conferences" })),
-    ...books.map((item) => ({ ...item, category: "books" })),
-  ];
-
-  const filteredPublications = allPublications.filter(
+  const filteredPublications = publications.filter(
     (item) => item.category === activeTab
   );
 
@@ -77,8 +94,9 @@ export default function Publications() {
             </button>
 
             <button
-              className={`tab-btn ${activeTab === "conferences" ? "active" : ""
-                }`}
+              className={`tab-btn ${
+                activeTab === "conferences" ? "active" : ""
+              }`}
               onClick={() => setActiveTab("conferences")}
             >
               Conference Publications
@@ -113,6 +131,8 @@ export default function Publications() {
                           : pub.title}
                       </p>
 
+                      {pub.year && <p className="pub-year">{pub.year}</p>}
+
                       {pub.link && (
                         <a
                           href={pub.link}
@@ -144,24 +164,18 @@ export default function Publications() {
                 <tr>
                   <th></th>
                   <th>All</th>
+                  <th>Since 2021</th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Citations</td>
-                  <td>7016</td>
-                </tr>
-
-                <tr>
-                  <td>h-index</td>
-                  <td>39</td>
-                </tr>
-
-                <tr>
-                  <td>i10-index</td>
-                  <td>111</td>
-                </tr>
+                {stats.map((item) => (
+                  <tr key={item.label}>
+                    <td>{item.label}</td>
+                    <td>{item.all_count}</td>
+                    <td>{item.since_2021}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
 
