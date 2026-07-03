@@ -7,61 +7,55 @@ header("Content-Type: application/json");
 include "../config/db.php";
 
 $id = $_POST["id"] ?? "";
-$title = $_POST["title"] ?? "";
-$category = $_POST["category"] ?? "";
-$description = $_POST["description"] ?? "";
-$oldImage = $_POST["oldImage"] ?? "";
 
-if (empty($id) || empty($title) || empty($category) || empty($description)) {
+if (empty($id)) {
     echo json_encode([
         "success" => false,
-        "message" => "Missing required fields."
+        "message" => "Missing blog ID."
     ]);
     exit();
 }
 
-$imagePath = $oldImage;
-
-if (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
-    $uploadDir = "../uploads/blogs/";
-
-    if (!file_exists($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
-
-    $imageName = time() . "_" . basename($_FILES["image"]["name"]);
-    $targetPath = $uploadDir . $imageName;
-
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
-        $imagePath = "uploads/blogs/" . $imageName;
-    }
+if (!isset($_FILES["image"]) || $_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Please upload an image."
+    ]);
+    exit();
 }
 
-$sql = "UPDATE blogs 
-        SET title = ?, category = ?, description = ?, image = ?
-        WHERE id = ?";
+$uploadDir = "../uploads/blogs/";
+
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
+$imageName = time() . "_" . basename($_FILES["image"]["name"]);
+$targetFile = $uploadDir . $imageName;
+$imagePath = "uploads/blogs/" . $imageName;
+
+if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Failed to upload image."
+    ]);
+    exit();
+}
+
+$sql = "UPDATE blogs SET image = ? WHERE id = ?";
 
 $stmt = $conn->prepare($sql);
-
-if (!$stmt) {
-    echo json_encode([
-        "success" => false,
-        "message" => $conn->error
-    ]);
-    exit();
-}
-
-$stmt->bind_param("ssssi", $title, $category, $description, $imagePath, $id);
+$stmt->bind_param("si", $imagePath, $id);
 
 if ($stmt->execute()) {
     echo json_encode([
         "success" => true,
-        "message" => "Blog updated successfully"
+        "message" => "Image updated successfully"
     ]);
 } else {
     echo json_encode([
         "success" => false,
-        "message" => "Failed to update blog"
+        "message" => $stmt->error
     ]);
 }
 

@@ -6,7 +6,7 @@ header("Content-Type: application/json");
 
 include "../config/db.php";
 
-$sql = "SELECT id, title, category, description, image, created_at
+$sql = "SELECT id, image, created_at
         FROM blogs
         ORDER BY created_at DESC";
 
