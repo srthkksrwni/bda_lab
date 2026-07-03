@@ -150,7 +150,7 @@ export default function Publications() {
                 ))}
 
                 {filteredPublications.length === 0 && (
-                  <p className="no-data">No records found for this category.</p>
+                  <p className="no-data">No records found in this category.</p>
                 )}
               </motion.div>
             </AnimatePresence>
@@ -159,25 +159,6 @@ export default function Publications() {
 
         <div className="pub-right">
           <div className="scholar-card">
-            <table className="scholar-table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>All</th>
-                  <th>Since 2021</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {stats.map((item) => (
-                  <tr key={item.label}>
-                    <td>{item.label}</td>
-                    <td>{item.all_count}</td>
-                    <td>{item.since_2021}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
 
             <div
               className="graph-container"
