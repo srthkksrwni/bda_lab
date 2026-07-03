@@ -6,70 +6,64 @@ header("Content-Type: application/json");
 
 include "../config/db.php";
 
+// Handle preflight request
 if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit();
 }
 
-$blogType = $_POST["blogType"] ?? "image";
+// Get form values safely
 $title = $_POST["title"] ?? "";
 $category = $_POST["category"] ?? "";
 $description = $_POST["description"] ?? "";
-$link = $_POST["link"] ?? "";
 
-if (empty($title) || empty($category) || empty($description)) {
+// Validate
+if ($title === "" || $category === "" || $description === "") {
     echo json_encode([
         "success" => false,
-        "message" => "Please fill title, category, and description."
+        "message" => "Please fill title, category and description."
     ]);
     exit();
 }
 
-$imagePath = "";
-
-if ($blogType === "image") {
-    if (!isset($_FILES["image"]) || $_FILES["image"]["error"] !== 0) {
-        echo json_encode([
-            "success" => false,
-            "message" => "Please upload an image."
-        ]);
-        exit();
-    }
-
-    $uploadDir = "../uploads/blogs/";
-
-    if (!file_exists($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
-
-    $imageName = time() . "_" . basename($_FILES["image"]["name"]);
-    $targetFile = $uploadDir . $imageName;
-    $imagePath = "uploads/blogs/" . $imageName;
-
-    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-        echo json_encode([
-            "success" => false,
-            "message" => "Failed to upload image."
-        ]);
-        exit();
-    }
-
-    $link = "";
+// Check image
+if (
+    !isset($_FILES["image"]) ||
+    $_FILES["image"]["error"] !== UPLOAD_ERR_OK
+) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Please upload an image."
+    ]);
+    exit();
 }
 
-if ($blogType === "url") {
-    if (empty($link)) {
-        echo json_encode([
-            "success" => false,
-            "message" => "Please enter a URL."
-        ]);
-        exit();
-    }
+// Upload folder
+$uploadDir = "../uploads/blogs/";
 
-    $imagePath = "";
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
 }
 
-$sql = "INSERT INTO blogs (title, category, description, image, link)
-        VALUES (?, ?, ?, ?, ?)";
+// Generate unique filename
+$imageName = time() . "_" . basename($_FILES["image"]["name"]);
+
+$targetFile = $uploadDir . $imageName;
+
+$imagePath = "uploads/blogs/" . $imageName;
+
+// Upload image
+if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Failed to upload image."
+    ]);
+    exit();
+}
+
+// Insert into database
+$sql = "INSERT INTO blogs
+(title, category, description, image)
+VALUES (?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 
@@ -81,7 +75,13 @@ if (!$stmt) {
     exit();
 }
 
-$stmt->bind_param("sssss", $title, $category, $description, $imagePath, $link);
+$stmt->bind_param(
+    "ssss",
+    $title,
+    $category,
+    $description,
+    $imagePath
+);
 
 if ($stmt->execute()) {
     echo json_encode([

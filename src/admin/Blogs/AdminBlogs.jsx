@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
 import "./AdminBlogs.css";
+import { BLOGS_API } from "../../api/blogsApi";
+import { API_BASE } from "../../api/apiConfig";
 
 function AdminBlogs() {
   const [blogs, setBlogs] = useState([]);
-  const [blogType, setBlogType] = useState("image");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Research");
   const [description, setDescription] = useState("");
-  const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
   const [oldImage, setOldImage] = useState("");
   const [editId, setEditId] = useState(null);
 
-  const API_URL = "http://localhost/bda_lab/backend/blogs";
-  const IMAGE_URL = "http://localhost/bda_lab/backend/";
-
   const fetchBlogs = async () => {
     try {
-      const response = await fetch(`${API_URL}/list.php`);
-      const data = await response.json();
+      const response = await fetch(BLOGS_API.list);
+      const text = await response.text();
+
+      if (!text) {
+        console.error("Empty response from list.php");
+        return;
+      }
+
+      const data = JSON.parse(text);
 
       if (data.success) {
         setBlogs(data.blogs);
@@ -33,11 +37,9 @@ function AdminBlogs() {
   }, []);
 
   const resetForm = () => {
-    setBlogType("image");
     setTitle("");
     setCategory("Research");
     setDescription("");
-    setLink("");
     setImage(null);
     setOldImage("");
     setEditId(null);
@@ -49,24 +51,17 @@ function AdminBlogs() {
       return;
     }
 
-    if (blogType === "image" && !editId && !image) {
+    if (!editId && !image) {
       alert("Please upload an image");
       return;
     }
 
-    if (blogType === "url" && !link) {
-      alert("Please enter a URL");
-      return;
-    }
-
     const formData = new FormData();
-    formData.append("blogType", blogType);
     formData.append("title", title);
     formData.append("category", category);
     formData.append("description", description);
-    formData.append("link", blogType === "url" ? link : "");
 
-    if (blogType === "image" && image) {
+    if (image) {
       formData.append("image", image);
     }
 
@@ -75,15 +70,23 @@ function AdminBlogs() {
       formData.append("oldImage", oldImage);
     }
 
-    const url = editId ? `${API_URL}/update.php` : `${API_URL}/add.php`;
+    const apiUrl = editId ? BLOGS_API.update : BLOGS_API.add;
 
     try {
-      const response = await fetch(url, {
+      const response = await fetch(apiUrl, {
         method: "POST",
         body: formData,
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      console.log("PHP RESPONSE:", text);
+
+      if (!text) {
+        alert("PHP returned empty response. Check add.php/update.php.");
+        return;
+      }
+
+      const data = JSON.parse(text);
 
       if (data.success) {
         alert(editId ? "Blog updated successfully" : "Blog added successfully");
@@ -94,19 +97,15 @@ function AdminBlogs() {
       }
     } catch (error) {
       console.error("Error saving blog:", error);
-      alert("Something went wrong");
+      alert(error.message);
     }
   };
 
   const editBlog = (blog) => {
-    const hasUrl = blog.link && blog.link.trim() !== "";
-
     setEditId(blog.id);
-    setBlogType(hasUrl ? "url" : "image");
     setTitle(blog.title);
     setCategory(blog.category);
     setDescription(blog.description);
-    setLink(blog.link || "");
     setOldImage(blog.image || "");
     setImage(null);
   };
@@ -117,7 +116,7 @@ function AdminBlogs() {
     }
 
     try {
-      const response = await fetch(`${API_URL}/delete.php`, {
+      const response = await fetch(BLOGS_API.delete, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,17 +124,24 @@ function AdminBlogs() {
         body: JSON.stringify({ id }),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+
+      if (!text) {
+        alert("PHP returned empty response. Check delete.php.");
+        return;
+      }
+
+      const data = JSON.parse(text);
 
       if (data.success) {
         alert("Blog deleted successfully");
         fetchBlogs();
       } else {
-        alert("Failed to delete blog");
+        alert(data.message || "Failed to delete blog");
       }
     } catch (error) {
       console.error("Error deleting blog:", error);
-      alert("Something went wrong");
+      alert(error.message);
     }
   };
 
@@ -144,11 +150,6 @@ function AdminBlogs() {
       <h1>Blogs</h1>
 
       <div className="admin-blogs-form">
-        <select value={blogType} onChange={(e) => setBlogType(e.target.value)}>
-          <option value="image">Image Blog</option>
-          <option value="url">URL Blog</option>
-        </select>
-
         <input
           type="text"
           placeholder="Enter blog title"
@@ -170,22 +171,11 @@ function AdminBlogs() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        {blogType === "url" && (
-          <input
-            type="url"
-            placeholder="Enter blog URL"
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-          />
-        )}
-
-        {blogType === "image" && (
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        )}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
 
         <button onClick={saveBlog}>
           {editId ? "Update Blog" : "+ Add Blog"}
@@ -198,12 +188,10 @@ function AdminBlogs() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Type</th>
             <th>Image</th>
             <th>Title</th>
             <th>Category</th>
             <th>Description</th>
-            <th>URL</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -212,12 +200,11 @@ function AdminBlogs() {
           {blogs.map((blog, index) => (
             <tr key={blog.id}>
               <td>{index + 1}</td>
-              <td>{blog.link ? "URL" : "Image"}</td>
 
               <td>
                 {blog.image ? (
                   <img
-                    src={`${IMAGE_URL}${blog.image}`}
+                    src={`${API_BASE}/${blog.image}`}
                     alt={blog.title}
                     className="blog-admin-img"
                   />
@@ -229,16 +216,6 @@ function AdminBlogs() {
               <td>{blog.title}</td>
               <td>{blog.category}</td>
               <td>{blog.description}</td>
-
-              <td>
-                {blog.link ? (
-                  <a href={blog.link} target="_blank" rel="noreferrer">
-                    Open
-                  </a>
-                ) : (
-                  "No URL"
-                )}
-              </td>
 
               <td>
                 <div className="action-buttons">
@@ -259,7 +236,7 @@ function AdminBlogs() {
 
           {blogs.length === 0 && (
             <tr>
-              <td colSpan="8" className="no-data">
+              <td colSpan="6" className="no-data">
                 No blogs found
               </td>
             </tr>
