@@ -120,11 +120,13 @@ CREATE TABLE IF NOT EXISTS publication_yearly_stats (
    BLOGS TABLE
 =========================================================== */
 
-CREATE TABLE IF NOT EXISTS blogs (
+DROP TABLE IF EXISTS blogs;
+
+CREATE TABLE blogs (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    image VARCHAR(255),
-    link VARCHAR(255),
+    title VARCHAR(255) DEFAULT NULL,
+    category VARCHAR(100) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
+    image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

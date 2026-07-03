@@ -200,3 +200,11 @@ INSERT INTO publication_yearly_stats (year,total) VALUES
 (2024,980),
 (2025,830),
 (2026,0);
+
+-- =====================================================
+-- SEED DATA FOR BLOGS TABLE
+-- =====================================================
+
+INSERT INTO blogs (image) VALUES
+('uploads/blogs/campus.jpg'),
+('uploads/blogs/maingate.jpg');
