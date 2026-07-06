@@ -1,14 +1,13 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Admin.css";
-
-const API = "http://localhost/bda_lab/backend";
+import { ADMIN_API } from "../api/adminapi";
 
 function AdminLayout() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await fetch(`${API}/auth/logout.php`, {
+      await fetch(ADMIN_API.logout, {
         method: "POST",
         credentials: "include",
       });
