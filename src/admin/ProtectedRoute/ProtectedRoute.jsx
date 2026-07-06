@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-
-const API = "http://localhost/bda_lab/backend";
+import { ADMIN_API } from "../../api/adminapi";
 
 export default function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    fetch(`${API}/auth/check_auth.php`, {
+    fetch(ADMIN_API.checkSession, {
       method: "GET",
       credentials: "include",
     })

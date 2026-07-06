@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Admin.css";
 
-const API = "http://localhost/bda_lab/backend";
+import { API_BASE } from "../../api/apiConfig";
+
+const API = API_BASE;
 
 export default function ResetPassword() {
   const navigate = useNavigate();
