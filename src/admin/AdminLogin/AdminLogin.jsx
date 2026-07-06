@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Admin.css";
 
-const API = "http://localhost/bda_lab/backend";
+import { ADMIN_API } from "../../api/adminapi";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -14,6 +14,27 @@ export default function AdminLogin() {
 
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const res = await fetch(ADMIN_API.checkSession, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          navigate("/admin/dashboard");
+        }
+      } catch (error) {
+        console.log("Session check failed:", error);
+      }
+    };
+
+    checkLogin();
+  }, [navigate]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,9 +44,10 @@ export default function AdminLogin() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setMessage("");
 
     try {
-      const res = await fetch(`${API}/auth/login.php`, {
+      const res = await fetch(ADMIN_API.login, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,9 +59,10 @@ export default function AdminLogin() {
       const data = await res.json();
 
       if (data.success) {
+        localStorage.setItem("adminLoggedIn", "true");
         navigate("/admin/dashboard");
       } else {
-        setMessage(data.message);
+        setMessage(data.message || "Invalid login details");
       }
     } catch (error) {
       setMessage("Login failed. Check API connection.");
