@@ -1,6 +1,9 @@
 USE bda_lab;
 
--- Funding & Collaboration seed data
+-- =====================================================
+-- FUNDING & COLLABORATION SEED DATA
+-- =====================================================
+
 INSERT INTO funding_collaboration (partner_name, logo) VALUES
 ('DST India', 'fund1.jpg'),
 ('i Hub Divyasampark', 'fund2.png'),
@@ -18,9 +21,11 @@ INSERT INTO funding_collaboration (partner_name, logo) VALUES
 ('IEEE CIS', 'fund14.jpg'),
 ('University of Peradeniya', 'fund15.png');
 
--- Events seed data
-INSERT INTO events (category_id, category_label, citation, link) VALUES
+-- =====================================================
+-- EVENTS SEED DATA
+-- =====================================================
 
+INSERT INTO events (category_id, category_label, citation, link) VALUES
 ('conferences', 'International Conferences',
 'Sonali Agarwal (General Chair), "16th Innovations in Software Engineering Conference (ISEC 2023)." Organized under ACM India, 2023.',
 NULL),
@@ -141,9 +146,9 @@ NULL),
 'Best Paper Award for our paper published in the 5th International Conference on Data Management, Analytics and Innovation (ICDMAI), 2021.',
 NULL);
 
--- ==========================
--- Research Updates seed data
--- ==========================
+-- =====================================================
+-- RESEARCH UPDATES SEED DATA
+-- =====================================================
 
 INSERT INTO research_updates (title, year) VALUES
 ('AI-Based Mental Health Detection using Multimodal Learning', '2025'),
@@ -151,6 +156,10 @@ INSERT INTO research_updates (title, year) VALUES
 ('Machine Learning for Early Disease Prediction', '2024'),
 ('Natural Language Processing for Mental Health Assessment', '2023'),
 ('Computer Vision for Medical Image Analysis', '2023');
+
+-- =====================================================
+-- FACULTY SEED DATA
+-- =====================================================
 
 INSERT INTO faculty (
     name,
@@ -179,30 +188,35 @@ VALUES (
 );
 
 -- =====================================================
--- PUBLICATION STATISTICS
+-- PUBLICATION CITATION STATISTICS
 -- =====================================================
 
-INSERT INTO publication_stats (label, all_count, since_2021) VALUES
-('Citations',7016,4761),
-('h-index',39,31),
-('i10-index',111,76);
+INSERT INTO publication_citation_stats
+(id, citations, h_index, i10_index)
+VALUES
+(1, 7016, 39, 111)
+ON DUPLICATE KEY UPDATE
+citations = VALUES(citations),
+h_index = VALUES(h_index),
+i10_index = VALUES(i10_index);
 
 -- =====================================================
 -- PUBLICATION YEARLY GRAPH
 -- =====================================================
 
-INSERT INTO publication_yearly_stats (year,total) VALUES
-(2019,280),
-(2020,450),
-(2021,820),
-(2022,1050),
-(2023,950),
-(2024,980),
-(2025,830),
-(2026,0);
+INSERT INTO publication_yearly_stats (year, total) VALUES
+(2020, 450),
+(2021, 820),
+(2022, 1050),
+(2023, 950),
+(2024, 980),
+(2025, 830),
+(2026, 1200)
+ON DUPLICATE KEY UPDATE
+total = VALUES(total);
 
 -- =====================================================
--- SEED DATA FOR BLOGS TABLE
+-- BLOGS SEED DATA
 -- =====================================================
 
 INSERT INTO blogs (image) VALUES
