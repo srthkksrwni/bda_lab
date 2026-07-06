@@ -18,27 +18,15 @@ export default function Publications() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [publications, setPublications] = useState([]);
-  const [stats, setStats] = useState([]);
   const [fullCitationData, setFullCitationData] = useState([]);
 
   useEffect(() => {
     fetch(`${API}/publications/list.php`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) {
-          setPublications(data.publications);
-        }
+        if (data.success) setPublications(data.publications);
       })
       .catch((err) => console.log("Error fetching publications:", err));
-
-    fetch(`${API}/publications/get_publication_stats.php`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setStats(data.data);
-        }
-      })
-      .catch((err) => console.log("Error fetching stats:", err));
 
     fetch(`${API}/publications/get_publication_yearly_stats.php`)
       .then((res) => res.json())
@@ -55,7 +43,7 @@ export default function Publications() {
       .catch((err) => console.log("Error fetching yearly stats:", err));
   }, []);
 
-  const sidebarData = fullCitationData.slice(-8);
+  const sidebarData = fullCitationData.slice(-7);
 
   const highlightAuthor = (citation) => {
     const names = ["S. Agarwal", "Sonali Agarwal", "S Agarwal"];
@@ -94,9 +82,8 @@ export default function Publications() {
             </button>
 
             <button
-              className={`tab-btn ${
-                activeTab === "conferences" ? "active" : ""
-              }`}
+              className={`tab-btn ${activeTab === "conferences" ? "active" : ""
+                }`}
               onClick={() => setActiveTab("conferences")}
             >
               Conference Publications
@@ -159,6 +146,31 @@ export default function Publications() {
 
         <div className="pub-right">
           <div className="scholar-card">
+            <table className="scholar-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>All</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Citations</td>
+                  <td>7016</td>
+                </tr>
+
+                <tr>
+                  <td>h-index</td>
+                  <td>39</td>
+                </tr>
+
+                <tr>
+                  <td>i10-index</td>
+                  <td>111</td>
+                </tr>
+              </tbody>
+            </table>
 
             <div
               className="graph-container"
@@ -171,19 +183,22 @@ export default function Publications() {
                   margin={{ top: 10, right: 5, left: -25, bottom: 0 }}
                 >
                   <CartesianGrid vertical={false} stroke="#f0f0f0" />
+
                   <XAxis
                     dataKey="year"
                     axisLine={false}
                     tickLine={false}
                     tick={{ fontSize: 10, fill: "#999" }}
                   />
+
                   <YAxis
                     orientation="right"
                     axisLine={false}
                     tickLine={false}
                     tick={{ fontSize: 10, fill: "#999" }}
                   />
-                  <Bar dataKey="count" fill="#777" barSize={18} />
+
+                  <Bar dataKey="count" fill="#777" barSize={22} />
                 </BarChart>
               </ResponsiveContainer>
 
@@ -217,13 +232,17 @@ export default function Publications() {
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={fullCitationData}>
                     <CartesianGrid vertical={false} stroke="#eee" />
+
                     <XAxis dataKey="year" axisLine={false} tickLine={false} />
+
                     <YAxis
                       orientation="right"
                       axisLine={false}
                       tickLine={false}
                     />
+
                     <Tooltip cursor={{ fill: "#f8f8f8" }} />
+
                     <Bar
                       dataKey="count"
                       fill="#1a2a6c"
