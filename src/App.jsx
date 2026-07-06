@@ -40,6 +40,10 @@ import AdminPeople from "./admin/People/AdminPeople";
 import AdminFunding from "./admin/FundingCollaboration/FundingCollaboration";
 import AdminPublications from "./admin/Publications/AdminPublications";
 import AdminBlogs from "./admin/Blogs/AdminBlogs";
+import ProtectedRoute from "./admin/ProtectedRoute/ProtectedRoute";
+import AdminLogin from "./admin/AdminLogin/AdminLogin";
+import ForgotPassword from "./admin/ForgotPassword/ForgotPassword";
+import ResetPassword from "./admin/ResetPassword/ResetPassword";
 
 function AppContent() {
   const location = useLocation();
@@ -81,14 +85,16 @@ function AppContent() {
         <Route path="/events" element={<Events />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/studentCorner" element={<StudentCorner />} />
-
         <Route path="/csir/:fileName" element={<CsirIframe />} />
         <Route path="/csir" element={<CsirIframe />} />
-
         <Route path="/ontology/*" element={<Redirect />} />
         <Route path="/portfolio/*" element={<RedirectApp />} />
 
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/forgot-password" element={<ForgotPassword />} />
+        <Route path="/admin/reset-password" element={<ResetPassword />} />
+
+        <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
           <Route index element={<AdminDashboard />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="funding" element={<AdminFunding />} />

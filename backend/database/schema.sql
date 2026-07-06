@@ -128,3 +128,22 @@ CREATE TABLE IF NOT EXISTS blogs (
     link VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+USE bda_lab;
+
+CREATE TABLE IF NOT EXISTS admin_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    reset_token VARCHAR(255) DEFAULT NULL,
+    reset_token_expiry DATETIME DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO admin_users (username, email, password)
+VALUES (
+    'admin',
+    'admin@bdalab.com',
+    '$2y$10$8K1p/a0dL1LXMIgoEDFrwO3SbiWnzkeP0fiD8n53uZ9ec0XZC0YjK'
+);

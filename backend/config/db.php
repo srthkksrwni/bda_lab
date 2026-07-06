@@ -1,11 +1,6 @@
 <?php
-$config = require __DIR__ . "/config.php";
 
-// header("Access-Control-Allow-Origin: " . $config["FRONTEND_URL"]);
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+$config = require __DIR__ . "/config.php";
 
 $conn = new mysqli(
     $config["db_host"],
@@ -15,9 +10,11 @@ $conn = new mysqli(
 );
 
 if ($conn->connect_error) {
-
-    die(json_encode([
+    echo json_encode([
         "success" => false,
         "message" => "Database connection failed"
-    ]));
+    ]);
+    exit();
 }
+
+?>

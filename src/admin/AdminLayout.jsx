@@ -1,7 +1,28 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Admin.css";
 
+const API = "http://localhost/bda_lab/backend";
+
 function AdminLayout() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await fetch(`${API}/auth/logout.php`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      console.log("Logout error:", error);
+    }
+
+    localStorage.removeItem("adminLoggedIn");
+    localStorage.removeItem("adminUser");
+    localStorage.removeItem("resetEmail");
+
+    navigate("/admin/login");
+  };
+
   return (
     <div className="admin-layout">
       <aside className="admin-sidebar">
@@ -16,6 +37,10 @@ function AdminLayout() {
           <Link to="/admin/events">Events</Link>
           <Link to="/admin/blogs">Blogs</Link>
           <Link to="/admin/contact-messages">Contact Messages</Link>
+
+          <button onClick={handleLogout} className="logout-btn">
+            Logout
+          </button>
         </nav>
       </aside>
 

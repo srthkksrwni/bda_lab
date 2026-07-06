@@ -4,6 +4,10 @@
   background: #f4f6fb;
 }
 
+/* ===========================
+   Sidebar
+=========================== */
+
 .admin-sidebar {
   width: 260px;
   background: #071d49;
@@ -14,6 +18,7 @@
 .admin-sidebar h2 {
   margin-bottom: 35px;
   font-size: 24px;
+  text-align: center;
 }
 
 .admin-sidebar nav {
@@ -27,11 +32,34 @@
   text-decoration: none;
   padding: 13px 16px;
   border-radius: 10px;
+  transition: 0.3s;
 }
 
 .admin-sidebar a:hover {
   background: #24317c;
 }
+
+.logout-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #b91c1c;
+}
+
+/* ===========================
+   Main
+=========================== */
 
 .admin-main {
   flex: 1;
@@ -56,7 +84,7 @@
   border-radius: 16px;
   font-size: 20px;
   font-weight: 600;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .dash-card span {
@@ -64,4 +92,84 @@
   margin-top: 15px;
   font-size: 34px;
   color: #071d49;
+}
+
+/* ===========================
+   Login / Forgot / Reset
+=========================== */
+
+.admin-login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef3fb, #dce8ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-login-box {
+  width: 420px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.admin-login-box h2 {
+  text-align: center;
+  color: #071d49;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.admin-login-box input {
+  width: 100%;
+  padding: 13px 15px;
+  margin-bottom: 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.admin-login-box input:focus {
+  border-color: #2563eb;
+}
+
+.admin-login-box button {
+  width: 100%;
+  padding: 13px;
+  background: #071d49;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.admin-login-box button:hover {
+  background: #0d2f75;
+}
+
+.login-message {
+  text-align: center;
+  margin-top: 15px;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.admin-link {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.admin-link a {
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.admin-link a:hover {
+  text-decoration: underline;
 }
