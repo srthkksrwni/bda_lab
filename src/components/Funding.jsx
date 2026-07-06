@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../styles/funding.css";
 import { FUNDING_API } from "../api/fundingApi";
 
-const IMAGE_BASE = "http://localhost/bda_lab/public_html";
+const API_BASE = import.meta.env.VITE_API_BASE;
+const IMAGE_BASE = API_BASE.replace("/backend", "/public_html");
 
 function Funding() {
   const [partners, setPartners] = useState([]);
@@ -51,13 +52,6 @@ function Funding() {
                   src={getImageUrl(partner.logo)}
                   alt={partner.partner_name}
                   className="partner-img"
-                  onError={(e) => {
-                    console.log(
-                      "Image failed:",
-                      `${IMAGE_BASE}/${partner.logo}`
-                    );
-                    e.target.src = "";
-                  }}
                 />
               </div>
 
@@ -65,9 +59,7 @@ function Funding() {
             </div>
           ))}
 
-          {partners.length === 0 && (
-            <p>No funding partners found.</p>
-          )}
+          {partners.length === 0 && <p>No funding partners found.</p>}
         </div>
       </div>
     </section>

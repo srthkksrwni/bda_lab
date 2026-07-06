@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "./FundingCollaboration.css";
 import { FUNDING_API } from "../../api/fundingApi";
 
-const IMAGE_BASE = "http://localhost/bda_lab/public_html";
+const API_BASE = import.meta.env.VITE_API_BASE;
+const IMAGE_BASE = API_BASE.replace("/backend", "/public_html");
 
 function FundingCollaboration() {
   const [showForm, setShowForm] = useState(false);
@@ -26,7 +27,7 @@ function FundingCollaboration() {
       return logo;
     }
 
-    return `http://localhost/bda_lab/public_html/${logo}`;
+    return `${IMAGE_BASE}/${logo}`;
   };
 
   const fetchFundings = async () => {
