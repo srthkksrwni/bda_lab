@@ -120,9 +120,8 @@ CREATE TABLE IF NOT EXISTS publication_yearly_stats (
    BLOGS TABLE
 =========================================================== */
 
-DROP TABLE IF EXISTS blogs;
 
-CREATE TABLE blogs (
+CREATE TABLE IF NOT EXISTS blogs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
