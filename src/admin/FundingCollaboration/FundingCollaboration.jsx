@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import "./FundingCollaboration.css";
 import { FUNDING_API } from "../../api/fundingApi";
 
-function FundingCollaboration() {
+const IMAGE_BASE = "http://localhost/bda_lab/public_html";
 
+function FundingCollaboration() {
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
   const [fundings, setFundings] = useState([]);
+  const [logoFile, setLogoFile] = useState(null);
 
   const [form, setForm] = useState({
     partner_name: "",
@@ -16,6 +18,16 @@ function FundingCollaboration() {
   useEffect(() => {
     fetchFundings();
   }, []);
+
+  const getImageUrl = (logo) => {
+    if (!logo) return "";
+
+    if (logo.startsWith("http://") || logo.startsWith("https://")) {
+      return logo;
+    }
+
+    return `http://localhost/bda_lab/public_html/${logo}`;
+  };
 
   const fetchFundings = async () => {
     const response = await fetch(FUNDING_API.list);
@@ -29,20 +41,33 @@ function FundingCollaboration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!form.partner_name) {
+      alert("Partner name is required.");
+      return;
+    }
+
+    if (!editId && !logoFile) {
+      alert("Logo image is required.");
+      return;
+    }
+
     const url = editId ? FUNDING_API.update : FUNDING_API.add;
 
-    const fundingData = {
-      id: editId,
-      partner_name: form.partner_name,
-      logo: form.logo,
-    };
+    const formData = new FormData();
+    formData.append("partner_name", form.partner_name);
+
+    if (editId) {
+      formData.append("id", editId);
+      formData.append("old_logo", form.logo);
+    }
+
+    if (logoFile) {
+      formData.append("logo", logoFile);
+    }
 
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(fundingData),
+      body: formData,
     });
 
     const data = await response.json();
@@ -50,6 +75,7 @@ function FundingCollaboration() {
     if (data.success) {
       alert(editId ? "Updated successfully." : "Added successfully.");
       setForm({ partner_name: "", logo: "" });
+      setLogoFile(null);
       setEditId(null);
       setShowForm(false);
       fetchFundings();
@@ -64,6 +90,7 @@ function FundingCollaboration() {
       logo: item.logo,
     });
 
+    setLogoFile(null);
     setEditId(item.id);
     setShowForm(true);
   };
@@ -90,6 +117,7 @@ function FundingCollaboration() {
         <button
           onClick={() => {
             setEditId(null);
+            setLogoFile(null);
             setForm({ partner_name: "", logo: "" });
             setShowForm(true);
           }}
@@ -114,17 +142,29 @@ function FundingCollaboration() {
             />
 
             <input
-              type="text"
-              placeholder="Logo filename e.g. fund1.jpg"
-              value={form.logo}
-              required
-              onChange={(e) => setForm({ ...form, logo: e.target.value })}
+              type="file"
+              accept="image/*"
+              required={!editId}
+              onChange={(e) => setLogoFile(e.target.files[0])}
             />
 
-            {form.logo && (
+            {logoFile && (
               <img
-                src={form.logo}
+                src={URL.createObjectURL(logoFile)}
                 alt="Preview"
+                style={{
+                  width: "90px",
+                  height: "90px",
+                  objectFit: "contain",
+                  borderRadius: "10px",
+                }}
+              />
+            )}
+
+            {!logoFile && form.logo && (
+              <img
+                src={getImageUrl(form.logo)}
+                alt="Old Logo"
                 style={{
                   width: "90px",
                   height: "90px",
@@ -143,6 +183,7 @@ function FundingCollaboration() {
                 onClick={() => {
                   setShowForm(false);
                   setEditId(null);
+                  setLogoFile(null);
                   setForm({ partner_name: "", logo: "" });
                 }}
               >
@@ -166,7 +207,7 @@ function FundingCollaboration() {
             <span>{index + 1}</span>
 
             <span>
-              <img src={item.logo} alt={item.partner_name} />
+              <img src={getImageUrl(item.logo)} alt={item.partner_name} />
             </span>
 
             <span>{item.partner_name}</span>

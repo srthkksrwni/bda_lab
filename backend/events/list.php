@@ -5,7 +5,7 @@ header("Access-Control-Allow-Origin: *");
 
 include "../config/db.php";
 
-$sql = "SELECT * FROM events ORDER BY id ASC";
+$sql = "SELECT * FROM events ORDER BY id DESC";
 $result = $conn->query($sql);
 
 if (!$result) {

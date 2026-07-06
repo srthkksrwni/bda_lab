@@ -3,7 +3,6 @@
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
 
 include "../config/db.php";
 
@@ -12,18 +11,42 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit();
 }
 
-$data = json_decode(file_get_contents("php://input"), true);
+$partner_name = trim($_POST["partner_name"] ?? "");
 
-$partner_name = trim($data["partner_name"] ?? "");
-$logo = trim($data["logo"] ?? "");
-
-if ($partner_name === "" || $logo === "") {
+if ($partner_name === "" || !isset($_FILES["logo"])) {
     echo json_encode([
         "success" => false,
         "message" => "Partner name and logo are required."
     ]);
     exit();
 }
+
+$uploadDir = "../../public_html/";
+
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
+$originalName = basename($_FILES["logo"]["name"]);
+$fileName = preg_replace('/\s+/', '_', $originalName);
+
+if (file_exists($uploadDir . $fileName)) {
+    $name = pathinfo($fileName, PATHINFO_FILENAME);
+    $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+    $fileName = $name . "_" . time() . "." . $ext;
+}
+
+$targetPath = $uploadDir . $fileName;
+
+if (!move_uploaded_file($_FILES["logo"]["tmp_name"], $targetPath)) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Logo upload failed."
+    ]);
+    exit();
+}
+
+$logo = $fileName;
 
 $stmt = $conn->prepare(
     "INSERT INTO funding_collaboration (partner_name, logo) VALUES (?, ?)"

@@ -2,8 +2,7 @@
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, PUT, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
 
 include "../config/db.php";
 
@@ -12,18 +11,47 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit();
 }
 
-$data = json_decode(file_get_contents("php://input"), true);
+$id = intval($_POST["id"] ?? 0);
+$partner_name = trim($_POST["partner_name"] ?? "");
+$old_logo = trim($_POST["old_logo"] ?? "");
 
-$id = intval($data["id"] ?? 0);
-$partner_name = trim($data["partner_name"] ?? "");
-$logo = trim($data["logo"] ?? "");
-
-if ($id === 0 || $partner_name === "" || $logo === "") {
+if ($id === 0 || $partner_name === "") {
     echo json_encode([
         "success" => false,
-        "message" => "ID, partner name and logo are required."
+        "message" => "ID and partner name are required."
     ]);
     exit();
+}
+
+$logo = $old_logo;
+
+if (isset($_FILES["logo"]) && $_FILES["logo"]["name"] !== "") {
+    $uploadDir = "../../public_html/";
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $originalName = basename($_FILES["logo"]["name"]);
+    $fileName = preg_replace('/\s+/', '_', $originalName);
+
+    if (file_exists($uploadDir . $fileName)) {
+        $name = pathinfo($fileName, PATHINFO_FILENAME);
+        $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+        $fileName = $name . "_" . time() . "." . $ext;
+    }
+
+    $targetPath = $uploadDir . $fileName;
+
+    if (!move_uploaded_file($_FILES["logo"]["tmp_name"], $targetPath)) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Logo upload failed."
+        ]);
+        exit();
+    }
+
+    $logo = $fileName;
 }
 
 $stmt = $conn->prepare(
