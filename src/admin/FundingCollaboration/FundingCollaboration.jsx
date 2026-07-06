@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import "./FundingCollaboration.css";
 import { FUNDING_API } from "../../api/fundingApi";
 
-const API_BASE = import.meta.env.VITE_API_BASE;
-const IMAGE_BASE = API_BASE.replace("/backend", "/public_html");
+const IMAGE_BASE = "http://localhost/bda_lab/public_html";
 
 function FundingCollaboration() {
   const [showForm, setShowForm] = useState(false);

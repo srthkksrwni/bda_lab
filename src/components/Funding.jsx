@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/funding.css";
 import { FUNDING_API } from "../api/fundingApi";
 
-const API_BASE = import.meta.env.VITE_API_BASE;
-const IMAGE_BASE = API_BASE.replace("/backend", "/public_html");
+const IMAGE_BASE = "http://localhost/bda_lab/public_html";
 
 function Funding() {
   const [partners, setPartners] = useState([]);
