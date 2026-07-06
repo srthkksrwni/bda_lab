@@ -84,7 +84,6 @@ CREATE TABLE IF NOT EXISTS events (
 -- =====================================================
 -- PUBLICATIONS TABLE
 -- =====================================================
-
 CREATE TABLE IF NOT EXISTS publications (
     id INT AUTO_INCREMENT PRIMARY KEY,
     category ENUM('journals','conferences','books') NOT NULL,
@@ -97,38 +96,35 @@ CREATE TABLE IF NOT EXISTS publications (
 CREATE INDEX idx_publications_category ON publications(category);
 
 -- =====================================================
--- PUBLICATION STATISTICS TABLE
+-- PUBLICATION CITATION STATISTICS TABLE
 -- =====================================================
-
-CREATE TABLE IF NOT EXISTS publication_stats (
+CREATE TABLE IF NOT EXISTS publication_citation_stats (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    label VARCHAR(50) NOT NULL UNIQUE,
-    all_count INT NOT NULL DEFAULT 0,
-    since_2021 INT NOT NULL DEFAULT 0
+    citations INT NOT NULL DEFAULT 0,
+    h_index INT NOT NULL DEFAULT 0,
+    i10_index INT NOT NULL DEFAULT 0
 );
 
 -- =====================================================
 -- PUBLICATION YEARLY STATISTICS TABLE
 -- =====================================================
-
 CREATE TABLE IF NOT EXISTS publication_yearly_stats (
     year INT PRIMARY KEY,
     total INT NOT NULL DEFAULT 0
 );
 
-/* ===========================================================
-   BLOGS TABLE
-=========================================================== */
-
-
+-- =====================================================
+-- BLOGS TABLE
+-- =====================================================
 CREATE TABLE IF NOT EXISTS blogs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-USE bda_lab;
-
+-- =====================================================
+-- ADMIN USERS TABLE
+-- =====================================================
 CREATE TABLE IF NOT EXISTS admin_users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
@@ -144,4 +140,7 @@ VALUES (
     'admin',
     'admin@bdalab.com',
     '$2y$10$8K1p/a0dL1LXMIgoEDFrwO3SbiWnzkeP0fiD8n53uZ9ec0XZC0YjK'
-);
+)
+ON DUPLICATE KEY UPDATE
+email = VALUES(email),
+password = VALUES(password);
