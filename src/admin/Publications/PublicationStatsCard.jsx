@@ -13,22 +13,25 @@ import {
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip);
 
 function PublicationStatsCard({ refresh }) {
-  const [stats, setStats] = useState([]);
   const [yearlyStats, setYearlyStats] = useState([]);
 
-  // API_URL managed via PUBLICATIONS_API
+  const [citationStats, setCitationStats] = useState({
+    citations: "",
+    h_index: "",
+    i10_index: "",
+  });
 
   const fetchStats = () => {
-    fetch(PUBLICATIONS_API.getStats)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) setStats(data.data);
-      });
-
     fetch(PUBLICATIONS_API.getYearlyStats)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setYearlyStats(data.data);
+      });
+
+    fetch(PUBLICATIONS_API.getCitationStats)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setCitationStats(data.data);
       });
   };
 
@@ -36,15 +39,16 @@ function PublicationStatsCard({ refresh }) {
     fetchStats();
   }, [refresh]);
 
-  const updateMainStat = async (item) => {
-    await fetch(PUBLICATIONS_API.updateStats, {
+  const updateCitationStats = async () => {
+    await fetch(PUBLICATIONS_API.updateCitationStats, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(item),
+      body: JSON.stringify(citationStats),
     });
 
+    alert("Citation stats updated");
     fetchStats();
   };
 
@@ -92,38 +96,68 @@ function PublicationStatsCard({ refresh }) {
 
   return (
     <div className="publication-stats-card">
-      <h3>Publication Statistics</h3>
+      <h3>Citation Statistics</h3>
 
       <table className="publication-stats-table">
         <thead>
           <tr>
             <th>Metric</th>
             <th>All</th>
+            <th>Action</th>
           </tr>
         </thead>
 
         <tbody>
-          {stats.map((item, index) => (
-            <tr key={item.label}>
-              <td>{item.label}</td>
+          <tr>
+            <td>Citations</td>
+            <td>
+              <input
+                type="number"
+                value={citationStats.citations}
+                onChange={(e) =>
+                  setCitationStats({
+                    ...citationStats,
+                    citations: e.target.value,
+                  })
+                }
+              />
+            </td>
+            <td rowSpan="3">
+              <button onClick={updateCitationStats}>Save</button>
+            </td>
+          </tr>
 
-              <td>
-                <input
-                  type="number"
-                  value={item.all_count}
-                  onChange={(e) => {
-                    const updated = [...stats];
-                    updated[index].all_count = e.target.value;
-                    setStats(updated);
-                  }}
-                />
-              </td>
+          <tr>
+            <td>h-index</td>
+            <td>
+              <input
+                type="number"
+                value={citationStats.h_index}
+                onChange={(e) =>
+                  setCitationStats({
+                    ...citationStats,
+                    h_index: e.target.value,
+                  })
+                }
+              />
+            </td>
+          </tr>
 
-              <td>
-                <button onClick={() => updateMainStat(item)}>Save</button>
-              </td>
-            </tr>
-          ))}
+          <tr>
+            <td>i10-index</td>
+            <td>
+              <input
+                type="number"
+                value={citationStats.i10_index}
+                onChange={(e) =>
+                  setCitationStats({
+                    ...citationStats,
+                    i10_index: e.target.value,
+                  })
+                }
+              />
+            </td>
+          </tr>
         </tbody>
       </table>
 

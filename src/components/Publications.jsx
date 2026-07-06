@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { PUBLICATIONS_API } from "../api/publicationsApi";
 import {
   BarChart,
   Bar,
@@ -11,8 +12,6 @@ import {
 } from "recharts";
 import "../styles/Publications.css";
 
-const API = import.meta.env.VITE_API_BASE;
-
 export default function Publications() {
   const [activeTab, setActiveTab] = useState("journals");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,15 +19,21 @@ export default function Publications() {
   const [publications, setPublications] = useState([]);
   const [fullCitationData, setFullCitationData] = useState([]);
 
+  const [citationStats, setCitationStats] = useState({
+    citations: 0,
+    h_index: 0,
+    i10_index: 0,
+  });
+
   useEffect(() => {
-    fetch(`${API}/publications/list.php`)
+    fetch(PUBLICATIONS_API.list)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setPublications(data.publications);
       })
       .catch((err) => console.log("Error fetching publications:", err));
 
-    fetch(`${API}/publications/get_publication_yearly_stats.php`)
+    fetch(PUBLICATIONS_API.getYearlyStats)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -41,6 +46,15 @@ export default function Publications() {
         }
       })
       .catch((err) => console.log("Error fetching yearly stats:", err));
+
+    fetch(PUBLICATIONS_API.getCitationStats)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setCitationStats(data.data);
+        }
+      })
+      .catch((err) => console.log("Error fetching citation stats:", err));
   }, []);
 
   const sidebarData = fullCitationData.slice(-7);
@@ -82,8 +96,9 @@ export default function Publications() {
             </button>
 
             <button
-              className={`tab-btn ${activeTab === "conferences" ? "active" : ""
-                }`}
+              className={`tab-btn ${
+                activeTab === "conferences" ? "active" : ""
+              }`}
               onClick={() => setActiveTab("conferences")}
             >
               Conference Publications
@@ -157,17 +172,17 @@ export default function Publications() {
               <tbody>
                 <tr>
                   <td>Citations</td>
-                  <td>7016</td>
+                  <td>{citationStats.citations}</td>
                 </tr>
 
                 <tr>
                   <td>h-index</td>
-                  <td>39</td>
+                  <td>{citationStats.h_index}</td>
                 </tr>
 
                 <tr>
                   <td>i10-index</td>
-                  <td>111</td>
+                  <td>{citationStats.i10_index}</td>
                 </tr>
               </tbody>
             </table>
@@ -232,17 +247,13 @@ export default function Publications() {
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={fullCitationData}>
                     <CartesianGrid vertical={false} stroke="#eee" />
-
                     <XAxis dataKey="year" axisLine={false} tickLine={false} />
-
                     <YAxis
                       orientation="right"
                       axisLine={false}
                       tickLine={false}
                     />
-
                     <Tooltip cursor={{ fill: "#f8f8f8" }} />
-
                     <Bar
                       dataKey="count"
                       fill="#1a2a6c"
