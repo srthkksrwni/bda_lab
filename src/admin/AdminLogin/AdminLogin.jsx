@@ -92,10 +92,10 @@ export default function AdminLogin() {
           required
         />
 
-        <button type="submit">Login</button>
+        <button type="submit">Login Here</button>
 
         <div className="admin-link">
-          <Link to="/admin/forgot-password">Forgot Password?</Link>
+          <Link to="/admin/forgot-password">Forgot Password...?</Link>
         </div>
 
         {message && <p className="login-message">{message}</p>}
