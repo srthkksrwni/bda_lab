@@ -1,39 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "../styles/funding.css";
 import { FUNDING_API } from "../api/fundingApi";
-
-const IMAGE_BASE = "http://localhost/bda_lab/backend";
+import { API_BASE } from "../api/apiConfig";
 
 function Funding() {
   const [partners, setPartners] = useState([]);
 
   useEffect(() => {
     fetch(FUNDING_API.list)
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setPartners(data.fundings || data.data || []);
+          setPartners(data.fundings);
         }
       })
       .catch((error) => {
-        console.log("Error fetching funding partners:", error);
-        setPartners([]);
+        console.error("Error fetching funding partners:", error);
       });
   }, []);
-
-  const getImageUrl = (logo) => {
-    if (!logo) return "";
-
-    if (logo.startsWith("http://") || logo.startsWith("https://")) {
-      return logo;
-    }
-
-    if (logo.startsWith("uploads/")) {
-      return `${IMAGE_BASE}/${logo}`;
-    }
-
-    return `http://localhost/bda_lab/public_html/${logo}`;
-  };
 
   return (
     <section id="funding" className="funding-section">
@@ -49,21 +33,22 @@ function Funding() {
 
       <div className="funding-container">
         <div className="partners-grid">
-          {(partners || []).map((partner) => (
+          {partners.map((partner) => (
             <div key={partner.id} className="partner-card animate-slide">
               <div className="logo-wrapper">
-                <img
-                  src={getImageUrl(partner.logo)}
-                  alt={partner.partner_name}
-                  className="partner-img"
-                />
+                {partner.logo && (
+                  <img
+                    src={`${API_BASE}/${partner.logo}`}
+                    alt={partner.partner_name}
+                    className="partner-img"
+                    loading="lazy"
+                  />
+                )}
               </div>
 
               <p>{partner.partner_name}</p>
             </div>
           ))}
-
-          {partners.length === 0 && <p>No funding partners found.</p>}
         </div>
       </div>
     </section>
