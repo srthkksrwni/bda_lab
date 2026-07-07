@@ -1,115 +1,108 @@
 import { useEffect, useState } from "react";
 import "./FundingCollaboration.css";
 import { FUNDING_API } from "../../api/fundingApi";
-
-const IMAGE_BASE = "http://localhost/bda_lab/backend";
+import { API_BASE } from "../../api/apiConfig";
 
 function FundingCollaboration() {
-  const [showForm, setShowForm] = useState(false);
-  const [editId, setEditId] = useState(null);
   const [fundings, setFundings] = useState([]);
-  const [logoFile, setLogoFile] = useState(null);
+  const [partnerName, setPartnerName] = useState("");
+  const [logo, setLogo] = useState(null);
+  const [editId, setEditId] = useState(null);
 
-  const [form, setForm] = useState({
-    partner_name: "",
-    logo: "",
-  });
+  const fetchFundings = async () => {
+    try {
+      const response = await fetch(FUNDING_API.list);
+      const data = await response.json();
+
+      if (data.success) {
+        setFundings(data.fundings || data.data || []);
+      }
+    } catch (error) {
+      console.error("Error fetching funding partners:", error);
+    }
+  };
 
   useEffect(() => {
     fetchFundings();
   }, []);
 
-  const getImageUrl = (logo) => {
-    if (!logo) return "";
-    return `${IMAGE_BASE}/${logo}`;
+  const resetForm = () => {
+    setPartnerName("");
+    setLogo(null);
+    setEditId(null);
   };
 
-  const fetchFundings = async () => {
-    const response = await fetch(FUNDING_API.list);
-    const data = await response.json();
-
-    if (data.success) {
-      setFundings(data.fundings);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!form.partner_name) {
-      alert("Partner name is required.");
+  const saveFunding = async () => {
+    if (!partnerName) {
+      alert("Please enter partner name");
       return;
     }
 
-    if (!editId && !logoFile) {
-      alert("Logo image is required.");
+    if (!logo) {
+      alert("Please upload logo");
       return;
     }
-
-    if (editId && !logoFile) {
-      alert("Please upload a logo.");
-      return;
-    }
-
-    const url = editId ? FUNDING_API.update : FUNDING_API.add;
 
     const formData = new FormData();
-    formData.append("partner_name", form.partner_name);
+    formData.append("partner_name", partnerName);
+    formData.append("logo", logo);
 
     if (editId) {
       formData.append("id", editId);
     }
 
-    formData.append("logo", logoFile);
+    const apiUrl = editId ? FUNDING_API.update : FUNDING_API.add;
 
-    const response = await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        body: formData,
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (data.success) {
-      alert(editId ? "Updated successfully." : "Added successfully.");
-      setForm({ partner_name: "", logo: "" });
-      setLogoFile(null);
-      setEditId(null);
-      setShowForm(false);
-      fetchFundings();
-    } else {
-      alert(data.message);
+      if (data.success) {
+        alert(editId ? "Funding updated successfully" : "Funding added successfully");
+        resetForm();
+        fetchFundings();
+      } else {
+        alert(data.message || "Operation failed");
+      }
+    } catch (error) {
+      console.error("Error saving funding:", error);
+      alert("Something went wrong");
     }
   };
 
-  const handleEdit = (item) => {
-    setForm({
-      partner_name: item.partner_name,
-      logo: item.logo,
-    });
-
-    setLogoFile(null);
+  const editFunding = (item) => {
     setEditId(item.id);
-    setShowForm(true);
+    setPartnerName(item.partner_name);
+    setLogo(null);
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Delete this item?")) return;
+  const deleteFunding = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this funding partner?")) return;
 
-    const response = await fetch(FUNDING_API.delete, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    });
+    try {
+      const response = await fetch(FUNDING_API.delete, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (data.success) {
-      alert("Deleted successfully.");
-      fetchFundings();
-    } else {
-      alert(data.message);
+      if (data.success) {
+        alert("Funding deleted successfully");
+        fetchFundings();
+      } else {
+        alert(data.message || "Failed to delete funding");
+      }
+    } catch (error) {
+      console.error("Error deleting funding:", error);
+      alert("Something went wrong");
     }
   };
 
@@ -117,86 +110,32 @@ function FundingCollaboration() {
     <div className="funding-page">
       <div className="funding-top">
         <h1>Funding & Collaboration</h1>
-
-        <button
-          onClick={() => {
-            setEditId(null);
-            setLogoFile(null);
-            setForm({ partner_name: "", logo: "" });
-            setShowForm(true);
-          }}
-        >
-          + Add
-        </button>
       </div>
 
-      {showForm && (
-        <div className="funding-form-box">
-          <h2>{editId ? "Edit Item" : "Add Item"}</h2>
+      <div className="funding-form-box">
+        <input
+          type="text"
+          placeholder="Partner Name"
+          value={partnerName}
+          onChange={(e) => setPartnerName(e.target.value)}
+        />
 
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Partner Name"
-              value={form.partner_name}
-              required
-              onChange={(e) =>
-                setForm({ ...form, partner_name: e.target.value })
-              }
-            />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setLogo(e.target.files[0])}
+        />
 
-            <input
-              type="file"
-              accept="image/*"
-              required
-              onChange={(e) => setLogoFile(e.target.files[0])}
-            />
+        <button onClick={saveFunding}>
+          {editId ? "Update Funding" : "+ Add Funding"}
+        </button>
 
-            {logoFile && (
-              <img
-                src={URL.createObjectURL(logoFile)}
-                alt="Preview"
-                style={{
-                  width: "90px",
-                  height: "90px",
-                  objectFit: "contain",
-                  borderRadius: "10px",
-                }}
-              />
-            )}
-
-            {!logoFile && form.logo && (
-              <img
-                src={getImageUrl(form.logo)}
-                alt="Old Logo"
-                style={{
-                  width: "90px",
-                  height: "90px",
-                  objectFit: "contain",
-                  borderRadius: "10px",
-                }}
-              />
-            )}
-
-            <div className="form-actions">
-              <button type="submit">{editId ? "Update" : "Save"}</button>
-
-              <button
-                type="button"
-                className="cancel-btn"
-                onClick={() => {
-                  setShowForm(false);
-                  setEditId(null);
-                  setLogoFile(null);
-                  setForm({ partner_name: "", logo: "" });
-                }}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+        {editId && (
+          <button type="button" className="cancel-btn" onClick={resetForm}>
+            Cancel
+          </button>
+        )}
+      </div>
 
       <div className="funding-table">
         <div className="table-head">
@@ -211,19 +150,22 @@ function FundingCollaboration() {
             <span>{index + 1}</span>
 
             <span>
-              <img src={getImageUrl(item.logo)} alt={item.partner_name} />
+              <img
+                src={`${API_BASE}/${item.logo}`}
+                alt={item.partner_name}
+              />
             </span>
 
             <span>{item.partner_name}</span>
 
             <span>
-              <button className="edit-btn" onClick={() => handleEdit(item)}>
+              <button className="edit-btn" onClick={() => editFunding(item)}>
                 Edit
               </button>
 
               <button
                 className="delete-btn"
-                onClick={() => handleDelete(item.id)}
+                onClick={() => deleteFunding(item.id)}
               >
                 Delete
               </button>
