@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Students.css";
 import { PEOPLE_API } from "../admin/People/peopleApi";
@@ -6,8 +7,9 @@ import { API_BASE } from "../api/apiConfig";
 
 function Students() {
   const [activeTab, setActiveTab] = useState("ongoing");
-  const [selectedBatch, setSelectedBatch] = useState("2025");
+  const [selectedBatch, setSelectedBatch] = useState("");
   const [students, setStudents] = useState([]);
+  const [years, setYears] = useState([]);
 
   const tabs = [
     { id: "postdoc", label: "Post-Doctorate" },
@@ -16,29 +18,26 @@ function Students() {
     { id: "mtech", label: "M.Tech Scholars" },
   ];
 
-  const years = [
-    "2025",
-    "2024",
-    "2023",
-    "2022",
-    "2021",
-    "2020",
-    "2019",
-    "2018",
-    "2017",
-    "2016",
-    "2015",
-    "2014",
-    "2013",
-    "2012",
-    "2011",
-    "2010"
-  ];
+  useEffect(() => {
+    fetch(`${PEOPLE_API.list}?type=years`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.data && data.data.length > 0) {
+          setYears(data.data);
+          setSelectedBatch(data.data[0]);
+        }
+      })
+      .catch((err) => console.error("Error fetching years:", err));
+  }, []);
 
   const fetchStudents = async () => {
     let category = activeTab;
     if (activeTab === "ongoing") {
       category = "phd";
+    }
+
+    if (category === "mtech" && !selectedBatch) {
+      return;
     }
 
     let url = `${PEOPLE_API.list}?type=students&category=${category}`;
@@ -70,7 +69,10 @@ function Students() {
   };
 
   useEffect(() => {
-    fetchStudents();
+    Promise.resolve().then(() => {
+      fetchStudents();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, selectedBatch]);
 
   return (

@@ -20,6 +20,24 @@ if ($type == "faculty") {
 
     $sql = "SELECT * FROM faculty ORDER BY id DESC";
 
+} elseif ($type == "years") {
+
+    $result = $conn->query(
+        "SELECT DISTINCT batch_year FROM students 
+         WHERE category='mtech' AND batch_year IS NOT NULL 
+         ORDER BY batch_year DESC"
+    );
+    $years = [];
+    while ($row = $result->fetch_assoc()) {
+        $years[] = (string)$row["batch_year"];
+    }
+    echo json_encode([
+        "success" => true,
+        "data" => $years
+    ]);
+    $conn->close();
+    exit();
+
 } elseif ($type == "students") {
 
     $category = $_GET["category"] ?? "";
