@@ -381,3 +381,825 @@ VALUES
     'https://scholar.google.com/citations?hl=en&user=c6sPHMcAAAAJ&view_op=list_works&sortby=pubdate',
     ''
 );
+
+INSERT INTO students (
+    category,
+    batch_year,
+    name,
+    email,
+    research_topic,
+    image_url,
+    scholar_url,
+    profile_url
+)
+VALUES
+(
+    'mtech',
+    2025,
+    'Sarang Mohrir',
+    '',
+    'Exploring Statistical Distance-Based Techniques for Real-Time Concept Drift Detection',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2025,
+    'Amol Paliwal',
+    '',
+    'Anomaly detection in real time data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2025,
+    'Nishita Omar',
+    '',
+    'XAI in finance using various explainability algorithms',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2025,
+    'Deep Jyoti',
+    '',
+    'Optimizing real time data processing using PySpark and Kafka',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2024,
+    'Atharv Gadre',
+    '',
+    'Investigating Developer Reviewer Symphony Using H-Rank Mechanism',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2024,
+    'Prachi Jain',
+    '',
+    'Optimizing Sentiment Analysis - Bi-LSTM and BERT with enlarged Bag-Of-Words and Reduced Ambiguity',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2024,
+    'Prashik Nandu Gujar',
+    '',
+    'Melanoma classification using image masking and fine tuned CNN',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2024,
+    'Shyam Dongre',
+    '',
+    'MLtoGAI: Semantic Web based with Machine Learning for Enhanced Disease Prediction and Personalized Recommendations using Generative AI',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2023,
+    'Akanksha Lal',
+    '',
+    'Melanoma Classification using GAN based augmentation and Self-Supervised feature extraction',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2023,
+    'Riya Panchal',
+    '',
+    'Multimodal Image Fusion on ECG signals for Congestive Heart Failure Classification',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2023,
+    'Medha Mishra',
+    '',
+    'Geolocated Event Detection using Graph Mining Approach on Real-Time Multimodal Data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2023,
+    'Sahil Dubey',
+    '',
+    'Real Time Multimodal Sentiment Analysis using Deep Learning Approach',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2023,
+    'Yash Patel',
+    '',
+    'Predicting Habitable Exoplanets in Different Star-Systems Using Deep Learning Based Anomaly Detection Approach',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2022,
+    'Kapil Despande',
+    '',
+    'Anomaly detection in video surveillance using deep learning',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2022,
+    'Ojas Vishwakarma',
+    '',
+    'Anomaly detection for medical images with one class classification',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2022,
+    'Gaurav Kumar',
+    '',
+    'Fraud analytics in eCommerce using machine learning',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2022,
+    'Rituvendra Singh',
+    '',
+    'Fraud analytics using machine learning based open source intelligence framework',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2022,
+    'Alok Patel',
+    '',
+    'Anomaly detection in real time streaming data using machine learning',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2022,
+    'Akrity Kumar',
+    '',
+    'Anomaly detection in time series classification using machine learning',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2021,
+    'Gaurav Rajput',
+    '',
+    'Hate Speech Detection Using Deep Learning',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2021,
+    'N Nikhil Chakravarthy',
+    '',
+    'Music Generation using Deep Learning',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2021,
+    'Shivam Kasat',
+    '',
+    'Identification of Hematological Alteration and Adverse Respiratory Health Among Agriculture Workers Using Machine Learning Classification Model',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2021,
+    'Sachin Gupta',
+    '',
+    'Image Classification Using Capsule Network',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2021,
+    'Mukul Madaan',
+    '',
+    'One Class Classification using Twin Support Vector Machine',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2021,
+    'Himanshu Batra',
+    '',
+    'Sentiment Analysis For Software Engineering Research',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2021,
+    'Nalla Praveen',
+    '',
+    'Blood Cell Subtype Detection using Deep Learning',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2021,
+    'Harish Rajora',
+    '',
+    'Centralized Medical System',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2020,
+    'Mohit Rajesh Dandekar',
+    '',
+    'Fruit classification using features from the convolutional layers',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2020,
+    'Uppala Sumanth',
+    '',
+    'Synthesis of Transfer Learning with End-to-End Learning for Autonomous Cars',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2020,
+    'Vishal Verna',
+    '',
+    'Anomaly/ Novelty detection using one class classification',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2020,
+    'Kharibam Priyojit Singh',
+    '',
+    'Anomaly detection for streaming data using autoencoder',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2020,
+    'Anand Bihari Gupta',
+    '',
+    'Real-Time Occupancy Detection Processing and Analytics For Smart Building',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2020,
+    'Ujala Singh',
+    '',
+    'Link Prediction Approach With Weighted Temporal Vectors Model In Multi-Dimensional Stack Overflow Network',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2020,
+    'Swapnesh Narayan Azad',
+    '',
+    'Do Open Source Software Ecosystem behave like Natural Ecosystem: An Investigative Study',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2020,
+    'Hariom Niranjan',
+    '',
+    'Use Heterogeneous Information Networks to Rank developers in Open Source Software Ecosystem',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Anirban Sarkar',
+    '',
+    'An Application of Ensemble Models and Deep Learning in Predictive Analytics',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Prachi Agarwal',
+    '',
+    'Gesture Recognition by learning local motion signatures using smartphones',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Umesh Singh',
+    '',
+    'Implementation of Iterative Routing-By-Agreement Capsule Network in Large Feature Space',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Akash Verma',
+    '',
+    'Anomaly Detection System for Video Surveillance using Deep Multiple Instance Learning with Weakly Labelled Data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Shubham Swarnkar',
+    '',
+    'Aggressive Driving Behaviour classification using Smartphone’s Accelerometer Sensor',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Rajat Sahu',
+    '',
+    'Person Tracking with Non-overlapping Multiple Cameras',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Vishesh Middha',
+    '',
+    'Concept Drift Detection In Email Dataset Through Intention-Based Segmentation',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Syam Prasad Dhannuri',
+    '',
+    'Privacy Control in Online Social Networks by Trust Aware Link Prediction and By Detecting Fake profiles',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2019,
+    'Ajay Kumar Pilaniya',
+    '',
+    'Integrating WordNet and STS (Semantic Textual Similarity) with DOM to detect plagiarism in online articles',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2018,
+    'Devendra Kaushik',
+    '',
+    'Classifying Streaming data in distributed environment',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2018,
+    'Shamshe Alam',
+    '',
+    'Distributed One-Class Support Vector Machine',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2018,
+    'Akash Jain',
+    '',
+    'Predicting customer behaviour through clickstream analysis',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2018,
+    'Rahul Swami',
+    '',
+    'Stream Data Analytics for Smart homes',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2018,
+    'Dhwaj Verma',
+    '',
+    'Cardiac Arrhythmia Detection from single lead ECG using CNN and LSTM',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2018,
+    'Rakesh Das',
+    '',
+    'Vehicle detection and counting using deep neural network',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2018,
+    'Ishu Matil',
+    '',
+    'Affective Computing: Emotion classification of Physiological (EEG) signals',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2018,
+    'Sonali Agrawal',
+    '',
+    'Real Time visualization and Analysis of Big Data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2017,
+    'Anant Prabhat',
+    '',
+    'Implementing Testing approaches for Complex Event Processing (CFP)',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2017,
+    'DibyaJyoti Mahuri',
+    '',
+    'Cloud based mutation testing for distributed system',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2017,
+    'Dhirendra Siddhartha',
+    '',
+    'An Efficient Approach for Software Defect Prediction',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2016,
+    'Neha Garg',
+    '',
+    'Process Mining for Clinical Workflow',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2016,
+    'Suchi Maheshwari',
+    '',
+    'Two-stage software defect prediction using three-way decisions',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2016,
+    'Ravindra Soni',
+    '',
+    'Exploring web application testing techniques',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2016,
+    'Rakesh Kumar Pal',
+    '',
+    'Test Case Minimization using Genetic Algorithm',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2016,
+    'Unmesh Kishore Bendale',
+    '',
+    'Distributed feature selection for big data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2015,
+    'Shwet Ketu',
+    '',
+    'A MapReduce Based Advanced Distributed K-means Clustering for Handling Big Data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2015,
+    'Geetanjali Chaurasia',
+    '',
+    'Clustering based Novel Test Case Prioritization Approach for Regression Testing',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2015,
+    'Anushree Priyadarshini',
+    '',
+    'A MapReduce based Support Vector Machine for Big Data Classification',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2015,
+    'Anubha Sharma',
+    '',
+    'A Comparative model of classifier for Authorship Characterization',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2015,
+    'Harshal Singh',
+    '',
+    'Link Prediction for Co-Authorship in Heterogeneous Network using Stream Classification',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2015,
+    'Preetam Jayaswal',
+    '',
+    'Churn prediction using Tree ensembles',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2014,
+    'Manoj Kumar',
+    '',
+    'A Clinical Decision Support System for Heart Disease- A Hybrid Approach Using Fuzzy Method and Neural Network',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2014,
+    'Manish Shukla',
+    '',
+    'Hybrid Approach for Tuberculosis Data Classification Using Optimal Centroid Selection Based Clustering',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2014,
+    'Pradeep Saini',
+    '',
+    'Using Clustering coherent rule generation for healthcare data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2014,
+    'Jitendra',
+    '',
+    'Effective detection of Parkinson’s disease using fuzzy k-nearest neighbor approach',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2014,
+    'Anvita Srivastava',
+    '',
+    'Privacy Preserving Data Mining In Electronic Health Record Using K-Anonymity',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2013,
+    'Shubham Khanna',
+    '',
+    'Study application of data mining by establishing pattern of Diabetes disease using SGPGI data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2013,
+    'Akhilesh Yadav',
+    '',
+    'Study application of data mining by establishing pattern of Lung cancer disease using SGPGI data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2013,
+    'Vijesh Patel',
+    '',
+    'Study application of data mining by establishing pattern of Heart Disease using SGPGI data',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2013,
+    'Neha Rathore',
+    '',
+    'Study application of data mining by establishing pattern of Breast Cancer Disease and survivability prediction',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2012,
+    'Vishal Mandpe',
+    '',
+    'Mining Software Repositories for Dynamic Fault Prediction',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2012,
+    'Abhinav Lokhande',
+    '',
+    'Mining Software Repositories for Software Change Classification',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2011,
+    'Divya',
+    '',
+    'Support Vector Classification and Regression for Health Data Mining',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2011,
+    'Ruchi Arya',
+    '',
+    'A fuzzy Clustering approach using multi kernel approach',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2011,
+    'Santosh Kumar',
+    '',
+    'SVM Based Data Classification using Multi Kernel approach',
+    '',
+    '',
+    ''
+),
+(
+    'mtech',
+    2010,
+    'Sadhana Tiwari',
+    '',
+    'Classification of Datasets using SVM',
+    '',
+    '',
+    ''
+);
