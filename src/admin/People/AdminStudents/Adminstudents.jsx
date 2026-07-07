@@ -273,7 +273,6 @@ return (
           type="email"
           placeholder="Email"
           value={form.email}
-          required
           onChange={(e) =>
             setForm({
               ...form,

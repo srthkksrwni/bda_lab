@@ -186,3 +186,198 @@ total = VALUES(total);
 INSERT INTO blogs (image) VALUES
 ('uploads/blogs/campus.jpg'),
 ('uploads/blogs/maingate.jpg');
+
+
+
+-- ===========================
+-- STUDENTS
+-- ===========================
+
+INSERT INTO students (
+    category,
+    batch_year,
+    name,
+    email,
+    research_topic,
+    image_url,
+    scholar_url,
+    profile_url
+)
+VALUES
+
+-- ===========================
+-- POST DOCTORATE
+-- ===========================
+
+(
+    'postdoc',
+    NULL,
+    'Dr. Sadhana Tiwari',
+    'prf.sadhana@iiita.ac.in',
+    '',
+    'uploads/students/1783423356_d90258ed.jpg',
+    'https://scholar.google.com/citations?user=zv8vatkAAAAJ&hl=en&oi=ao',
+    '/#/portfolio'
+),
+
+-- ===========================
+-- PHD SCHOLARS
+-- ===========================
+
+(
+    'phd',
+    NULL,
+    'Amit Kumar Singh',
+    'mse2022010@iiita.ac.in',
+    'AI - Added rapid mission design in complex dynamical environments',
+    'uploads/students/1783423463_75c232e7.jpg',
+    '',
+    ''
+),
+
+(
+    'phd',
+    NULL,
+    'Mrs. Nitu Kumari',
+    'rsi2022506@iiita.ac.in',
+    'Self Supervised Learning in Medical Imaging',
+    'uploads/students/1783423505_e8571c42.jpeg',
+    'https://scholar.google.com/citations?hl=en&user=B9zsVckAAAAJ',
+    ''
+),
+
+(
+    'phd',
+    NULL,
+    'Mr. Ritesh Chandra',
+    'rsi202201@iiita.ac.in',
+    'Ontology-Enabled Big Data Analytics for Clinical Decision Support in Healthcare Systems',
+    'uploads/students/1783423523_8a4a8840.jpg',
+    'https://scholar.google.com/citations?user=44lff0IAAAAJ&hl=en&oi=ao',
+    ''
+),
+
+(
+    'phd',
+    NULL,
+    'Mrs. Anvita Srivastava',
+    'rsi2024507@iiita.ac.in',
+    'Stream Analytics Framework for data-driven applications',
+    'uploads/students/1783423533_eb70f2b9.jpg',
+    'https://scholar.google.com/citations?hl=en&user=DE-NpLMAAAAJ',
+    ''
+),
+
+(
+    'phd',
+    NULL,
+    'Mrs. Sonam Yadav',
+    'rsi2024503@iiita.ac.in',
+    'Uncertainty-aware concept drift management framework',
+    'uploads/students/1783423547_80c7fe08.jpg',
+    'https://scholar.google.com/citations?hl=en&user=1PXAetgAAAAJ',
+    ''
+),
+
+(
+    'phd',
+    NULL,
+    'Ms. Himanshi Singh',
+    'rsi2026003@iiita.ac.in',
+    'Multimodal Analysis for Mental Disorder Recognition',
+    'uploads/students/1783423558_c467c109.jpeg',
+    'https://scholar.google.com/citations?user=b5mtNfcAAAAJ&hl=en',
+    ''
+),
+
+-- ===========================
+-- GRADUATED PHD
+-- ===========================
+
+(
+    'graduated',
+    NULL,
+    'Dr. Divya Tomar',
+    '',
+    '',
+    'uploads/students/1783423996_8679ad89.jpg',
+    'https://scholar.google.com/citations?user=Zrlnp7UAAAAJ&hl=en',
+    ''
+),
+
+(
+    'graduated',
+    NULL,
+    'Dr. Narinder Singh Punn',
+    '',
+    '',
+    'uploads/students/1783424011_ae692033.jpg',
+    'https://scholar.google.com/citations?user=GQz--cYAAAAJ&hl=en',
+    ''
+),
+
+(
+    'graduated',
+    NULL,
+    'Dr. Rohit Bakshi',
+    '',
+    '',
+    'uploads/students/1783424021_9d348a72.jpg',
+    'https://scholar.google.com/citations?user=d-Kal94AAAAJ&hl=en',
+    ''
+),
+
+(
+    'graduated',
+    NULL,
+    'Dr. Sanjay Singh Sonbhadara',
+    '',
+    '',
+    'uploads/students/1783424040_4a2a2f65.jpg',
+    'https://scholar.google.com/citations?user=e0VFj78AAAAJ&hl=en',
+    ''
+),
+
+(
+    'graduated',
+    NULL,
+    'Dr. Sashi Shekhar',
+    '',
+    '',
+    'uploads/students/1783424067_4fb896d5.jpeg',
+    'https://scholar.google.com/citations?user=HsMk-RsAAAAJ&hl=en',
+    ''
+),
+
+(
+    'graduated',
+    NULL,
+    'Dr. Sadhana Tiwari',
+    '',
+    '',
+    'uploads/students/1783424077_44dc30e0.jpg',
+    'https://scholar.google.com/citations?user=zv8vatkAAAAJ&hl=en',
+    ''
+),
+
+(
+    'graduated',
+    NULL,
+    'Dr. Ashutosh Kumar',
+    '',
+    '',
+    'uploads/students/1783424092_37d812b7.jpg',
+    'https://scholar.google.com/citations?user=wVPIvmcAAAAJ&hl=en',
+    ''
+),
+
+(
+    'graduated',
+    NULL,
+    'Dr. Amit Kumar',
+    '',
+    '',
+    'uploads/students/1783424110_f856f3d8.png',
+    'https://scholar.google.com/citations?hl=en&user=c6sPHMcAAAAJ&view_op=list_works&sortby=pubdate',
+    ''
+);
