@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./FundingCollaboration.css";
 import { FUNDING_API } from "../../api/fundingApi";
 
-const IMAGE_BASE = "http://localhost/bda_lab/public_html";
+const IMAGE_BASE = "http://localhost/bda_lab/backend";
 
 function FundingCollaboration() {
   const [showForm, setShowForm] = useState(false);
@@ -21,11 +21,6 @@ function FundingCollaboration() {
 
   const getImageUrl = (logo) => {
     if (!logo) return "";
-
-    if (logo.startsWith("http://") || logo.startsWith("https://")) {
-      return logo;
-    }
-
     return `${IMAGE_BASE}/${logo}`;
   };
 
@@ -34,7 +29,7 @@ function FundingCollaboration() {
     const data = await response.json();
 
     if (data.success) {
-      setFundings(data.data);
+      setFundings(data.fundings);
     }
   };
 
@@ -51,6 +46,11 @@ function FundingCollaboration() {
       return;
     }
 
+    if (editId && !logoFile) {
+      alert("Please upload a logo.");
+      return;
+    }
+
     const url = editId ? FUNDING_API.update : FUNDING_API.add;
 
     const formData = new FormData();
@@ -58,12 +58,9 @@ function FundingCollaboration() {
 
     if (editId) {
       formData.append("id", editId);
-      formData.append("old_logo", form.logo);
     }
 
-    if (logoFile) {
-      formData.append("logo", logoFile);
-    }
+    formData.append("logo", logoFile);
 
     const response = await fetch(url, {
       method: "POST",
@@ -98,7 +95,14 @@ function FundingCollaboration() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this item?")) return;
 
-    const response = await fetch(`${FUNDING_API.delete}?id=${id}`);
+    const response = await fetch(FUNDING_API.delete, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
     const data = await response.json();
 
     if (data.success) {
@@ -144,7 +148,7 @@ function FundingCollaboration() {
             <input
               type="file"
               accept="image/*"
-              required={!editId}
+              required
               onChange={(e) => setLogoFile(e.target.files[0])}
             />
 

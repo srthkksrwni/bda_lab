@@ -1,36 +1,32 @@
 <?php
-
-header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Content-Type: application/json");
 
 include "../config/db.php";
 
-if (!isset($_GET["id"])) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Partner ID is missing."
-    ]);
-    exit();
-}
+$data = json_decode(file_get_contents("php://input"), true);
 
-$id = intval($_GET["id"]);
+$id = $data["id"];
 
-$sql = "DELETE FROM funding_collaboration WHERE id = $id";
+$sql = "DELETE FROM funding_collaboration WHERE id = ?";
 
-if ($conn->query($sql)) {
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+
+if ($stmt->execute()) {
     echo json_encode([
         "success" => true,
-        "message" => "Funding partner deleted successfully."
+        "message" => "Funding partner deleted successfully"
     ]);
 } else {
     echo json_encode([
         "success" => false,
-        "message" => "Delete failed."
+        "message" => "Failed to delete funding partner"
     ]);
 }
 
+$stmt->close();
 $conn->close();
-
 ?>

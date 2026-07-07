@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/funding.css";
 import { FUNDING_API } from "../api/fundingApi";
 
-const IMAGE_BASE = "http://localhost/bda_lab/public_html";
+const IMAGE_BASE = "http://localhost/bda_lab/backend";
 
 function Funding() {
   const [partners, setPartners] = useState([]);
@@ -12,11 +12,12 @@ function Funding() {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          setPartners(data.data);
+          setPartners(data.fundings || data.data || []);
         }
       })
       .catch((error) => {
         console.log("Error fetching funding partners:", error);
+        setPartners([]);
       });
   }, []);
 
@@ -27,7 +28,11 @@ function Funding() {
       return logo;
     }
 
-    return `${IMAGE_BASE}/${logo}`;
+    if (logo.startsWith("uploads/")) {
+      return `${IMAGE_BASE}/${logo}`;
+    }
+
+    return `http://localhost/bda_lab/public_html/${logo}`;
   };
 
   return (
@@ -44,7 +49,7 @@ function Funding() {
 
       <div className="funding-container">
         <div className="partners-grid">
-          {partners.map((partner) => (
+          {(partners || []).map((partner) => (
             <div key={partner.id} className="partner-card animate-slide">
               <div className="logo-wrapper">
                 <img
