@@ -17,8 +17,10 @@ function sendAlert($subject, $message)
         $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
 
-        // CHANGE THESE
+        // Gmail Account
         $mail->Username = "prf.sarthak@iiita.ac.in";
+
+        // Gmail App Password (16 characters, no spaces)
         $mail->Password = "rmsaxgacgyvjduyo";
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -26,30 +28,39 @@ function sendAlert($subject, $message)
 
         $mail->setFrom("prf.sarthak@iiita.ac.in", "BDA Lab Admin");
 
-        // CHANGE THIS
+        // Admin Email
         $mail->addAddress("prf.sarthak@iiita.ac.in");
 
         $mail->isHTML(true);
 
         $mail->Subject = $subject;
 
+        $ip = $_SERVER["REMOTE_ADDR"] ?? "Unknown";
+
         $mail->Body = "
-        <h2>BDA Lab Security Alert</h2>
+            <h2>BDA Lab Security Alert</h2>
 
-        <p>$message</p>
+            <p>{$message}</p>
 
-        <hr>
+            <hr>
 
-        <b>Time :</b> " . date("d-m-Y h:i:s A") . "<br>
+            <b>Time:</b> " . date("d-m-Y h:i:s A") . "<br>
 
-        <b>IP :</b> " . $_SERVER['REMOTE_ADDR'];
-        $mail->SMTPDebug = 2;
+            <b>IP Address:</b> {$ip}
+        ";
+
+        // DO NOT ENABLE SMTP DEBUG IN PRODUCTION
+        // $mail->SMTPDebug = 2;
+
         $mail->send();
 
         return true;
 
     } catch (Exception $e) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
-    return false;
-}
+
+        // Optional: write errors to a log file instead of printing them
+        error_log("PHPMailer Error: " . $mail->ErrorInfo);
+
+        return false;
+    }
 }
