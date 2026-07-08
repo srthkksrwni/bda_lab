@@ -1,5 +1,4 @@
 <?php
-
 $config = require_once __DIR__ . "/../config/config.php";
 
 ini_set("display_errors", 0);
@@ -27,98 +26,45 @@ $username = trim($data["username"] ?? "");
 $password = trim($data["password"] ?? "");
 
 if ($username === "" || $password === "") {
-    echo json_encode([
-        "success" => false,
-        "message" => "Username and password are required."
-    ]);
+    echo json_encode(["success" => false, "message" => "Username and password are required."]);
     exit();
 }
 
 $sql = "SELECT id, username, email, password FROM admin_users WHERE username = ? OR email = ?";
-
 $stmt = $conn->prepare($sql);
-
-if (!$stmt) {
-    echo json_encode([
-        "success" => false,
-        "message" => "SQL error"
-    ]);
-    exit();
-}
-
 $stmt->bind_param("ss", $username, $username);
 $stmt->execute();
-
 $result = $stmt->get_result();
 
 if ($result && $result->num_rows === 1) {
-
     $admin = $result->fetch_assoc();
 
     if (password_verify($password, $admin["password"])) {
+        $otp = rand(100000, 999999);
+        $expiry = date("Y-m-d H:i:s", strtotime("+10 minutes"));
 
-        $_SESSION["admin_id"] = $admin["id"];
-        $_SESSION["admin_username"] = $admin["username"];
+        $update = $conn->prepare("UPDATE admin_users SET login_otp = ?, login_otp_expiry = ? WHERE id = ?");
+        $update->bind_param("ssi", $otp, $expiry, $admin["id"]);
+        $update->execute();
 
         sendAlert(
-            "✅ Admin Login Alert",
-            "
-            <b>Admin Login Successful</b><br><br>
-
-            <b>Username:</b> {$admin['username']}<br>
-            <b>Email:</b> {$admin['email']}<br>
-            <b>IP Address:</b> {$_SERVER['REMOTE_ADDR']}<br>
-            <b>Time:</b> " . date("d-m-Y h:i:s A")
+            "Admin Login Verification Code",
+            "Your login verification code is: <h2>$otp</h2><p>This code is valid for 10 minutes.</p>"
         );
 
         echo json_encode([
             "success" => true,
-            "message" => "Login successful",
-            "admin" => [
-                "id" => $admin["id"],
-                "username" => $admin["username"],
-                "email" => $admin["email"]
-            ]
+            "otp_required" => true,
+            "message" => "Verification code sent to admin email.",
+            "admin_id" => $admin["id"]
         ]);
-
         exit();
     }
 
-    // Wrong password
-    sendAlert(
-        "❌ Failed Admin Login",
-        "
-        <b>Wrong Password Attempt</b><br><br>
-
-        <b>Username/Email Entered:</b> {$username}<br>
-        <b>IP Address:</b> {$_SERVER['REMOTE_ADDR']}<br>
-        <b>Time:</b> " . date("d-m-Y h:i:s A")
-    );
-
-    echo json_encode([
-        "success" => false,
-        "message" => "Invalid password."
-    ]);
-
+    echo json_encode(["success" => false, "message" => "Invalid password."]);
     exit();
 }
 
-// Username not found
-sendAlert(
-    "⚠ Unknown Admin Login Attempt",
-    "
-    <b>Unknown Username/Email Attempt</b><br><br>
-
-    <b>Entered:</b> {$username}<br>
-    <b>IP Address:</b> {$_SERVER['REMOTE_ADDR']}<br>
-    <b>Time:</b> " . date("d-m-Y h:i:s A")
-);
-
-echo json_encode([
-    "success" => false,
-    "message" => "Admin not found."
-]);
-
+echo json_encode(["success" => false, "message" => "Admin not found."]);
 exit();
-
 ?>

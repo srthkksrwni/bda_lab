@@ -12,8 +12,9 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleVerifyEmail = async (e) => {
+  const handleSendOtp = async (e) => {
     e.preventDefault();
+    setMessage("");
 
     try {
       const res = await fetch(`${API}/auth/forgot_password.php`, {
@@ -29,6 +30,7 @@ export default function ForgotPassword() {
 
       if (data.success) {
         localStorage.setItem("resetEmail", email);
+        alert("Verification code sent to admin email.");
         navigate("/admin/reset-password");
       } else {
         setMessage(data.message);
@@ -40,7 +42,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="admin-login-page">
-      <form className="admin-login-box" onSubmit={handleVerifyEmail}>
+      <form className="admin-login-box" onSubmit={handleSendOtp}>
         <h2>Forgot Password</h2>
 
         <input
@@ -51,7 +53,7 @@ export default function ForgotPassword() {
           required
         />
 
-        <button type="submit">Verify Email</button>
+        <button type="submit">Send Verification Code</button>
 
         <div className="admin-link">
           <Link to="/admin/login">← Back to Login</Link>

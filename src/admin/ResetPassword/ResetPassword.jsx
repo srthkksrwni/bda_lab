@@ -9,6 +9,7 @@ const API = API_BASE;
 export default function ResetPassword() {
   const navigate = useNavigate();
 
+  const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -17,6 +18,7 @@ export default function ResetPassword() {
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
+    setMessage("");
 
     if (!email) {
       setMessage("Email not verified. Please try again.");
@@ -37,6 +39,7 @@ export default function ResetPassword() {
         credentials: "include",
         body: JSON.stringify({
           email,
+          otp,
           newPassword,
         }),
       });
@@ -61,6 +64,15 @@ export default function ResetPassword() {
         <h2>Reset Password</h2>
 
         <input
+          type="text"
+          placeholder="Enter Verification Code"
+          value={otp}
+          maxLength="6"
+          onChange={(e) => setOtp(e.target.value)}
+          required
+        />
+
+        <input
           type="password"
           placeholder="New Password"
           value={newPassword}
@@ -76,7 +88,7 @@ export default function ResetPassword() {
           required
         />
 
-        <button type="submit">Reset Password</button>
+        <button type="submit">Verify & Reset Password</button>
 
         <div className="admin-link">
           <Link to="/admin/login">← Back to Login</Link>

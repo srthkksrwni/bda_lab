@@ -12,6 +12,9 @@ export default function AdminLogin() {
     password: "",
   });
 
+  const [otp, setOtp] = useState("");
+  const [adminId, setAdminId] = useState(null);
+  const [showOtpBox, setShowOtpBox] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -58,9 +61,10 @@ export default function AdminLogin() {
 
       const data = await res.json();
 
-      if (data.success) {
-        localStorage.setItem("adminLoggedIn", "true");
-        navigate("/admin/dashboard");
+      if (data.success && data.otp_required) {
+        setAdminId(data.admin_id);
+        setShowOtpBox(true);
+        setMessage("Verification code sent to admin email.");
       } else {
         setMessage(data.message || "Invalid login details");
       }
@@ -69,37 +73,99 @@ export default function AdminLogin() {
     }
   };
 
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    setMessage("");
+
+    try {
+      const res = await fetch(ADMIN_API.verifyLoginOtp, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          admin_id: adminId,
+          otp,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        localStorage.setItem("adminLoggedIn", "true");
+        navigate("/admin/dashboard");
+      } else {
+        setMessage(data.message || "Invalid verification code");
+      }
+    } catch (error) {
+      setMessage("OTP verification failed.");
+    }
+  };
+
   return (
     <div className="admin-login-page">
-      <form className="admin-login-box" onSubmit={handleLogin}>
-        <h2>BDA Lab Admin Login</h2>
+      {!showOtpBox ? (
+        <form className="admin-login-box" onSubmit={handleLogin}>
+          <h2>BDA Lab Admin Login</h2>
 
-        <input
-          type="text"
-          name="username"
-          placeholder="Username or Email"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
+          <input
+            type="text"
+            name="username"
+            placeholder="Username or Email"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
 
-        <button type="submit">Login Here</button>
+          <button type="submit">Send Verification Code</button>
 
-        <div className="admin-link">
-          <Link to="/admin/forgot-password">Forgot Password...?</Link>
-        </div>
+          <div className="admin-link">
+            <Link to="/admin/forgot-password">Forgot Password...?</Link>
+          </div>
 
-        {message && <p className="login-message">{message}</p>}
-      </form>
+          {message && <p className="login-message">{message}</p>}
+        </form>
+      ) : (
+        <form className="admin-login-box" onSubmit={handleVerifyOtp}>
+          <h2>Enter Verification Code</h2>
+
+          <input
+            type="text"
+            placeholder="Enter 6-digit code"
+            value={otp}
+            maxLength="6"
+            onChange={(e) => setOtp(e.target.value)}
+            required
+          />
+
+          <button type="submit">Verify & Login</button>
+
+          <div className="admin-link">
+            <button
+              type="button"
+              onClick={() => {
+                setShowOtpBox(false);
+                setOtp("");
+                setAdminId(null);
+              }}
+            >
+              ← Back to Login
+            </button>
+          </div>
+
+          {message && <p className="login-message">{message}</p>}
+        </form>
+      )}
     </div>
   );
 }
