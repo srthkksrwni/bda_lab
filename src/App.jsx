@@ -21,6 +21,7 @@ import HealthMonitoringProject from "./components/HealthMonitoring";
 import CEPProject from "./components/CEPProject";
 import OntologyProject from "./components/Ontology";
 import RedirectApp from "./portfolio/RedirectApp";
+import RedirectModest from "./modest/RedirectModest";
 import CloudPlatformProject from "./components/CloudPlatform";
 import MobileApplicationProject from "./components/Mobileapp";
 import ScrollToTop from "./components/ScrollToTop";
@@ -89,6 +90,7 @@ function AppContent() {
         <Route path="/csir" element={<CsirIframe />} />
         <Route path="/ontology/*" element={<Redirect />} />
         <Route path="/portfolio/*" element={<RedirectApp />} />
+        <Route path="/modest/*" element={<RedirectModest />} />
 
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/forgot-password" element={<ForgotPassword />} />

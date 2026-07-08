@@ -78,7 +78,7 @@ function Events() {
             className={`event-card ${
               activeTab === "awards" ? "award-highlight" : ""
             }`}
-            key={item.id}
+            key={`${item.id}-${index}`}
           >
             <div className="event-index">
               {activeTab === "awards" ? "🏆" : index + 1}
