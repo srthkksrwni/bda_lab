@@ -44,6 +44,7 @@ import ProtectedRoute from "./admin/ProtectedRoute/ProtectedRoute";
 import AdminLogin from "./admin/AdminLogin/AdminLogin";
 import ForgotPassword from "./admin/ForgotPassword/ForgotPassword";
 import ResetPassword from "./admin/ResetPassword/ResetPassword";
+import ModestIframe from "./components/ModestIframe";
 
 function AppContent() {
   const location = useLocation();
@@ -89,6 +90,7 @@ function AppContent() {
         <Route path="/csir" element={<CsirIframe />} />
         <Route path="/ontology/*" element={<Redirect />} />
         <Route path="/portfolio/*" element={<RedirectApp />} />
+        <Route path="/modest/*" element={<ModestIframe />} />
 
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/forgot-password" element={<ForgotPassword />} />
