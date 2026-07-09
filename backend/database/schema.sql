@@ -96,6 +96,18 @@ CREATE TABLE IF NOT EXISTS publications (
 CREATE INDEX idx_publications_category ON publications(category);
 
 -- =====================================================
+-- PUBLICATION CATEGORY STATISTICS TABLE
+-- Used by: backend/publications/get_publication_stats.php
+-- =====================================================
+CREATE TABLE IF NOT EXISTS publication_stats (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    label VARCHAR(100) NOT NULL UNIQUE,
+    all_count INT NOT NULL DEFAULT 0,
+    since_2021 INT NOT NULL DEFAULT 0
+);
+
+
+-- =====================================================
 -- PUBLICATION CITATION STATISTICS TABLE
 -- =====================================================
 CREATE TABLE IF NOT EXISTS publication_citation_stats (
@@ -130,17 +142,11 @@ CREATE TABLE IF NOT EXISTS admin_users (
     username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    login_otp VARCHAR(10) DEFAULT NULL,
+    login_otp_expiry DATETIME DEFAULT NULL,
+    reset_otp VARCHAR(10) DEFAULT NULL,
+    reset_otp_expiry DATETIME DEFAULT NULL,
     reset_token VARCHAR(255) DEFAULT NULL,
     reset_token_expiry DATETIME DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-INSERT INTO admin_users (username, email, password)
-VALUES (
-    'admin',
-    'admin@bdalab.com',
-    '$2y$10$8K1p/a0dL1LXMIgoEDFrwO3SbiWnzkeP0fiD8n53uZ9ec0XZC0YjK'
-)
-ON DUPLICATE KEY UPDATE
-email = VALUES(email),
-password = VALUES(password);

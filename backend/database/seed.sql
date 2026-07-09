@@ -1203,3 +1203,42 @@ VALUES
     '',
     ''
 );
+
+-- =====================================================
+-- ADMIN USER SEED DATA
+-- Default login: username = admin, email = admin@bdalab.com
+-- Password hash is kept from previous schema file.
+-- =====================================================
+INSERT INTO admin_users (username, email, password)
+VALUES (
+    'admin',
+    'admin@bdalab.com',
+    '$2y$10$8K1p/a0dL1LXMIgoEDFrwO3SbiWnzkeP0fiD8n53uZ9ec0XZC0YjK'
+)
+ON DUPLICATE KEY UPDATE
+email = VALUES(email),
+password = VALUES(password);
+
+-- =====================================================
+-- PUBLICATION CATEGORY STATS SEED DATA
+-- =====================================================
+INSERT INTO publication_stats (label, all_count, since_2021) VALUES
+('Transactions & Journals', 111, 45),
+('Conference Publications', 75, 28),
+('Books', 10, 4)
+ON DUPLICATE KEY UPDATE
+all_count = VALUES(all_count),
+since_2021 = VALUES(since_2021);
+
+-- =====================================================
+-- PUBLICATIONS SEED DATA
+-- =====================================================
+INSERT INTO publications (category, year, citation, link) VALUES
+('journals', 2025, 'S. Agarwal, et al., "AI-Based Mental Health Detection using Multimodal Learning," Journal Publication, 2025.', NULL),
+('journals', 2024, 'S. Agarwal, et al., "Deep Learning for Healthcare Analytics," Journal Publication, 2024.', NULL),
+('journals', 2023, 'S. Agarwal, et al., "Natural Language Processing for Mental Health Assessment," Journal Publication, 2023.', NULL),
+('conferences', 2025, 'S. Agarwal, et al., "Mental Disorder Recognition using Multimodal Analysis," DEXA 2025.', NULL),
+('conferences', 2025, 'S. Agarwal, et al., "Explainable AI for Healthcare and Mental Wellness," INDICON 2025.', NULL),
+('conferences', 2024, 'S. Agarwal, et al., "Machine Learning for Early Disease Prediction," International Conference Publication, 2024.', NULL),
+('books', 2024, 'S. Agarwal, "Artificial Intelligence and Data Analytics for Healthcare," Book Chapter, 2024.', NULL),
+('books', 2023, 'S. Agarwal, "Big Data Analytics and Machine Learning Applications," Book Chapter, 2023.', NULL);
