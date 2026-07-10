@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS faculty (
 -- =====================================================
 CREATE TABLE IF NOT EXISTS students (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    category ENUM('postdoc','phd','graduated','mtech') NOT NULL,
+    category ENUM('postdoc','phd','graduated','mtech','intern') NOT NULL,
     batch_year INT NULL,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255),

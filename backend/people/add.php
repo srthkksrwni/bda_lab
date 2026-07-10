@@ -132,7 +132,7 @@ if ($type == "faculty") {
     $research_topic = $data["research_topic"] ?? null;
     $scholar_url = $data["scholar_url"] ?? null;
     $profile_url = $data["profile_url"] ?? null;
-    $batch_year = ($category === "mtech" && isset($data["batch_year"]) && $data["batch_year"] !== "") ? intval($data["batch_year"]) : null;
+    $batch_year = (($category === "mtech" || $category === "intern") && isset($data["batch_year"]) && $data["batch_year"] !== "") ? intval($data["batch_year"]) : null;
 
     if ($category == "" || $name == "") {
         echo json_encode([

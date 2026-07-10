@@ -16,19 +16,26 @@ function Students() {
     { id: "ongoing", label: "PhD Scholars" },
     { id: "graduated", label: "Graduated PhD" },
     { id: "mtech", label: "M.Tech Scholars" },
+    { id: "intern", label: "Interns" },
   ];
 
   useEffect(() => {
-    fetch(`${PEOPLE_API.list}?type=years`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && data.data && data.data.length > 0) {
-          setYears(data.data);
-          setSelectedBatch(data.data[0]);
-        }
-      })
-      .catch((err) => console.error("Error fetching years:", err));
-  }, []);
+    if (activeTab === "mtech" || activeTab === "intern") {
+      fetch(`${PEOPLE_API.list}?type=years&category=${activeTab}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.data) {
+            setYears(data.data);
+            if (data.data.length > 0) {
+              setSelectedBatch(data.data[0]);
+            } else {
+              setSelectedBatch("");
+            }
+          }
+        })
+        .catch((err) => console.error("Error fetching years:", err));
+    }
+  }, [activeTab]);
 
   const fetchStudents = async () => {
     let category = activeTab;
@@ -36,12 +43,13 @@ function Students() {
       category = "phd";
     }
 
-    if (category === "mtech" && !selectedBatch) {
+    if ((category === "mtech" || category === "intern") && !selectedBatch) {
+      setStudents([]);
       return;
     }
 
     let url = `${PEOPLE_API.list}?type=students&category=${category}`;
-    if (category === "mtech") {
+    if (category === "mtech" || category === "intern") {
       url += `&batch_year=${selectedBatch}`;
     }
 
@@ -338,6 +346,62 @@ function Students() {
                       </div>
                     ))}
                   </div>
+                </section>
+              )}
+
+              {/* --- INTERN SECTION --- */}
+              {activeTab === "intern" && (
+                <section className="intern-section">
+                  <div className="batch-selector">
+                    {years.map((year) => (
+                      <button
+                        key={year}
+                        className={`batch-btn ${selectedBatch === year ? "active" : ""}`}
+                        onClick={() => setSelectedBatch(year)}
+                      >
+                        {year}
+                      </button>
+                    ))}
+                  </div>
+
+                  {students.length === 0 ? (
+                    <div style={{ textAlign: "center", margin: "40px 0", color: "#64748b", fontWeight: "600" }}>
+                      No interns found for this batch.
+                    </div>
+                  ) : (
+                    <div className="member-grid">
+                      {students.map((student, index) => (
+                        <div key={student.id || index} className="member-card intern-card">
+                          <div className="avatar-wrapper">
+                            {student.img ? (
+                              <img
+                                src={`${API_BASE}/${student.img}`}
+                                alt={student.name}
+                                className="member-img"
+                                onError={(e) => {
+                                  e.target.style.display = "none";
+                                  e.target.nextSibling.style.display = "flex";
+                                }}
+                              />
+                            ) : null}
+                            <div className="initials-avatar" style={{ display: student.img ? "none" : "flex" }}>
+                              {student.name ? student.name.charAt(0) : ""}
+                            </div>
+                          </div>
+                          <div className="member-info">
+                            <h3 className="member-name">{student.name}</h3>
+                            <p className="member-role">
+                              Intern (Batch {student.batch})
+                            </p>
+                            <div className="project-box">
+                              <strong>Project:</strong>
+                              <p className="project-text">{student.project}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </section>
               )}
             </motion.div>

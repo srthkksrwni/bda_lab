@@ -22,11 +22,15 @@ if ($type == "faculty") {
 
 } elseif ($type == "years") {
 
-    $result = $conn->query(
+    $category = $_GET["category"] ?? "mtech";
+    $stmt = $conn->prepare(
         "SELECT DISTINCT batch_year FROM students 
-         WHERE category='mtech' AND batch_year IS NOT NULL 
+         WHERE category=? AND batch_year IS NOT NULL 
          ORDER BY batch_year DESC"
     );
+    $stmt->bind_param("s", $category);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $years = [];
     while ($row = $result->fetch_assoc()) {
         $years[] = (string)$row["batch_year"];
@@ -44,7 +48,7 @@ if ($type == "faculty") {
     $batch_year = $_GET["batch_year"] ?? "";
 
     if ($category != "") {
-        if ($category === "mtech" && $batch_year !== "") {
+        if (($category === "mtech" || $category === "intern") && $batch_year !== "") {
             $stmt = $conn->prepare(
                 "SELECT * FROM students
                  WHERE category=? AND batch_year=?

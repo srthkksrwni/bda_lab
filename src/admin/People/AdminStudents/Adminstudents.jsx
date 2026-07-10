@@ -9,6 +9,7 @@ function AdminStudents() {
     { id: "phd", label: "PhD Scholars" },
     { id: "graduated", label: "Graduated PhD" },
     { id: "mtech", label: "M.Tech Scholars" },
+    { id: "intern", label: "Interns" },
   ];
 
   const [selectedCategory, setSelectedCategory] = useState("postdoc");
@@ -18,6 +19,8 @@ function AdminStudents() {
   const [students, setStudents] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
+
+  const usesBatchYear = selectedCategory === "mtech" || selectedCategory === "intern";
 
   const [form, setForm] = useState({
     name: "",
@@ -50,7 +53,7 @@ function AdminStudents() {
 
   const fetchStudents = async () => {
     try {
-      const url = selectedCategory === "mtech"
+      const url = usesBatchYear
         ? `${PEOPLE_API.list}?type=students&category=${selectedCategory}&batch_year=${batchYear}`
         : `${PEOPLE_API.list}?type=students&category=${selectedCategory}`;
       const response = await fetch(url);
@@ -104,7 +107,7 @@ function AdminStudents() {
     formData.append("research_topic", form.topic || "");
     formData.append("scholar_url", form.scholarLink || "");
     formData.append("profile_url", form.profileLink || "");
-    if (selectedCategory === "mtech") {
+    if (usesBatchYear) {
       formData.append("batch_year", batchYear);
     } else {
       formData.append("batch_year", "");
@@ -148,7 +151,7 @@ function AdminStudents() {
       scholarLink: item.scholarLink || "",
       profileLink: item.profileLink || "",
     });
-    if (selectedCategory === "mtech" && item.batchYear) {
+    if (usesBatchYear && item.batchYear) {
       setBatchYear(item.batchYear.toString());
     }
     setEditId(item.id);
@@ -216,7 +219,7 @@ return (
     </select>
   </div>
 
-  {selectedCategory === "mtech" && (
+  {usesBatchYear && (
     <div className="category-box">
       <label>Batch Year</label>
 
