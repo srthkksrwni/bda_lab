@@ -26,6 +26,7 @@ function Students() {
         .then((data) => {
           if (data.success && data.data) {
             setYears(data.data);
+
             if (data.data.length > 0) {
               setSelectedBatch(data.data[0]);
             } else {
@@ -33,22 +34,32 @@ function Students() {
             }
           }
         })
-        .catch((err) => console.error("Error fetching years:", err));
+        .catch((err) => {
+          console.error("Error fetching years:", err);
+        });
+    } else {
+      setYears([]);
+      setSelectedBatch("");
     }
   }, [activeTab]);
 
   const fetchStudents = async () => {
     let category = activeTab;
+
     if (activeTab === "ongoing") {
       category = "phd";
     }
 
-    if ((category === "mtech" || category === "intern") && !selectedBatch) {
+    if (
+      (category === "mtech" || category === "intern") &&
+      !selectedBatch
+    ) {
       setStudents([]);
       return;
     }
 
     let url = `${PEOPLE_API.list}?type=students&category=${category}`;
+
     if (category === "mtech" || category === "intern") {
       url += `&batch_year=${selectedBatch}`;
     }
@@ -56,8 +67,9 @@ function Students() {
     try {
       const response = await fetch(url);
       const data = await response.json();
+
       if (data.success) {
-        const mapped = (data.data || []).map((item) => ({
+        const mappedStudents = (data.data || []).map((item) => ({
           id: item.id,
           name: item.name,
           email: item.email || "",
@@ -67,11 +79,14 @@ function Students() {
           project: item.research_topic || "",
           batch: item.batch_year || "",
         }));
-        setStudents(mapped);
+
+        setStudents(mappedStudents);
       } else {
+        setStudents([]);
         console.error("Failed to load students:", data.message);
       }
     } catch (error) {
+      setStudents([]);
       console.error("Error fetching students:", error);
     }
   };
@@ -80,6 +95,7 @@ function Students() {
     Promise.resolve().then(() => {
       fetchStudents();
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, selectedBatch]);
 
@@ -98,7 +114,10 @@ function Students() {
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`student-tab-btn ${activeTab === tab.id ? "active" : ""}`}
+              type="button"
+              className={`student-tab-btn ${
+                activeTab === tab.id ? "active" : ""
+              }`}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.label}
@@ -115,48 +134,72 @@ function Students() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
             >
-              {/* --- POST-DOCTORATE SECTION --- */}
+              {/* POST-DOCTORATE SECTION */}
               {activeTab === "postdoc" && (
                 <section className="postdoc-section">
                   <div className="member-grid">
                     {students.map((scholar, index) => (
-                      <div key={scholar.id || index} className="member-card postdoc-card">
+                      <div
+                        key={scholar.id || index}
+                        className="member-card postdoc-card"
+                      >
                         <div className="avatar-wrapper">
                           {scholar.img ? (
                             <img
                               src={`${API_BASE}/${scholar.img}`}
                               alt={scholar.name}
                               className="member-img"
-                              onError={(e) => {
-                                e.target.style.display = "none";
-                                e.target.nextSibling.style.display = "flex";
+                              onError={(event) => {
+                                event.currentTarget.style.display = "none";
+
+                                if (event.currentTarget.nextSibling) {
+                                  event.currentTarget.nextSibling.style.display =
+                                    "flex";
+                                }
                               }}
                             />
                           ) : null}
-                          <div className="initials-avatar" style={{ display: scholar.img ? "none" : "flex" }}>
-                            {scholar.name ? scholar.name.charAt(0) : ""}
+
+                          <div
+                            className="initials-avatar"
+                            style={{
+                              display: scholar.img ? "none" : "flex",
+                            }}
+                          >
+                            {scholar.name
+                              ? scholar.name.charAt(0).toUpperCase()
+                              : ""}
                           </div>
                         </div>
+
                         <div className="member-info">
                           <h3 className="member-name">{scholar.name}</h3>
-                          <p className="member-role">Post-Doctoral Fellow</p>
 
-                          {/* Email display with split logic */}
-                          <div className="member-email">
-                            {scholar.email.split("\n").map((mail, i) => (
-                              <a
-                                key={i}
-                                href={`mailto:${mail.trim()}`}
-                                style={{
-                                  display: "block",
-                                  color: "inherit",
-                                  textDecoration: "none",
-                                }}
-                              >
-                                {mail.trim()}
-                              </a>
-                            ))}
-                          </div>
+                          <p className="member-role">
+                            Post-Doctoral Fellow
+                          </p>
+
+                          {scholar.email && (
+                            <div className="member-email">
+                              {scholar.email
+                                .split("\n")
+                                .filter((mail) => mail.trim() !== "")
+                                .map((mail, index) => (
+                                  <a
+                                    key={index}
+                                    href={`mailto:${mail.trim()}`}
+                                    style={{
+                                      display: "block",
+                                      color: "inherit",
+                                      textDecoration: "none",
+                                    }}
+                                  >
+                                    {mail.trim()}
+                                  </a>
+                                ))}
+                            </div>
+                          )}
+
                           <div className="postdoc-btn-group">
                             {scholar.scholarLink && (
                               <a
@@ -187,46 +230,90 @@ function Students() {
                 </section>
               )}
 
-              {/* --- PhD SCHOLARS SECTION --- */}
+              {/* PHD SCHOLARS SECTION */}
               {activeTab === "ongoing" && (
-                <section id="OngoingPhd" className="phd-section-wrapper">
+                <section
+                  id="OngoingPhd"
+                  className="phd-section-wrapper"
+                >
                   <h2 className="phd-display-heading">PhD Scholars</h2>
 
                   <div className="phd-members-grid">
                     {students.map((student, index) => (
-                      <div key={student.id || index} className="phd-individual-card">
+                      <div
+                        key={student.id || index}
+                        className="phd-individual-card"
+                      >
                         <div className="phd-img-container">
                           {student.img ? (
                             <img
                               src={`${API_BASE}/${student.img}`}
                               alt={student.name}
                               className="phd-profile-photo"
-                              onError={(e) => {
-                                e.target.style.display = "none";
-                                e.target.nextSibling.style.display = "flex";
+                              onError={(event) => {
+                                event.currentTarget.style.display = "none";
+
+                                if (event.currentTarget.nextSibling) {
+                                  event.currentTarget.nextSibling.style.display =
+                                    "flex";
+                                }
                               }}
                             />
                           ) : null}
-                          <div className="initials-avatar" style={{ display: student.img ? "none" : "flex" }}>
-                            {student.name ? student.name.charAt(0) : ""}
+
+                          <div
+                            className="initials-avatar"
+                            style={{
+                              display: student.img ? "none" : "flex",
+                            }}
+                          >
+                            {student.name
+                              ? student.name.charAt(0).toUpperCase()
+                              : ""}
                           </div>
                         </div>
 
                         <div className="phd-details-box">
-                          <h3 className="phd-student-name">{student.name}</h3>
-                          <p className="phd-student-role">PhD Research Scholar</p>
+                          <h3 className="phd-student-name">
+                            {student.name}
+                          </h3>
 
-                          <div className="phd-email-pill">
-                            <span className="phd-icon">📧</span>
-                            <a href={`mailto:${student.email}`} className="phd-email-link">
-                              {student.email}
-                            </a>
-                          </div>
+                          <p className="phd-student-role">
+                            PhD Research Scholar
+                          </p>
+
+                          {student.email && (
+                            <div className="phd-email-pill">
+                              <span className="phd-icon">📧</span>
+
+                              <a
+                                href={`mailto:${student.email}`}
+                                className="phd-email-link"
+                              >
+                                {student.email}
+                              </a>
+                            </div>
+                          )}
 
                           {student.project && (
-                            <div className="phd-thesis-section" style={{ marginTop: "10px", fontSize: "0.9rem" }}>
-                              <strong style={{ color: "#555" }}>Thesis Topic:</strong>
-                              <p style={{ fontStyle: "italic", margin: "5px 0", color: "#333" }}>
+                            <div
+                              className="phd-thesis-section"
+                              style={{
+                                marginTop: "10px",
+                                fontSize: "0.9rem",
+                              }}
+                            >
+                              <strong style={{ color: "#555" }}>
+                                Thesis Topic:
+                              </strong>
+
+                              <p
+                                style={{
+                                  fontStyle: "italic",
+                                  margin: "5px 0",
+                                  color: "#333",
+                                }}
+                              >
                                 {student.project}
                               </p>
                             </div>
@@ -251,34 +338,59 @@ function Students() {
                 </section>
               )}
 
-              {/* --- GRADUATED PhD SECTION --- */}
+              {/* GRADUATED PHD SECTION */}
               {activeTab === "graduated" && (
-                <section id="GraduatedPhd" className="grad-section-wrapper">
-                  <h2 className="grad-display-heading">Graduated PhD Students</h2>
+                <section
+                  id="GraduatedPhd"
+                  className="grad-section-wrapper"
+                >
+                  <h2 className="grad-display-heading">
+                    Graduated PhD Students
+                  </h2>
 
                   <div className="grad-members-grid">
                     {students.map((student, index) => (
-                      <div key={student.id || index} className="grad-individual-card">
+                      <div
+                        key={student.id || index}
+                        className="grad-individual-card"
+                      >
                         <div className="grad-img-container">
                           {student.img ? (
                             <img
                               src={`${API_BASE}/${student.img}`}
                               alt={student.name}
                               className="grad-profile-photo"
-                              onError={(e) => {
-                                e.target.style.display = "none";
-                                e.target.nextSibling.style.display = "flex";
+                              onError={(event) => {
+                                event.currentTarget.style.display = "none";
+
+                                if (event.currentTarget.nextSibling) {
+                                  event.currentTarget.nextSibling.style.display =
+                                    "flex";
+                                }
                               }}
                             />
                           ) : null}
-                          <div className="initials-avatar" style={{ display: student.img ? "none" : "flex" }}>
-                            {student.name ? student.name.charAt(0) : ""}
+
+                          <div
+                            className="initials-avatar"
+                            style={{
+                              display: student.img ? "none" : "flex",
+                            }}
+                          >
+                            {student.name
+                              ? student.name.charAt(0).toUpperCase()
+                              : ""}
                           </div>
                         </div>
 
                         <div className="grad-details-box">
-                          <h3 className="grad-student-name">{student.name}</h3>
-                          <p className="grad-student-role">Graduated PhD Scholar</p>
+                          <h3 className="grad-student-name">
+                            {student.name}
+                          </h3>
+
+                          <p className="grad-student-role">
+                            Graduated PhD Scholar
+                          </p>
 
                           {student.scholarLink && (
                             <div className="grad-action">
@@ -299,14 +411,17 @@ function Students() {
                 </section>
               )}
 
-              {/* --- M.TECH SECTION --- */}
+              {/* M.TECH SECTION */}
               {activeTab === "mtech" && (
                 <section className="mtech-section">
                   <div className="batch-selector">
                     {years.map((year) => (
                       <button
                         key={year}
-                        className={`batch-btn ${selectedBatch === year ? "active" : ""}`}
+                        type="button"
+                        className={`batch-btn ${
+                          selectedBatch === year ? "active" : ""
+                        }`}
                         onClick={() => setSelectedBatch(year)}
                       >
                         {year}
@@ -316,32 +431,55 @@ function Students() {
 
                   <div className="member-grid">
                     {students.map((student, index) => (
-                      <div key={student.id || index} className="member-card mtech-card">
+                      <div
+                        key={student.id || index}
+                        className="member-card mtech-card"
+                      >
                         <div className="avatar-wrapper">
                           {student.img ? (
                             <img
                               src={`${API_BASE}/${student.img}`}
                               alt={student.name}
                               className="member-img"
-                              onError={(e) => {
-                                e.target.style.display = "none";
-                                e.target.nextSibling.style.display = "flex";
+                              onError={(event) => {
+                                event.currentTarget.style.display = "none";
+
+                                if (event.currentTarget.nextSibling) {
+                                  event.currentTarget.nextSibling.style.display =
+                                    "flex";
+                                }
                               }}
                             />
                           ) : null}
-                          <div className="initials-avatar" style={{ display: student.img ? "none" : "flex" }}>
-                            {student.name ? student.name.charAt(0) : ""}
+
+                          <div
+                            className="initials-avatar"
+                            style={{
+                              display: student.img ? "none" : "flex",
+                            }}
+                          >
+                            {student.name
+                              ? student.name.charAt(0).toUpperCase()
+                              : ""}
                           </div>
                         </div>
+
                         <div className="member-info">
                           <h3 className="member-name">{student.name}</h3>
+
                           <p className="member-role">
                             M.Tech Scholar (Batch {student.batch})
                           </p>
-                          <div className="project-box">
-                            <strong>Project:</strong>
-                            <p className="project-text">{student.project}</p>
-                          </div>
+
+                          {student.project && (
+                            <div className="project-box">
+                              <strong>Project:</strong>
+
+                              <p className="project-text">
+                                {student.project}
+                              </p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -349,14 +487,17 @@ function Students() {
                 </section>
               )}
 
-              {/* --- INTERN SECTION --- */}
+              {/* INTERN SECTION */}
               {activeTab === "intern" && (
                 <section className="intern-section">
                   <div className="batch-selector">
                     {years.map((year) => (
                       <button
                         key={year}
-                        className={`batch-btn ${selectedBatch === year ? "active" : ""}`}
+                        type="button"
+                        className={`batch-btn ${
+                          selectedBatch === year ? "active" : ""
+                        }`}
                         onClick={() => setSelectedBatch(year)}
                       >
                         {year}
@@ -365,38 +506,68 @@ function Students() {
                   </div>
 
                   {students.length === 0 ? (
-                    <div style={{ textAlign: "center", margin: "40px 0", color: "#64748b", fontWeight: "600" }}>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        margin: "40px 0",
+                        color: "#64748b",
+                        fontWeight: "600",
+                      }}
+                    >
                       No interns found for this batch.
                     </div>
                   ) : (
                     <div className="member-grid">
                       {students.map((student, index) => (
-                        <div key={student.id || index} className="member-card intern-card">
+                        <div
+                          key={student.id || index}
+                          className="member-card intern-card"
+                        >
                           <div className="avatar-wrapper">
                             {student.img ? (
                               <img
                                 src={`${API_BASE}/${student.img}`}
                                 alt={student.name}
                                 className="member-img"
-                                onError={(e) => {
-                                  e.target.style.display = "none";
-                                  e.target.nextSibling.style.display = "flex";
+                                onError={(event) => {
+                                  event.currentTarget.style.display = "none";
+
+                                  if (event.currentTarget.nextSibling) {
+                                    event.currentTarget.nextSibling.style.display =
+                                      "flex";
+                                  }
                                 }}
                               />
                             ) : null}
-                            <div className="initials-avatar" style={{ display: student.img ? "none" : "flex" }}>
-                              {student.name ? student.name.charAt(0) : ""}
+
+                            <div
+                              className="initials-avatar"
+                              style={{
+                                display: student.img ? "none" : "flex",
+                              }}
+                            >
+                              {student.name
+                                ? student.name.charAt(0).toUpperCase()
+                                : ""}
                             </div>
                           </div>
+
                           <div className="member-info">
-                            <h3 className="member-name">{student.name}</h3>
-                            <p className="member-role">
-                              Intern (Batch {student.batch})
-                            </p>
-                            <div className="project-box">
-                              <strong>Project:</strong>
-                              <p className="project-text">{student.project}</p>
-                            </div>
+                            <h3 className="member-name">
+                              {student.name}
+                            </h3>
+
+                            <p className="member-role">Intern</p>
+
+                            {student.project && (
+                              <div className="project-box">
+                                <strong>Project:</strong>
+
+                                <p className="project-text">
+                                  {student.project}
+                                </p>
+                              </div>
+                            )}
                           </div>
                         </div>
                       ))}
